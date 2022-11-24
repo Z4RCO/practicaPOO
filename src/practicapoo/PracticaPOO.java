@@ -17,5 +17,4 @@ public class PracticaPOO {
         // TODO code application logic here
         System.out.println("hola");
     }
-    
 }
