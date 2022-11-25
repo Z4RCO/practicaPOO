@@ -7,4 +7,5 @@ public class Configuracion {
     private static int numPalabras;
     private static boolean primeraLetra;
 
+    //TODO Hacer métodos de la clase Configuracion
 }
