@@ -1,9 +1,11 @@
+
+
 package practicapoo.palabra;
 
 public class Palabra {
     private enum numLetras{
         Cinco,
-        Seis
+        Seis,
     }
     private char[] palabra;
     private boolean regaloDeLetra;
@@ -33,6 +35,7 @@ public class Palabra {
     }
 
     public void sacarPalabraAleatoria(){
+
 
     }
 
