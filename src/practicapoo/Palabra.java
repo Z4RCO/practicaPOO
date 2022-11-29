@@ -7,7 +7,9 @@ public class Palabra {
     }
     private char[] palabra;
     private boolean regaloDeLetra;
+    private Intento[] intento;
 
+    //TODO Hacer constructor
 
     public void jugar(){
 
