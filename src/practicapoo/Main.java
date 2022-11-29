@@ -8,7 +8,7 @@ package practicapoo;
  *
  * @author z3rc0
  */
-public class PracticaPOO {
+public class Main {
 
     /**
      * @param args the command line arguments
