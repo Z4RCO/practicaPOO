@@ -1,4 +1,4 @@
-package practicapoo;
+package practicapoo.partida;
 
 public class Partida {
 

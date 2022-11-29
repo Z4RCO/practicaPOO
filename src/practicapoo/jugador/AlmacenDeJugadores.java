@@ -1,4 +1,6 @@
-package practicapoo;
+package practicapoo.jugador;
+
+import practicapoo.jugador.Jugador;
 
 import java.util.ArrayList;
 

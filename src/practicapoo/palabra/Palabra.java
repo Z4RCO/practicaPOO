@@ -1,4 +1,4 @@
-package practicapoo;
+package practicapoo.palabra;
 
 public class Palabra {
     private enum numLetras{

@@ -1,4 +1,4 @@
-package practicapoo;
+package practicapoo.palabra;
 
 public class Intento {
     private char[] intento;

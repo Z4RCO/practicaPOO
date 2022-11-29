@@ -1,4 +1,6 @@
-package practicapoo;
+package practicapoo.palabra;
+
+import practicapoo.palabra.Palabra;
 
 public class PistaDeLetra {
 

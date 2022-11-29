@@ -1,4 +1,4 @@
-package practicapoo;
+package practicapoo.jugador;
 
 public class Estadisticas {
     private int ganadas;

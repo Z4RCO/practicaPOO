@@ -1,4 +1,4 @@
-package practicapoo;
+package practicapoo.palabra;
 
 public class Entrenamiento {
 
