@@ -7,6 +7,12 @@ public class Partida {
     private boolean primeraLetra;
     private int numPalabras;
 
+    public Partida(int numPalabras){
+        if(numPalabras > 10 || numPalabras < 1){
+           this.numPalabras = numPalabras;
+        }
+    }
+
     public void cambiarTurno(){};
 
     public void actualizarMarcador(){};
