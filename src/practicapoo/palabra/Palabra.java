@@ -37,7 +37,7 @@ public class Palabra {
     }
 
     private void comprobarDistintaPosicion(){
-        ArrayList <Character> l = new ArrayList<Character>(palabra);
+       // ArrayList <Character> l = new ArrayList<Character>(palabra);
 
     }
 

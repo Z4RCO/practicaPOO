@@ -5,7 +5,6 @@
 package practicapoo.interfaz;
 
 import javax.swing.*;
-
 /**
  *
  * @author z3rc0
