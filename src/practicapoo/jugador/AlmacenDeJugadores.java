@@ -41,8 +41,6 @@ public class AlmacenDeJugadores {
             String element = i.next();
             //TODO Devolver jugadores
         }
-        //TODO Hacer comparator
-        //jugadores.sort();
     }
 
     public void alta(Jugador j){
