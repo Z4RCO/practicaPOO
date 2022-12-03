@@ -8,6 +8,12 @@ public class Jugador implements Comparable {
     private String password;
     private Estadisticas estadisticas;
 
+    public Jugador(String nombre, String password) {
+        this.nombre = nombre;
+        this.password = password;
+        this.estadisticas = new Estadisticas();
+    }
+
     public void partidasContraOtro(Jugador j){
 
     }

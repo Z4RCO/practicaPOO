@@ -15,9 +15,10 @@ import javax.swing.*;
  */
 public class Base extends JFrame {
 
-    /**
-     * Creates new form Base
-     */
+    //TODO inicializar almacenes en el constructor
+    private AlmacenDeJugadores jugadores;
+    private AlmacenDePalabras palabras;
+    private AlmacenDePartidas partidas;
     public Base() {
         initComponents();
         pintar(new Sesion(this,null));
@@ -67,17 +68,6 @@ public class Base extends JFrame {
      */
     public static void main(String args[]) {
 
-        //TODO leer archivos de config y datos
-
-        //TODO instanciar almacen de partidas
-        AlmacenDePartidas partidas = new AlmacenDePartidas();
-
-        //TODO instanciar almacen de jugadores
-        AlmacenDeJugadores jugadores = new AlmacenDeJugadores();
-
-        //TODO instanciar almacen de palabras
-        //AlmacenDePalabras = new AlmacenDePalabras();
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -101,4 +91,15 @@ public class Base extends JFrame {
           lienzo.repaint(); 
       }
 
+    public AlmacenDeJugadores getJugadores() {
+        return jugadores;
+    }
+
+    public AlmacenDePalabras getPalabras() {
+        return palabras;
+    }
+
+    public AlmacenDePartidas getPartidas() {
+        return partidas;
+    }
 }

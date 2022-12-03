@@ -1,6 +1,9 @@
 package practicapoo.interfaz;
 
+import practicapoo.jugador.Jugador;
+
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 /**
  *
@@ -27,19 +30,90 @@ public class Menu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        iniciarSesion = new javax.swing.JButton();
+        practicar = new javax.swing.JButton();
+        salir = new javax.swing.JButton();
+
+        iniciarSesion.setText("Iniciar Sesión");
+        iniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iniciarSesionActionPerformed(evt);
+            }
+        });
+
+        practicar.setText("Practicar");
+        practicar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                practicarActionPerformed(evt);
+            }
+        });
+
+        salir.setText("Salir");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(268, 268, 268)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(iniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                    .addComponent(practicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(317, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(practicar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(133, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_salirActionPerformed
+
+    private void practicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_practicarActionPerformed
+        // TODO Empezar partida de práctica
+    }//GEN-LAST:event_practicarActionPerformed
+
+    private void iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionActionPerformed
+                JPanel p = new JPanel();
+        JTextField user = new JTextField(20);
+        JTextField pass = new JPasswordField(20);
+
+
+        p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+        p.add(new JLabel("Usuario"));
+        p.add(user);
+        p.add(new JLabel("Contraseña"));
+        p.add(pass);
+
+        int i = JOptionPane.showConfirmDialog(null, p,"Iniciar sesión", JOptionPane.OK_CANCEL_OPTION);
+        if(i == JOptionPane.OK_OPTION && user.getText() != "" && pass.getText() != ""){
+            Jugador j = new Jugador(user.getText(),pass.getText());
+            if(frame.getJugadores().autenticar(j)){
+                frame.pintar(new Sesion(frame,j));
+            }
+
+        }
+    }//GEN-LAST:event_iniciarSesionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton iniciarSesion;
+    private javax.swing.JButton practicar;
+    private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 }
