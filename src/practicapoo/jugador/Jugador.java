@@ -31,4 +31,8 @@ public class Jugador implements Comparable {
         if(estadisticas.getGanadas() < ((Jugador) o).estadisticas.getGanadas())return -1;
         return 0;
     }
+
+    public Estadisticas getEstadisticas(){
+        return estadisticas;
+    }
 }

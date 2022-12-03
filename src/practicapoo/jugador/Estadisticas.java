@@ -10,18 +10,6 @@ public class Estadisticas {
         return ganadas;
     }
 
-    public int getEmpatadas() {
-        return empatadas;
-    }
-
-    public int getPerdidas() {
-        return perdidas;
-    }
-
-    public int getPuntos() {
-        return puntos;
-    }
-
     public void setGanadas(int ganadas) {
         this.ganadas = ganadas;
     }
@@ -36,5 +24,14 @@ public class Estadisticas {
 
     public void setPuntos(int puntos) {
         this.puntos = puntos;
+    }
+
+    @Override
+    public String toString() {
+        return  "Victorias: " + ganadas + "\n" +
+                "Empates: " + empatadas + "\n" +
+                "Derrotas: " + perdidas + "\n" +
+                "Puntos totales: " + puntos
+        ;
     }
 }

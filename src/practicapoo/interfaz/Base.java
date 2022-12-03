@@ -4,6 +4,10 @@
  */
 package practicapoo.interfaz;
 
+import practicapoo.jugador.AlmacenDeJugadores;
+import practicapoo.palabra.AlmacenDePalabras;
+import practicapoo.partida.AlmacenDePartidas;
+
 import javax.swing.*;
 /**
  *
@@ -62,28 +66,17 @@ public class Base extends JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Base.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Base.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Base.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Base.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+
+        //TODO leer archivos de config y datos
+
+        //TODO instanciar almacen de partidas
+        AlmacenDePartidas partidas = new AlmacenDePartidas();
+
+        //TODO instanciar almacen de jugadores
+        AlmacenDeJugadores jugadores = new AlmacenDeJugadores();
+
+        //TODO instanciar almacen de palabras
+        //AlmacenDePalabras = new AlmacenDePalabras();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
