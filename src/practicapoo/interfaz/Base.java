@@ -10,8 +10,9 @@ import practicapoo.partida.AlmacenDePartidas;
 
 import javax.swing.*;
 /**
- *
- * @author z3rc0
+ * Clase que genera el JFrame Base sobre el que se asientan el resto de paneles
+ * Contiene la información de almacenes necesaria para que el programa funcione
+ * Contiene el método main, punto de inicio de ejecución del programa
  */
 public class Base extends JFrame {
 
@@ -25,7 +26,7 @@ public class Base extends JFrame {
         //palabras = new AlmacenDePalabras();
         partidas = new AlmacenDePartidas();
         initComponents();
-        pintar(new Sesion(this,null));
+        pintar(new Menu(this));
     }
 
     /**
@@ -68,6 +69,8 @@ public class Base extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Main de la Clase
+     * Inicio de funcionamiento del programa
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -83,9 +86,12 @@ public class Base extends JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel lienzo;
     // End of variables declaration//GEN-END:variables
-    
-    
-    //Método para actualizar el contenido del JPanel lienzo
+
+
+    /**
+     * Método para Cambiar el contenido del panel lienzo
+     * @param panel Panel para poner sobre el lienzo
+     */
     public void pintar(JPanel panel){
           panel.setSize(800,500);
           panel.setLocation(0,0);
@@ -95,14 +101,26 @@ public class Base extends JFrame {
           lienzo.repaint(); 
       }
 
+    /**
+     * Devuelve la lista de jugadores
+     * @return Atributo jugadores
+     */
     public AlmacenDeJugadores getJugadores() {
         return jugadores;
     }
 
+    /**
+     * Devuelve la lista de Palabras
+     * @return Atributo palabras
+     */
     public AlmacenDePalabras getPalabras() {
         return palabras;
     }
 
+    /**
+     * Devuelve la lista de Partidas
+     * @return Atributo partidas
+     */
     public AlmacenDePartidas getPartidas() {
         return partidas;
     }

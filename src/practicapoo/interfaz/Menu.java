@@ -11,8 +11,8 @@ public class Menu extends javax.swing.JPanel {
 
     private Base frame;
     /**
-     * Creates new form Menu
-     * @param frame
+     * Crea un nuevo menú
+     * @param frame Frame sobre el que dibujar el menú
      */
     public Menu(Base frame) {
         initComponents();
@@ -99,7 +99,7 @@ public class Menu extends javax.swing.JPanel {
         p.add(pass);
 
         //TODO añadir imagen al popup de inicio de sesión
-        int i = JOptionPane.showConfirmDialog(null, p,"Iniciar sesión", JOptionPane.OK_CANCEL_OPTION);
+        int i = JOptionPane.showConfirmDialog(null, p,"Iniciar sesión", JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/practicapoo/imagenes/w.png"));
         if(i == JOptionPane.OK_OPTION && !user.getText().equals("") && !pass.getText().equals("")){
             System.out.println(user.getText());
             System.out.println(pass.getText());
