@@ -1,9 +1,7 @@
 package practicapoo.interfaz;
 
 import practicapoo.jugador.Jugador;
-
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 /**
  *
@@ -100,9 +98,13 @@ public class Menu extends javax.swing.JPanel {
         p.add(new JLabel("Contraseña"));
         p.add(pass);
 
+        //TODO añadir imagen al popup de inicio de sesión
         int i = JOptionPane.showConfirmDialog(null, p,"Iniciar sesión", JOptionPane.OK_CANCEL_OPTION);
-        if(i == JOptionPane.OK_OPTION && user.getText() != "" && pass.getText() != ""){
+        if(i == JOptionPane.OK_OPTION && !user.getText().equals("") && !pass.getText().equals("")){
+            System.out.println(user.getText());
+            System.out.println(pass.getText());
             Jugador j = new Jugador(user.getText(),pass.getText());
+            System.out.println(frame.getJugadores().autenticar(j));
             if(frame.getJugadores().autenticar(j)){
                 frame.pintar(new Sesion(frame,j));
             }

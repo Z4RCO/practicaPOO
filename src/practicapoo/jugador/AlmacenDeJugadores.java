@@ -1,7 +1,5 @@
 package practicapoo.jugador;
 
-import practicapoo.jugador.Jugador;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -10,15 +8,17 @@ public class AlmacenDeJugadores {
 
     private ArrayList<Jugador> jugadores;
 
+    public AlmacenDeJugadores(){
+        jugadores = new ArrayList<Jugador>();
+        jugadores.add(new Jugador("admin","admin"));
+    }
     public boolean autenticar(Jugador j){
         boolean encontrado = false;
-        Iterator i = jugadores.iterator();
+        Iterator<Jugador> i = jugadores.iterator();
         while(i.hasNext() && !encontrado){
-            Jugador p = (Jugador) i.next();
+            Jugador p = i.next();
             if(p.equals(j))encontrado = true;
         }
-
-        //TODO Acabar método autenticar
         return encontrado;
     }
 

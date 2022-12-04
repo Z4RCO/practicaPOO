@@ -122,7 +122,7 @@ public class Partida5 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pistaLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaLetraActionPerformed
-        // TODO add your handling code here:
+        // TODO hacer evento pista letra
     }//GEN-LAST:event_pistaLetraActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

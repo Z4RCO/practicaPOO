@@ -15,11 +15,15 @@ import javax.swing.*;
  */
 public class Base extends JFrame {
 
-    //TODO inicializar almacenes en el constructor
+    //TODO Leer archivos de config y datos
+    //TODO inicializar almacen de palabras en el constructor
     private AlmacenDeJugadores jugadores;
     private AlmacenDePalabras palabras;
     private AlmacenDePartidas partidas;
     public Base() {
+        jugadores = new AlmacenDeJugadores();
+        //palabras = new AlmacenDePalabras();
+        partidas = new AlmacenDePartidas();
         initComponents();
         pintar(new Sesion(this,null));
     }
@@ -66,7 +70,7 @@ public class Base extends JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
