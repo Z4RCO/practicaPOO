@@ -1,5 +1,6 @@
 package practicapoo.palabra;
 
+//TODO implementar serializable
 public class AlmacenDePalabras {
 
     private Palabra[] palabrasDeCinco;

@@ -87,25 +87,32 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_practicarActionPerformed
 
     private void iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionActionPerformed
-                JPanel p = new JPanel();
+        //TODO Hacer un método que pinte el popup ¿?
+        JPanel popup = new JPanel();
         JTextField user = new JTextField(20);
-        JTextField pass = new JPasswordField(20);
+        JPasswordField pass = new JPasswordField(20);
 
+        popup.setLayout(new BoxLayout(popup, BoxLayout.Y_AXIS));
+        popup.add(new JLabel("Usuario"));
+        popup.add(user);
+        popup.add(new JLabel("Contraseña"));
+        popup.add(pass);
 
-        p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-        p.add(new JLabel("Usuario"));
-        p.add(user);
-        p.add(new JLabel("Contraseña"));
-        p.add(pass);
+        int i = JOptionPane.showConfirmDialog(
+                frame,
+                popup,
+                "Iniciar sesión",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                new ImageIcon("src/practicapoo/imagenes/w.png")
+        );
 
-        //TODO añadir imagen al popup de inicio de sesión
-        int i = JOptionPane.showConfirmDialog(null, p,"Iniciar sesión", JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/practicapoo/imagenes/w.png"));
+        //si le has dado a OK y has puesto texto en los TextFields
         if(i == JOptionPane.OK_OPTION && !user.getText().equals("") && !pass.getText().equals("")){
-            System.out.println(user.getText());
-            System.out.println(pass.getText());
+            //Creas un nuevo jugador y compruebas si existe en el almacen
             Jugador j = new Jugador(user.getText(),pass.getText());
-            System.out.println(frame.getJugadores().autenticar(j));
             if(frame.getJugadores().autenticar(j)){
+                //Si existe, pintas un Panel Sesión, que tiene como atributo un Jugador (le pasas el que creaste antes)
                 frame.pintar(new Sesion(frame,j));
             }
 

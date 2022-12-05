@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+//TODO implementar serializable
 public class AlmacenDeJugadores {
 
     private ArrayList<Jugador> jugadores;
