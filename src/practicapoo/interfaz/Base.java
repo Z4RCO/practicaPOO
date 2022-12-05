@@ -8,7 +8,11 @@ import practicapoo.jugador.AlmacenDeJugadores;
 import practicapoo.palabra.AlmacenDePalabras;
 import practicapoo.partida.AlmacenDePartidas;
 
+import javax.imageio.ImageReader;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.ImageProducer;
+
 /**
  * Clase que genera el JFrame Base sobre el que se asientan el resto de paneles
  * Contiene la información de almacenes necesaria para que el programa funcione
@@ -22,10 +26,15 @@ public class Base extends JFrame {
     private AlmacenDePalabras palabras;
     private AlmacenDePartidas partidas;
     public Base() {
+
         jugadores = new AlmacenDeJugadores();
         //palabras = new AlmacenDePalabras();
         partidas = new AlmacenDePartidas();
+
         initComponents();
+        //TODO Pasar icono a initComponents
+        setIconImage(new ImageIcon("src/practicapoo/imagenes/w.png").getImage());
+
         pintar(new Menu(this));
     }
 
@@ -41,6 +50,7 @@ public class Base extends JFrame {
         lienzo = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Wordle");
         setResizable(false);
 
         javax.swing.GroupLayout lienzoLayout = new javax.swing.GroupLayout(lienzo);
