@@ -1,6 +1,8 @@
 package practicapoo.jugador;
 
-public class Estadisticas {
+import java.io.*;
+
+public class Estadisticas implements Serializable {
     private int ganadas;
     private int empatadas;
     private int perdidas;

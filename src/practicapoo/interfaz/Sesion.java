@@ -89,6 +89,7 @@ public class Sesion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void estadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasActionPerformed
+        //TODO Cambiar ver stats y Partidas contra otro por Ver Perfil
         JOptionPane.showMessageDialog(frame,jugador.getEstadisticas().toString(),"Estadísticas",0,new ImageIcon("src/practicapoo/imagenes/Stats.png"));
     }//GEN-LAST:event_estadisticasActionPerformed
 

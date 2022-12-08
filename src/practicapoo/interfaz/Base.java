@@ -134,4 +134,6 @@ public class Base extends JFrame {
     public AlmacenDePartidas getPartidas() {
         return partidas;
     }
+
+
 }
