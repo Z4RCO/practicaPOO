@@ -7,7 +7,7 @@ import javax.swing.*;
  *
  * @author z3rc0
  */
-public class Menu extends javax.swing.JPanel {
+public class Menu extends JPanel {
 
     private Base frame;
     /**
@@ -87,7 +87,18 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_practicarActionPerformed
 
     private void iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionActionPerformed
-        //TODO Hacer un método que pinte el popup ¿?
+        pintarInicioSesion();
+
+    }//GEN-LAST:event_iniciarSesionActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton iniciarSesion;
+    private javax.swing.JButton practicar;
+    private javax.swing.JButton salir;
+    // End of variables declaration//GEN-END:variables
+
+    private void pintarInicioSesion(){
         JPanel popup = new JPanel();
         JTextField user = new JTextField(20);
         JPasswordField pass = new JPasswordField(20);
@@ -108,21 +119,12 @@ public class Menu extends javax.swing.JPanel {
         );
 
         //si le has dado a OK y has puesto texto en los TextFields
-        if(i == JOptionPane.OK_OPTION && !user.getText().equals("") && !pass.getText().equals("")){
-            //Creas un nuevo jugador y compruebas si existe en el almacen
-            Jugador j = new Jugador(user.getText(),pass.getText());
+        if(i == JOptionPane.OK_OPTION && !user.getText().equals("") &&  !(new String(pass.getPassword())).equals("")){
+
+            Jugador j = new Jugador(user.getText(),new String( pass.getPassword()));
             if(frame.getJugadores().autenticar(j)){
-                //Si existe, pintas un Panel Sesión, que tiene como atributo un Jugador (le pasas el que creaste antes)
                 frame.pintar(new Sesion(frame,j));
             }
-
         }
-    }//GEN-LAST:event_iniciarSesionActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton iniciarSesion;
-    private javax.swing.JButton practicar;
-    private javax.swing.JButton salir;
-    // End of variables declaration//GEN-END:variables
+    }
 }
