@@ -18,14 +18,14 @@ import java.awt.image.ImageProducer;
  * Contiene la información de almacenes necesaria para que el programa funcione
  * Contiene el método main, punto de inicio de ejecución del programa
  */
-public class Base extends JFrame {
+public class Main extends JFrame {
 
     //TODO Leer archivos de config y datos
     //TODO inicializar almacen de palabras en el constructor
     private AlmacenDeJugadores jugadores;
     private AlmacenDePalabras palabras;
     private AlmacenDePartidas partidas;
-    public Base() {
+    public Main() {
 
         jugadores = new AlmacenDeJugadores();
         //palabras = new AlmacenDePalabras();
@@ -51,6 +51,7 @@ public class Base extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Wordle");
+        //setIconImage(new ImageIcon(getClass().getResource("src/practicapoo/archivos/w.png")).getImage());
         setResizable(false);
 
         javax.swing.GroupLayout lienzoLayout = new javax.swing.GroupLayout(lienzo);
@@ -88,7 +89,7 @@ public class Base extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Base().setVisible(true);
+                new Main().setVisible(true);
             }
         });
     }
@@ -108,7 +109,9 @@ public class Base extends JFrame {
           lienzo.removeAll();
           lienzo.add(panel);
           lienzo.revalidate();
-          lienzo.repaint(); 
+          lienzo.repaint();
+          panel.setFocusable(true);
+          panel.grabFocus();
       }
 
     /**

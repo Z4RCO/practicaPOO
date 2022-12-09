@@ -20,11 +20,9 @@
               <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="cerrarSesion" pref="200" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jugar" max="32767" attributes="0"/>
-                      <Component id="estadisticas" max="32767" attributes="0"/>
-                      <Component id="partidasOtro" alignment="0" pref="200" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jugar" max="32767" attributes="0"/>
+                  <Component id="estadisticas" max="32767" attributes="0"/>
+                  <Component id="partidasOtro" alignment="0" pref="200" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="310" max="32767" attributes="0"/>
           </Group>
@@ -51,6 +49,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Jugar!"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jugarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="estadisticas">
       <Properties>

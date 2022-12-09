@@ -72,7 +72,9 @@ public class AlmacenDeJugadores implements Serializable {
                 }
                 input.close();
             }
-        } catch (IOException | ClassNotFoundException eof) {
+        } catch(EOFException eof){
+
+        }catch (IOException | ClassNotFoundException eof) {
             System.err.println("Error. Se ha producido un error: " + eof);
         }
 
@@ -88,7 +90,7 @@ public class AlmacenDeJugadores implements Serializable {
                 input.writeObject(j);
             }
         } catch (IOException io) {
-            System.err.println("Error. Se ha producido un error al guardar la info: " + io);
+            System.err.println("Error. Se ha producido un error al guardar la información: " + io);
         }
     }
 }

@@ -10,13 +10,13 @@ import practicapoo.jugador.Jugador;
 public class Sesion extends javax.swing.JPanel {
     
     private Jugador jugador;
-    private Base frame;
+    private Main frame;
     /**
      * Crea un nuevo form de una sesión iniciada
      * @param frame Frame sobre el que asentar el JPanel
      * @param jugador Jugador que ha iniciado sesión
      */
-    public Sesion(Base frame, Jugador jugador) {
+    public Sesion(Main frame, Jugador jugador) {
         initComponents();
         this.frame = frame;
         this.jugador = jugador;
@@ -37,6 +37,11 @@ public class Sesion extends javax.swing.JPanel {
         cerrarSesion = new javax.swing.JButton();
 
         jugar.setText("Jugar!");
+        jugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jugarActionPerformed(evt);
+            }
+        });
 
         estadisticas.setText("Ver estadísticas");
         estadisticas.addActionListener(new java.awt.event.ActionListener() {
@@ -67,10 +72,9 @@ public class Sesion extends javax.swing.JPanel {
                 .addGap(290, 290, 290)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(estadisticas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(partidasOtro, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+                    .addComponent(jugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(estadisticas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(partidasOtro, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                 .addContainerGap(310, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,6 +105,10 @@ public class Sesion extends javax.swing.JPanel {
     private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
         frame.pintar(new Menu(frame));
     }//GEN-LAST:event_cerrarSesionActionPerformed
+
+    private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
+        frame.pintar(new Partida5());
+    }//GEN-LAST:event_jugarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,12 +9,12 @@ import javax.swing.*;
  */
 public class Menu extends JPanel {
 
-    private Base frame;
+    private Main frame;
     /**
      * Crea un nuevo menú
      * @param frame Frame sobre el que dibujar el menú
      */
-    public Menu(Base frame) {
+    public Menu(Main frame) {
         initComponents();
         this.frame = frame;
     }
