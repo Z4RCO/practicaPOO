@@ -33,7 +33,7 @@ public class Main extends JFrame {
 
         initComponents();
         //TODO Pasar icono a initComponents
-        setIconImage(new ImageIcon("src/practicapoo/imagenes/w.png").getImage());
+        setIconImage(new ImageIcon("src/practicapoo/archivos/Logo.png").getImage());
 
         pintar(new Menu(this));
     }

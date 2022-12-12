@@ -378,6 +378,45 @@ public class Partida5 extends javax.swing.JPanel{
             case 12:
                 jLabel15.setText(evt.getKeyChar() + "");
                 break;
+            case 13:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 14:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 15:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 16:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 17:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 18:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 19:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 20:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 21:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 22:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 23:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 24:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 25:
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
         }
         ++letrasEscritas;
     }//GEN-LAST:event_formKeyTyped

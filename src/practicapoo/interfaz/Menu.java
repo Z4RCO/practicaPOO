@@ -115,7 +115,7 @@ public class Menu extends JPanel {
                 "Iniciar sesión",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
-                new ImageIcon("src/practicapoo/imagenes/w.png")
+                new ImageIcon("src/practicapoo/archivos/Usuario.png")
         );
 
         //si le has dado a OK y has puesto texto en los TextFields
