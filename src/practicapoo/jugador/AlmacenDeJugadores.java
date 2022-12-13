@@ -66,14 +66,12 @@ public class AlmacenDeJugadores implements Serializable {
             Jugador j = (Jugador) input.readObject();
             if(input != null) {
                 while (j != null) {
-                    System.out.println("Jugador" + j.getNombre());
                     jugadores.add(j);
                     j = (Jugador) input.readObject();
                 }
                 input.close();
             }
         } catch(EOFException eof){
-
         }catch (IOException | ClassNotFoundException eof) {
             System.err.println("Error. Se ha producido un error: " + eof);
         }

@@ -107,7 +107,9 @@ public class Sesion extends javax.swing.JPanel {
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
-        frame.pintar(new Partida5());
+        //TODO arreglar llamada al constructor de partida
+        //TODO poner atributo frame en InterfazPartida
+        frame.pintar(new InterfazPartida5(null));
     }//GEN-LAST:event_jugarActionPerformed
 
 

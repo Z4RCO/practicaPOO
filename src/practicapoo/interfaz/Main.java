@@ -103,6 +103,7 @@ public class Main extends JFrame {
      * Método para Cambiar el contenido del panel lienzo
      * @param panel Panel para poner sobre el lienzo
      */
+    //TODO Cambiar nombre a cambiarContenido
     public void pintar(JPanel panel){
           panel.setSize(800,500);
           panel.setLocation(0,0);

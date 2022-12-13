@@ -1,0 +1,8 @@
+5 3 no
+arbol
+coche
+koala
+6
+espada
+maleta
+ciervo
