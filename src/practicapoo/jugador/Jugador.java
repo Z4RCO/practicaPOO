@@ -14,6 +14,11 @@ public class Jugador implements Comparable, Serializable {
     }
 
     public void partidasContraOtro(Jugador j){
+        try{
+
+        }catch(NullPointerException npe){
+            System.err.println("El jugador especificado no existe: " + npe);
+        }
 
     }
     @Override
