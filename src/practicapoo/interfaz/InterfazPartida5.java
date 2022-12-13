@@ -4,6 +4,8 @@ package practicapoo.interfaz;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 
+import practicapoo.jugador.Jugador;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -12,15 +14,19 @@ import java.awt.event.KeyListener;
  *
  * @author crist
  */
-public class Partida5 extends javax.swing.JPanel{
+public class InterfazPartida5 extends javax.swing.JPanel{
 
     private int letrasEscritas;
+    private  char[] palabra;
+    private Jugador jugador;
     /**
      * Creates new form Partida5
      */
-    public Partida5() {
+    public InterfazPartida5(Jugador jugador) {
         initComponents();
         setFocusable(true);
+        this.jugador = jugador;
+        palabra = new char[5];
     }
 
     /**
@@ -415,6 +421,15 @@ public class Partida5 extends javax.swing.JPanel{
                 jLabel27.setText(evt.getKeyChar() + "");
                 break;
         }
+        if(letrasEscritas == 5){
+            StringBuilder s = new StringBuilder();
+            s.append(jLabel3.getText());
+            s.append(jLabel4.getText());
+            s.append(jLabel5.getText());
+            s.append(jLabel6.getText());
+            s.append(jLabel7.getText());
+            System.out.println(s.toString());
+        }
         ++letrasEscritas;
     }//GEN-LAST:event_formKeyTyped
 
@@ -451,4 +466,9 @@ public class Partida5 extends javax.swing.JPanel{
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton pistaLetra;
     // End of variables declaration//GEN-END:variables
+
+
+    public Jugador getJugador(){
+        return jugador;
+    }
 }
