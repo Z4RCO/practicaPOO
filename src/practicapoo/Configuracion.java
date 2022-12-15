@@ -3,13 +3,13 @@ package practicapoo;
 import java.io.*;
 
 public class Configuracion {
-    private static enum letras{
-        Cinco,
-        Seis,
-    };
+    private static Letras letras;
     private static int numPalabras;
     private static boolean primeraLetra;
 
+    public static Letras getNumLetras(){
+        return letras;
+    }
     public static int getNumPalabras() {
         return numPalabras;
     }
@@ -24,9 +24,8 @@ public class Configuracion {
 
             String s = entrada.readLine();
 
-            //TODO Hacer enum
-            if(s.charAt(0) == '5') System.out.println();
-            else System.out.println();
+            if(s.charAt(0) == '5') letras = Letras.CINCO;
+            else letras = Letras.SEIS;
 
 
             numPalabras = Integer.parseInt(s.substring(2,3));
