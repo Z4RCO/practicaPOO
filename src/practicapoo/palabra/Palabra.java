@@ -5,22 +5,20 @@ import practicapoo.Letras;
 import java.util.Scanner;
 
 public class Palabra {
+    private char[] palabra;
     private Letras numLetras;
     private static char[] palabra;
     private boolean regaloDeLetra;
-    private Intento[] intento;
 
-    public Palabra() {
-        // this.NumLetras = La longitud que el ususario seleccione en configuración
-        sacarPalabraAleatoria(); // Se guarda en el array de chars palabra
-        this.regaloDeLetra = false; // Todavía no ha usado el regalo
-        for(int i = 0; i < 5; i++){
-            intento[i] = new Intento();
+    public Palabra(String pal) {
+        //this.NumLetras = pal.length();
+        for(int i = 0; i < pal.length(); i++){
+            this.palabra[i] = pal.charAt(i);
         }
+        this.regaloDeLetra = false; // Todavía no ha usado el regalo
     }
 
     public void jugar(int numIntentos){
-        Palabra palabraMisteriosa = new Palabra();
     }
 
     private void comprobarColocadas(char[] palabraMisteriosa, char[] miIntento){
@@ -70,9 +68,7 @@ public class Palabra {
     }
 
     public void secuenciaResultados(){
-        for(int i = 0; i < /*La longitud que el ususario seleccione en configuración*/; i++){
-            System.out. println(intento[i]);
-        }
+
     }
 
 }
