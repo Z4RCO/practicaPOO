@@ -4,8 +4,8 @@ public class Intento {
     private char[] intento;
 
 
-    public Intento() {
-        this.intento = new char[/*La longitud que el ususario seleccione en configuración*/];
+    public Intento(Palabra palabra) {
+        this.intento = new char[palabra.getNumLetras().ordinal()];
     }
     public char[] recogerIntento(){
 
