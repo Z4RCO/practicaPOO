@@ -1,13 +1,13 @@
 package practicapoo.palabra;
 
+import practicapoo.Letras;
+
 import java.util.Scanner;
 
 public class Palabra {
-    private enum NumLetras {
-        CINCO,
-        SEIS,
-    }
     private char[] palabra;
+    private Letras numLetras;
+    private static char[] palabra;
     private boolean regaloDeLetra;
 
     public Palabra(String pal) {
