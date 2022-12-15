@@ -7,14 +7,14 @@ import javax.swing.*;
  *
  * @author z3rc0
  */
-public class Menu extends javax.swing.JPanel {
+public class Menu extends JPanel {
 
-    private Base frame;
+    private Main frame;
     /**
-     * Creates new form Menu
-     * @param frame
+     * Crea un nuevo menú
+     * @param frame Frame sobre el que dibujar el menú
      */
-    public Menu(Base frame) {
+    public Menu(Main frame) {
         initComponents();
         this.frame = frame;
     }
@@ -87,29 +87,8 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_practicarActionPerformed
 
     private void iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionActionPerformed
-                JPanel p = new JPanel();
-        JTextField user = new JTextField(20);
-        JTextField pass = new JPasswordField(20);
+        pintarInicioSesion();
 
-
-        p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-        p.add(new JLabel("Usuario"));
-        p.add(user);
-        p.add(new JLabel("Contraseña"));
-        p.add(pass);
-
-        //TODO añadir imagen al popup de inicio de sesión
-        int i = JOptionPane.showConfirmDialog(null, p,"Iniciar sesión", JOptionPane.OK_CANCEL_OPTION);
-        if(i == JOptionPane.OK_OPTION && !user.getText().equals("") && !pass.getText().equals("")){
-            System.out.println(user.getText());
-            System.out.println(pass.getText());
-            Jugador j = new Jugador(user.getText(),pass.getText());
-            System.out.println(frame.getJugadores().autenticar(j));
-            if(frame.getJugadores().autenticar(j)){
-                frame.pintar(new Sesion(frame,j));
-            }
-
-        }
     }//GEN-LAST:event_iniciarSesionActionPerformed
 
 
@@ -118,4 +97,34 @@ public class Menu extends javax.swing.JPanel {
     private javax.swing.JButton practicar;
     private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
+
+    private void pintarInicioSesion(){
+        JPanel popup = new JPanel();
+        JTextField user = new JTextField(20);
+        JPasswordField pass = new JPasswordField(20);
+
+        popup.setLayout(new BoxLayout(popup, BoxLayout.Y_AXIS));
+        popup.add(new JLabel("Usuario"));
+        popup.add(user);
+        popup.add(new JLabel("Contraseña"));
+        popup.add(pass);
+
+        int i = JOptionPane.showConfirmDialog(
+                frame,
+                popup,
+                "Iniciar sesión",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                new ImageIcon("src/practicapoo/archivos/Usuario.png")
+        );
+
+        //si le has dado a OK y has puesto texto en los TextFields
+        if(i == JOptionPane.OK_OPTION && !user.getText().equals("") &&  !(new String(pass.getPassword())).equals("")){
+
+            Jugador j = new Jugador(user.getText(),new String( pass.getPassword()));
+            if(frame.getJugadores().autenticar(j)){
+                frame.pintar(new Sesion(frame,j));
+            }
+        }
+    }
 }

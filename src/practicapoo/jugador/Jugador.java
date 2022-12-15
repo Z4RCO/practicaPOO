@@ -1,6 +1,8 @@
 package practicapoo.jugador;
 
-public class Jugador implements Comparable {
+import java.io.*;
+
+public class Jugador implements Comparable, Serializable {
     private String nombre;
     private String password;
     private Estadisticas estadisticas;

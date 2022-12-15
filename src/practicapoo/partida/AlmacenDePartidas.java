@@ -2,6 +2,7 @@ package practicapoo.partida;
 
 import java.util.ArrayList;
 
+//TODO implementar serializable
 public class AlmacenDePartidas {
     private ArrayList<Partida> partidas;
 

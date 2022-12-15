@@ -1,57 +1,94 @@
 package practicapoo.jugador;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.io.*;
+import java.util.*;
 
-public class AlmacenDeJugadores {
+
+public class AlmacenDeJugadores implements Serializable {
 
     private ArrayList<Jugador> jugadores;
 
-    public AlmacenDeJugadores(){
+    public AlmacenDeJugadores() {
         jugadores = new ArrayList<Jugador>();
-        jugadores.add(new Jugador("admin","admin"));
+        cargarArchivo();
     }
-    public boolean autenticar(Jugador j){
+
+    public boolean autenticar(Jugador j) {
         boolean encontrado = false;
         Iterator<Jugador> i = jugadores.iterator();
-        while(i.hasNext() && !encontrado){
+        while (i.hasNext() && !encontrado) {
             Jugador p = i.next();
-            if(p.equals(j))encontrado = true;
+            if (p.equals(j)) encontrado = true;
         }
         return encontrado;
     }
 
-    public void rankingOrdenadoPorVictorias(){
+    public void rankingOrdenadoPorVictorias() {
         jugadores.sort(Jugador::compareTo);
         Iterator<Jugador> i = jugadores.iterator();
-        while(i.hasNext()){
+        while (i.hasNext()) {
             String element = i.next().getNombre();
             //TODO Devolver jugadores
         }
     }
 
-    public void rankingOrdenadoPorNombre(){
+    public void rankingOrdenadoPorNombre() {
         TreeSet<String> set = new TreeSet<String>();
-        for(Jugador j: jugadores){
+        for (Jugador j : jugadores) {
             set.add(j.getNombre());
         }
         Iterator<String> i = set.iterator();
-        while(i.hasNext()){
+        while (i.hasNext()) {
             String element = i.next();
             //TODO Devolver jugadores
         }
     }
 
-    public void alta(Jugador j){
-        if(!autenticar(j)){
+    public void alta(Jugador j) {
+        if (!autenticar(j)) {
             jugadores.add(j);
+            guardarArchivo();
+        }
+
+    }
+
+    public void baja(Jugador j) {
+        if (autenticar(j)) {
+            jugadores.remove(j);
+            guardarArchivo();
         }
     }
 
-    public void baja(Jugador j){
-        if(autenticar(j)){
-            jugadores.remove(j);
+    private void cargarArchivo() {
+        try {
+            FileInputStream file = new FileInputStream("src/practicapoo/archivos/jugadores.lingo");
+            ObjectInputStream input = new ObjectInputStream(file);
+            Jugador j = (Jugador) input.readObject();
+            if(input != null) {
+                while (j != null) {
+                    jugadores.add(j);
+                    j = (Jugador) input.readObject();
+                }
+                input.close();
+            }
+        } catch(EOFException eof){
+        }catch (IOException | ClassNotFoundException eof) {
+            System.err.println("Error. Se ha producido un error: " + eof);
+        }
+
+    }
+
+    private void guardarArchivo(){
+        try {
+            System.out.println("guardando...");
+            FileOutputStream file = new FileOutputStream("src/practicapoo/archivos/jugadores.lingo");
+            ObjectOutputStream input = new ObjectOutputStream(file);
+
+            for(Jugador j:jugadores){
+                input.writeObject(j);
+            }
+        } catch (IOException io) {
+            System.err.println("Error. Se ha producido un error al guardar la información: " + io);
         }
     }
 }
