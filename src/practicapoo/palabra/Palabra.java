@@ -1,24 +1,29 @@
 package practicapoo.palabra;
 
+import practicapoo.Configuracion;
 import practicapoo.Letras;
 
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Palabra {
     private char[] palabra;
     private Letras numLetras;
-    private static char[] palabra;
     private boolean regaloDeLetra;
 
     public Palabra(String pal) {
-        //this.NumLetras = pal.length();
+        this.numLetras = pal.length();
         for(int i = 0; i < pal.length(); i++){
             this.palabra[i] = pal.charAt(i);
         }
         this.regaloDeLetra = false; // Todavía no ha usado el regalo
     }
 
-    public void jugar(int numIntentos){
+    public Letras getNumLetras() {
+        return numLetras;
+    }
+
+    public void jugar(){
     }
 
     private void comprobarColocadas(char[] palabraMisteriosa, char[] miIntento){
@@ -62,8 +67,25 @@ public class Palabra {
         return (6-numIntentos);
     }
 
-    public void sacarPalabraAleatoria(){
-        //Ficheros
+    public void sacarPalabraAleatoria(AlmacenDePalabras almacen){
+        int numLetras = Configuracion.getNumLetras().ordinal();
+        if( numLetras == 5){
+            int indiceAleatorio = ThreadLocalRandom.current().nextInt(0,  almacen.getPalabrasDeCinco().length);
+            Palabra[] pals = new Palabra[almacen.getPalabrasDeCinco().length];
+            Palabra pal = pals[indiceAleatorio];
+            for(int i = 0; i < pal.toString().length(); i++){
+                this.palabra[i] = pal.toString().charAt(i);
+            }
+        }
+
+        if(numLetras == 6){
+            int indiceAleatorio = ThreadLocalRandom.current().nextInt(0,  almacen.getPalabrasDeSeis().length);
+            Palabra[] pals = new Palabra[almacen.getPalabrasDeSeis().length];
+            Palabra pal = pals[indiceAleatorio];
+            for(int i = 0; i < pal.toString().length(); i++){
+                this.palabra[i] = pal.toString().charAt(i);
+            }
+        }
 
     }
 
