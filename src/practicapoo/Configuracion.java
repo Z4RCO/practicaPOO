@@ -1,5 +1,7 @@
 package practicapoo;
 
+import practicapoo.enums.Letras;
+
 import java.io.*;
 
 public class Configuracion {

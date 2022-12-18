@@ -1,5 +1,7 @@
 package practicapoo.partida;
 
+import practicapoo.jugador.Jugador;
+
 public class Partida {
 
     private int identificador;
@@ -7,9 +9,15 @@ public class Partida {
     private boolean primeraLetra;
     private int numPalabras;
 
-    public Partida(int numPalabras){
+    private Jugador jugador1;
+    private Jugador jugador2;
+
+    public Partida(int numPalabras, Jugador jugador1,Jugador jugador2){
+        //TODO lanzar excepcion
         if(numPalabras > 10 || numPalabras < 1){
            this.numPalabras = numPalabras;
+           this.jugador1 = jugador1;
+           this.jugador2 = jugador2;
         }
     }
 
