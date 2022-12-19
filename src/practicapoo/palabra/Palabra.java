@@ -12,11 +12,16 @@ public class Palabra {
     private boolean regaloDeLetra;
 
     public Palabra(String pal) {
-        this.numLetras = pal.length();
+        if (pal.length()==5){
+            this.numLetras = Letras.CINCO;
+        } else if (pal.length()==6){
+            this.numLetras = Letras.SEIS;
+        }
+        palabra = new char[numLetras.ordinal()];
         for(int i = 0; i < pal.length(); i++){
             this.palabra[i] = pal.charAt(i);
         }
-        this.regaloDeLetra = false; // Todavía no ha usado el regalo
+        this.regaloDeLetra = true; // Tienes disponible el regalo
     }
 
     public Letras getNumLetras() {
@@ -68,25 +73,29 @@ public class Palabra {
     }
 
     public void sacarPalabraAleatoria(AlmacenDePalabras almacen){
-        int numLetras = Configuracion.getNumLetras().ordinal();
-        if( numLetras == 5){
+        almacen.cargarFichero();
+        this.numLetras = Configuracion.getNumLetras();
+        if(numLetras == Letras.CINCO){
             int indiceAleatorio = ThreadLocalRandom.current().nextInt(0,  almacen.getPalabrasDeCinco().length);
             Palabra[] pals = new Palabra[almacen.getPalabrasDeCinco().length];
+            for(int i=0; i<almacen.getPalabrasDeCinco().length; i++){
+                pals[i]=almacen.getPalabrasDeCinco()[i];
+            }
             Palabra pal = pals[indiceAleatorio];
             for(int i = 0; i < pal.toString().length(); i++){
                 this.palabra[i] = pal.toString().charAt(i);
             }
-        }
-
-        if(numLetras == 6){
+        } else if(numLetras == Letras.SEIS){
             int indiceAleatorio = ThreadLocalRandom.current().nextInt(0,  almacen.getPalabrasDeSeis().length);
             Palabra[] pals = new Palabra[almacen.getPalabrasDeSeis().length];
+            for(int i=0; i<almacen.getPalabrasDeSeis().length; i++){
+                pals[i]=almacen.getPalabrasDeSeis()[i];
+            }
             Palabra pal = pals[indiceAleatorio];
             for(int i = 0; i < pal.toString().length(); i++){
                 this.palabra[i] = pal.toString().charAt(i);
             }
         }
-
     }
 
     public void secuenciaResultados(){
