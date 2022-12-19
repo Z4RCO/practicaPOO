@@ -11,6 +11,7 @@ public class Partida {
 
     private Jugador jugador1;
     private Jugador jugador2;
+    private Marcador marcador;
 
     public Partida(int numPalabras, Jugador jugador1,Jugador jugador2){
         //TODO lanzar excepcion
@@ -18,6 +19,7 @@ public class Partida {
            this.numPalabras = numPalabras;
            this.jugador1 = jugador1;
            this.jugador2 = jugador2;
+           marcador = new Marcador();
         }
     }
 
@@ -33,8 +35,15 @@ public class Partida {
         return true;
     };
 
-    public void info_Partida(){};
-
-
-
+    @Override
+    public String toString() {
+        String palabras;
+        for (int i = 0; i < numPalabras; i++) {
+            //TODO añadir array de palabras
+        }
+        return "Identificador: " + identificador + "\n" +
+                "Jugador 1: " + jugador1 + ". Consiguió " + marcador.getPuntos_j1() + "\n" +
+                "Jugador 2: " + jugador2 + ". Consiguió " + marcador.getPuntos_j2() + "\n" +
+                "Palabras de la partida: ";
+    }
 }
