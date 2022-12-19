@@ -10,8 +10,9 @@ public class AlmacenDePartidas {
         this.partidas = new ArrayList<Partida>();
     }
 
-    public void infoPartidas(){
+    public String infoPartidas(){
         //TODO Imprimir informacion de las partidas
+        return null;
     }
 
     public void insertarPartida(Partida p){
