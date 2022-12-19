@@ -16,7 +16,6 @@ public class InterfazPartida5 extends javax.swing.JPanel{
      */
     public InterfazPartida5(Jugador jugador) {
         initComponents();
-        setFocusable(true);
         this.jugador = jugador;
         palabra = new char[5];
     }
