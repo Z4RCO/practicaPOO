@@ -119,12 +119,15 @@ public class Menu extends JPanel {
         );
 
         //si le has dado a OK y has puesto texto en los TextFields
-        if(i == JOptionPane.OK_OPTION && !user.getText().equals("") &&  !(new String(pass.getPassword())).equals("")){
-
-            Jugador j = new Jugador(user.getText(),new String( pass.getPassword()));
-            if(frame.getJugadores().autenticar(j)){
-                frame.pintar(new Sesion(frame,j));
-            }
+        if (i != JOptionPane.OK_OPTION || user.getText().equals("") || (new String(pass.getPassword())).equals("")) {
+            return;
         }
+
+        Jugador j = new Jugador(user.getText(),new String( pass.getPassword()));
+        if (!frame.getJugadores().autenticar(j)) {
+            return;
+        }
+        if(j.equals(new Jugador("admin","admin")))frame.pintar(new Config(frame));
+        else frame.pintar(new Sesion(frame,j));
     }
 }

@@ -1,4 +1,4 @@
-package practicapoo;
+package practicapoo.enums;
 
 public enum Letras{
     CINCO(5),
