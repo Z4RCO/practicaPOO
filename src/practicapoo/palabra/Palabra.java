@@ -1,7 +1,7 @@
 package practicapoo.palabra;
 
 import practicapoo.Configuracion;
-import practicapoo.Letras;
+import practicapoo.enums.Letras;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
