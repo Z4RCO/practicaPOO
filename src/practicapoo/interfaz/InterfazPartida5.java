@@ -2,6 +2,7 @@ package practicapoo.interfaz;
 
 import practicapoo.enums.Colores;
 import practicapoo.jugador.Jugador;
+import practicapoo.partida.Partida;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +12,17 @@ public class InterfazPartida5 extends javax.swing.JPanel{
     private int letrasEscritas;
     private  char[] palabra;
     private Jugador jugador;
+
+    private Partida partida;
     /**
      * Creates new form Partida5
      */
-    public InterfazPartida5(Jugador jugador) {
+    public InterfazPartida5(Jugador jugador, Partida partida) {
         initComponents();
         this.jugador = jugador;
         palabra = new char[5];
+        this.partida = partida;
+        turno.setText("Turno de " + jugador.getNombre());
     }
 
     /**
@@ -214,11 +219,11 @@ public class InterfazPartida5 extends javax.swing.JPanel{
     }
 
     private void pistaLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaLetraActionPerformed
-        // TODO hacer evento pista letra
+        partida.usar_Pista_de_Letra();
     }//GEN-LAST:event_pistaLetraActionPerformed
 
     private void regaloPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regaloPalabraActionPerformed
-        // TODO add your handling code here:
+        partida.usar_Pista_de_Palabra();
     }//GEN-LAST:event_regaloPalabraActionPerformed
 
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
@@ -232,6 +237,7 @@ public class InterfazPartida5 extends javax.swing.JPanel{
             if(letrasEscritas % 5 == 0){
                 cambiarColor(Colores.GRIS,0);
                 //TODO HACER INTENTO
+                partida.cambiarTurno();
             }
 
         }
@@ -266,5 +272,9 @@ public class InterfazPartida5 extends javax.swing.JPanel{
     }
     public Jugador getJugador(){
         return jugador;
+    }
+
+    public void setPartida(Partida partida){
+        this.partida = partida;
     }
 }
