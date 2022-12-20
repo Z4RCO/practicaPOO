@@ -11,8 +11,11 @@ public class AlmacenDePartidas {
     }
 
     public String infoPartidas(){
-        //TODO Imprimir informacion de las partidas
-        return null;
+        StringBuilder sb = new StringBuilder();
+        for (Partida p: partidas){
+            sb.append(p.toString()).append("\n");
+        }
+        return sb.toString();
     }
 
     public void insertarPartida(Partida p){
