@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package practicapoo.interfaz;
 
 import practicapoo.Configuracion;
@@ -111,8 +107,7 @@ public class Config extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void editarConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarConfigActionPerformed
-        // TODO Hacer botón para cambiar archivo de configuración
-        Configuracion.setter();
+        Configuracion.setter(JOptionPane.showInputDialog("Introduce la ruta del nuevo archivo de donfiguración"));
     }//GEN-LAST:event_editarConfigActionPerformed
 
     private void verInfoPartidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInfoPartidasActionPerformed

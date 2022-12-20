@@ -19,9 +19,9 @@ public class Configuracion {
         return primeraLetra;
     }
 
-    public static void setter(){
+    public static void setter(String archivo){
         try{
-            FileReader fr = new FileReader("src/practicapoo/archivos/configuracion.txt");
+            FileReader fr = new FileReader(archivo);
             BufferedReader entrada = new BufferedReader(fr);
 
             String s = entrada.readLine();

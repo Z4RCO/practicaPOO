@@ -2,6 +2,7 @@ package practicapoo.interfaz;
 
 import javax.swing.*;
 import practicapoo.jugador.Jugador;
+import practicapoo.partida.Partida;
 
 /**
  *
@@ -109,7 +110,9 @@ public class Sesion extends javax.swing.JPanel {
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
         //TODO arreglar llamada al constructor de partida
         //TODO poner atributo frame en InterfazPartida
-        frame.pintar(new InterfazPartida5(null));
+        InterfazPartida5 i = new InterfazPartida5(jugador,null);
+        i.setPartida(new Partida(jugador,null,i));
+        frame.pintar(i);
     }//GEN-LAST:event_jugarActionPerformed
 
 
