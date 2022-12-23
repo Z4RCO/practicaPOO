@@ -1,9 +1,9 @@
 package practicapoo.partida;
 
+import java.io.*;
 import java.util.ArrayList;
 
-//TODO implementar serializable
-public class AlmacenDePartidas {
+public class AlmacenDePartidas implements Serializable {
     private ArrayList<Partida> partidas;
 
     public AlmacenDePartidas(){
@@ -19,6 +19,41 @@ public class AlmacenDePartidas {
     }
 
     public void insertarPartida(Partida p){
+        partidas.add(p);
+    }
 
+    private void cargarArchivo(){
+        try{
+            FileInputStream file = new FileInputStream("resources/partidas.lingo");
+            ObjectInputStream input = new ObjectInputStream(file);
+            Partida p = (Partida)input.readObject();
+
+            while (p != null) {
+                partidas.add(p);
+                p = (Partida) input.readObject();
+            }
+            input.close();
+
+        }catch (FileNotFoundException fnf){
+            System.err.println("Se ha producido una excepción: No se ha enontrado el archivo deseado.\n" + fnf);
+        }catch(EOFException ignored){
+
+        }catch (IOException | ClassNotFoundException ioex){
+            System.err.println("Se ha producido una excepción de E/S: " + ioex);
+        }
+    }
+
+    private void guardarArchivo(){
+        try{
+            FileOutputStream file = new FileOutputStream("resources/partidas.lingo");
+            ObjectOutputStream output = new ObjectOutputStream(file);
+            for(Partida p: partidas){
+                output.writeObject(p);
+            }
+        }catch (FileNotFoundException fnf){
+            System.err.println("Se ha producido una excepción: No se ha enontrado el archivo deseado.\n" + fnf);
+        }catch (IOException ioex){
+            System.err.println("Se ha producido una excepción de E/S: " + ioex);
+        }
     }
 }

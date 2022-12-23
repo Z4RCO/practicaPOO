@@ -72,8 +72,8 @@ public class AlmacenDeJugadores implements Serializable {
                 input.close();
             }
         } catch(EOFException eof){
-        }catch (IOException | ClassNotFoundException eof) {
-            System.err.println("Error. Se ha producido un error: " + eof);
+        }catch (IOException | ClassNotFoundException exception) {
+            System.err.println("Error. Se ha producido una excepcion: " + exception);
         }
 
     }
