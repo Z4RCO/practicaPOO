@@ -35,7 +35,7 @@ public class Configuracion {
 
 
         }catch(FileNotFoundException fnf){
-            System.err.println("Error. Archivo No encontrado: " + fnf);
+            System.err.println("Se ha producido una excepción. Archivo No encontrado: " + fnf);
         }catch(IOException io){
             System.err.println("Excepción de Entrada/Salida: " + io);
         }
