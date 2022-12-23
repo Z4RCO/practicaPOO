@@ -20,15 +20,13 @@ import java.awt.image.ImageProducer;
  */
 public class Main extends JFrame {
 
-    //TODO Leer archivos de config y datos
-    //TODO inicializar almacen de palabras en el constructor
     private AlmacenDeJugadores jugadores;
     private AlmacenDePalabras palabras;
     private AlmacenDePartidas partidas;
     public Main() {
 
         jugadores = new AlmacenDeJugadores();
-        //palabras = new AlmacenDePalabras();
+        palabras = new AlmacenDePalabras();
         partidas = new AlmacenDePartidas();
 
         initComponents();

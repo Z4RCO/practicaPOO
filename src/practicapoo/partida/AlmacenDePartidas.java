@@ -8,6 +8,7 @@ public class AlmacenDePartidas implements Serializable {
 
     public AlmacenDePartidas(){
         this.partidas = new ArrayList<Partida>();
+        cargarArchivo();
     }
 
     public String infoPartidas(){
