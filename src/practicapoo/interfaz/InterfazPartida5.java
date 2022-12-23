@@ -14,6 +14,7 @@ public class InterfazPartida5 extends javax.swing.JPanel{
     private Jugador jugador;
 
     private Partida partida;
+
     /**
      * Creates new form Partida5
      */

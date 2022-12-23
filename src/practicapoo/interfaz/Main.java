@@ -33,7 +33,7 @@ public class Main extends JFrame {
 
         initComponents();
         //TODO Pasar icono a initComponents
-        setIconImage(new ImageIcon("src/practicapoo/archivos/Logo.png").getImage());
+        setIconImage(new ImageIcon("resources/Logo.png").getImage());
 
         pintar(new Menu(this));
     }
@@ -50,7 +50,7 @@ public class Main extends JFrame {
         lienzo = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Wordle");
+        setTitle("Lingo");
         //setIconImage(new ImageIcon(getClass().getResource("src/practicapoo/archivos/w.png")).getImage());
         setResizable(false);
 

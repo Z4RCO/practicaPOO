@@ -17,7 +17,7 @@ public class AlmacenDePalabras {
     public void cargarFichero(){
         StringBuilder archivo = new StringBuilder();
         try {
-            FileReader fr = new FileReader("src/practicapoo/archivos/configuracion.txt");
+            FileReader fr = new FileReader("resources/configuracion.txt");
             BufferedReader entrada = new BufferedReader(fr);
             int numletras;
             int numpalabras;

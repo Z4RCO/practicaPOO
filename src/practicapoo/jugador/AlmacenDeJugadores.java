@@ -61,7 +61,7 @@ public class AlmacenDeJugadores implements Serializable {
 
     private void cargarArchivo() {
         try {
-            FileInputStream file = new FileInputStream("src/practicapoo/archivos/jugadores.lingo");
+            FileInputStream file = new FileInputStream("resources/jugadores.lingo");
             ObjectInputStream input = new ObjectInputStream(file);
             Jugador j = (Jugador) input.readObject();
             if(input != null) {
@@ -73,22 +73,21 @@ public class AlmacenDeJugadores implements Serializable {
             }
         } catch(EOFException eof){
         }catch (IOException | ClassNotFoundException exception) {
-            System.err.println("Error. Se ha producido una excepcion: " + exception);
+            System.err.println("Error. Se ha producido una excepción: " + exception);
         }
 
     }
 
     private void guardarArchivo(){
         try {
-            System.out.println("guardando...");
-            FileOutputStream file = new FileOutputStream("src/practicapoo/archivos/jugadores.lingo");
+            FileOutputStream file = new FileOutputStream("resources/jugadores.lingo");
             ObjectOutputStream input = new ObjectOutputStream(file);
 
             for(Jugador j:jugadores){
                 input.writeObject(j);
             }
         } catch (IOException io) {
-            System.err.println("Error. Se ha producido un error al guardar la información: " + io);
+            System.err.println("Error. Se ha producido una excepción al guardar la información: " + io);
         }
     }
 }

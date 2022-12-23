@@ -134,7 +134,7 @@ public class Config extends javax.swing.JPanel {
                 frame, popup, "Iniciar sesión",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
-                new ImageIcon("src/practicapoo/archivos/Usuario.png")
+                new ImageIcon("resources/Usuario.png")
         );
 
         //si le has dado a OK y has puesto texto en los TextFields
@@ -162,7 +162,7 @@ public class Config extends javax.swing.JPanel {
                 "Iniciar sesión",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
-                new ImageIcon("src/practicapoo/archivos/Usuario.png")
+                new ImageIcon("resources/Usuario.png")
         );
 
         //si le has dado a OK y has puesto texto en los TextFields
