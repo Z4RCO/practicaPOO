@@ -21,6 +21,7 @@ public class AlmacenDePartidas implements Serializable {
 
     public void insertarPartida(Partida p){
         partidas.add(p);
+        guardarArchivo();
     }
 
     private void cargarArchivo(){
@@ -36,11 +37,11 @@ public class AlmacenDePartidas implements Serializable {
             input.close();
 
         }catch (FileNotFoundException fnf){
-            System.err.println("Se ha producido una excepción: No se ha enontrado el archivo deseado.\n" + fnf);
+            System.err.println("Se ha producido una excepción cargando el almacen de partidas: No se ha enontrado el archivo deseado.\n" + fnf);
         }catch(EOFException ignored){
 
         }catch (IOException | ClassNotFoundException ioex){
-            System.err.println("Se ha producido una excepción de E/S: " + ioex);
+            System.err.println("Se ha producido una excepción de E/S cargando el almacen de partidas: " + ioex);
         }
     }
 

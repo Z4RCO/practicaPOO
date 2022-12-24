@@ -64,16 +64,18 @@ public class AlmacenDeJugadores implements Serializable {
             FileInputStream file = new FileInputStream("resources/jugadores.lingo");
             ObjectInputStream input = new ObjectInputStream(file);
             Jugador j = (Jugador) input.readObject();
+            System.out.println(j.getNombre());
             if(input != null) {
                 while (j != null) {
                     jugadores.add(j);
                     j = (Jugador) input.readObject();
+                    System.out.println(j.getNombre());
                 }
                 input.close();
             }
-        } catch(EOFException eof){
+        } catch(EOFException ignored){
         }catch (IOException | ClassNotFoundException exception) {
-            System.err.println("Error. Se ha producido una excepción: " + exception);
+            System.err.println("Error. Se ha producido una excepción intentando cargar el archivo de jugadores: " + exception);
         }
 
     }
@@ -87,7 +89,7 @@ public class AlmacenDeJugadores implements Serializable {
                 input.writeObject(j);
             }
         } catch (IOException io) {
-            System.err.println("Error. Se ha producido una excepción al guardar la información: " + io);
+            System.err.println("Error. Se ha producido una excepción al serializar el almacen de jugadores: " + io);
         }
     }
 }

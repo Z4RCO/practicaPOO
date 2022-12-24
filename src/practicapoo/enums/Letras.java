@@ -8,4 +8,8 @@ public enum Letras{
     Letras(int letras){
         size = letras;
     }
+
+    public int getSize(){
+        return this.size;
+    }
 }
