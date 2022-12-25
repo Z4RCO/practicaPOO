@@ -1,7 +1,10 @@
 package practicapoo.palabra;
 
 import practicapoo.Configuracion;
+import practicapoo.enums.Colores;
 import practicapoo.enums.Letras;
+import practicapoo.interfaz.InterfazPartida5;
+import practicapoo.jugador.Jugador;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -11,13 +14,19 @@ public class Palabra {
     private Letras numLetras;
     private boolean regaloDeLetra;
 
+    private InterfazPartida5 interfaz;
+
+    public void setInterfaz(InterfazPartida5 interfaz) {
+        this.interfaz = interfaz;
+    }
+
     public Palabra(String pal) {
         if (pal.length()==5){
             this.numLetras = Letras.CINCO;
         } else if (pal.length()==6){
             this.numLetras = Letras.SEIS;
         }
-        palabra = new char[numLetras.ordinal()];
+        palabra = new char[getNumLetras().ordinal()];
         for(int i = 0; i < pal.length(); i++){
             this.palabra[i] = pal.charAt(i);
         }
@@ -31,41 +40,43 @@ public class Palabra {
     public void jugar(){
     }
 
-    private void comprobarColocadas(char[] palabraMisteriosa, char[] miIntento){
-        String s1 = new String(palabraMisteriosa);
+    private void comprobarColocadas(char[] miIntento){
+        String s1 = new String(this.palabra);
         String s2 = new String(miIntento);
         for(int i = 0; i < s1.length(); i++){
             if(s1.charAt(i) == s2.charAt(i)){
-                //Interfaz verde
+                interfaz.cambiarColor(Colores.VERDE, i);
             }
         }
     }
 
-    private int numApariciones(char c, String palabraMisteriosa){
+    private int numApariciones(char c){
         int res = 0;
-        for(int i = 0; i < palabraMisteriosa.length(); i++){
-            if(palabraMisteriosa.charAt(i) == c){
+        String s1 = new String(this.palabra);
+        for(int i = 0; i < s1.length(); i++){
+            if(s1.charAt(i) == c){
                 res++;
             }
         }
         return res;
     }
 
-    private void comprobarDistintaPosicion(char[] palabraMisteriosa, char[] miIntento){
-        String s1 = new String(palabraMisteriosa);
+    private void comprobarDistintaPosicion(char[] miIntento){
+        String s1 = new String(this.palabra);
         String s2 = new String(miIntento);
         for(int i = 0; i < s1.length(); i++){
             char c = s2.charAt(i);
-            if(numApariciones(c, s1) > 0 && s1.charAt(i) != s2.charAt(i)){
-                //Interfaz amarillo
+            if(numApariciones(c) > 0 && s1.charAt(i) != s2.charAt(i)){
+                interfaz.cambiarColor(Colores.AMARILLO, i);
             } else{
-                //Interfaz rojo
+                interfaz.cambiarColor(Colores.GRIS, i);
             }
         }
     }
 
-    public void mostrarIntentoResuelto(){
-
+    public void mostrarIntentoResuelto(char[] intento){
+        comprobarColocadas(intento);
+        comprobarDistintaPosicion(intento);
     }
 
     public int puntosObtenidos(int numIntentos){
@@ -99,7 +110,6 @@ public class Palabra {
     }
 
     public void secuenciaResultados(){
-
     }
 
 }
