@@ -1,12 +1,8 @@
 package practicapoo.palabra;
 
 import practicapoo.Configuracion;
-import practicapoo.enums.Colores;
-import practicapoo.enums.Letras;
+import practicapoo.enums.*;
 import practicapoo.interfaz.InterfazPartida5;
-import practicapoo.jugador.Jugador;
-
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Palabra {
