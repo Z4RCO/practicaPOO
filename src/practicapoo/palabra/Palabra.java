@@ -7,33 +7,34 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Palabra {
     private char[] palabra;
+    private Intento[] intentos;
     private Letras numLetras;
     private boolean regaloDeLetra;
 
     private InterfazPalabra5 interfaz;
+    private PistaDeLetra pistaDeLetra;
 
     public void setInterfaz(InterfazPalabra5 interfaz) {
         this.interfaz = interfaz;
     }
 
-    public Palabra(String pal) {
-        if (pal.length()==5){
-            this.numLetras = Letras.CINCO;
-        } else if (pal.length()==6){
-            this.numLetras = Letras.SEIS;
-        }
-        palabra = new char[getNumLetras().ordinal()];
-        for(int i = 0; i < pal.length(); i++){
-            this.palabra[i] = pal.charAt(i);
-        }
-        this.regaloDeLetra = true; // Tienes disponible el regalo
+    public Palabra() {
+        this.numLetras = Configuracion.getNumLetras();
+        this.intentos = new Intento[numLetras.getSize()];
+
+        //TODO añadir atributo almacenDePalabras
+        AlmacenDePalabras almacen = new AlmacenDePalabras();
+        almacen.cargarFichero();
+        sacarPalabraAleatoria(almacen);
+        pistaDeLetra = new PistaDeLetra();
+        palabra = new char[numLetras.getSize()];
+       this.regaloDeLetra = true;
     }
 
-    public Letras getNumLetras() {
-        return numLetras;
-    }
-
-    public void jugar(){
+    public void jugar(char[] intento, int numIntento){
+        intentos[numIntento] = new Intento(intento);
+        comprobarColocadas(intento);
+        comprobarDistintaPosicion(intento);
     }
 
     private void comprobarColocadas(char[] miIntento){
@@ -69,12 +70,6 @@ public class Palabra {
             }
         }
     }
-
-    public void mostrarIntentoResuelto(char[] intento){
-        comprobarColocadas(intento);
-        comprobarDistintaPosicion(intento);
-    }
-
     public int puntosObtenidos(int numIntentos){
         return (6-numIntentos);
     }

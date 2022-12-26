@@ -1,9 +1,9 @@
 package practicapoo.partida;
 
 import practicapoo.Configuracion;
-import practicapoo.interfaz.InterfazPalabra5;
 import practicapoo.jugador.Jugador;
 import practicapoo.palabra.Palabra;
+
 public class Partida {
 
     private int identificador;
@@ -15,31 +15,36 @@ public class Partida {
     private Marcador marcador;
     private Palabra[] palabras;
 
-    private InterfazPalabra5 interfaz;
-
-    public Partida(Jugador jugador1,Jugador jugador2, InterfazPalabra5 interfaz){
+    public Partida(Jugador jugador1, Jugador jugador2) {
         this.numPalabras = Configuracion.getNumPalabras();
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         marcador = new Marcador();
         palabras = new Palabra[numPalabras];
-        this.interfaz = interfaz;
+
+        palabras[0] = new Palabra();
+        //palabras[0].jugar();
 
     }
 
-    public void cambiarTurno(){
+    public void cambiarTurno() {
         //TODO hacer método cambiarTurno
-    };
+        actualizarMarcador();
+    }
 
-    public void actualizarMarcador(){};
+    public void actualizarMarcador() {
+        //TODO hacer método ActualizarMarcador
+    }
 
-    public boolean usar_Pista_de_Letra(){
+    public boolean usar_Pista_de_Letra() {
+        //TODO hacer método usarPistaDeLetra
         return true;
-    };
+    }
 
-    public boolean usar_Pista_de_Palabra(){
+    public boolean usar_Pista_de_Palabra() {
+        //TODO hacer método usarPistaDePalabra
         return true;
-    };
+    }
 
     @Override
     public String toString() {
