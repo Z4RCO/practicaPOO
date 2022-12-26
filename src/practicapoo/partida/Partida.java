@@ -1,7 +1,7 @@
 package practicapoo.partida;
 
 import practicapoo.Configuracion;
-import practicapoo.interfaz.InterfazPartida5;
+import practicapoo.interfaz.InterfazPalabra5;
 import practicapoo.jugador.Jugador;
 import practicapoo.palabra.Palabra;
 public class Partida {
@@ -15,9 +15,9 @@ public class Partida {
     private Marcador marcador;
     private Palabra[] palabras;
 
-    private InterfazPartida5 interfaz;
+    private InterfazPalabra5 interfaz;
 
-    public Partida(Jugador jugador1,Jugador jugador2, InterfazPartida5 interfaz){
+    public Partida(Jugador jugador1,Jugador jugador2, InterfazPalabra5 interfaz){
         this.numPalabras = Configuracion.getNumPalabras();
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
@@ -28,8 +28,8 @@ public class Partida {
     }
 
     public void cambiarTurno(){
-        if(interfaz.getJugador().equals(jugador1))interfaz = new InterfazPartida5(jugador2,this);
-        else interfaz = new InterfazPartida5(jugador1,this);
+        if(interfaz.getJugador().equals(jugador1))interfaz = new InterfazPalabra5(jugador2,this);
+        else interfaz = new InterfazPalabra5(jugador1,this);
     };
 
     public void actualizarMarcador(){};

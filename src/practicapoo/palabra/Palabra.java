@@ -2,7 +2,7 @@ package practicapoo.palabra;
 
 import practicapoo.Configuracion;
 import practicapoo.enums.*;
-import practicapoo.interfaz.InterfazPartida5;
+import practicapoo.interfaz.InterfazPalabra5;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Palabra {
@@ -10,9 +10,9 @@ public class Palabra {
     private Letras numLetras;
     private boolean regaloDeLetra;
 
-    private InterfazPartida5 interfaz;
+    private InterfazPalabra5 interfaz;
 
-    public void setInterfaz(InterfazPartida5 interfaz) {
+    public void setInterfaz(InterfazPalabra5 interfaz) {
         this.interfaz = interfaz;
     }
 

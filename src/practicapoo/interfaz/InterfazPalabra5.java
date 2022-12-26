@@ -7,22 +7,19 @@ import practicapoo.partida.Partida;
 import javax.swing.*;
 import java.awt.*;
 
-public class InterfazPartida5 extends javax.swing.JPanel{
+public class InterfazPalabra5 extends javax.swing.JPanel{
 
     private int letrasEscritas;
     private  char[] palabra;
     private Jugador jugador;
 
-    private Partida partida;
-
     /**
      * Creates new form Partida5
      */
-    public InterfazPartida5(Jugador jugador, Partida partida) {
+    public InterfazPalabra5(Jugador jugador) {
         initComponents();
         this.jugador = jugador;
         palabra = new char[5];
-        this.partida = partida;
         turno.setText("Turno de " + jugador.getNombre());
     }
 
@@ -220,11 +217,11 @@ public class InterfazPartida5 extends javax.swing.JPanel{
     }
 
     private void pistaLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaLetraActionPerformed
-        partida.usar_Pista_de_Letra();
+        //TODO Hacer evento pista de letra
     }//GEN-LAST:event_pistaLetraActionPerformed
 
     private void regaloPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regaloPalabraActionPerformed
-        partida.usar_Pista_de_Palabra();
+        //TODO hacer pista de palabra
     }//GEN-LAST:event_regaloPalabraActionPerformed
 
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
@@ -235,10 +232,8 @@ public class InterfazPartida5 extends javax.swing.JPanel{
         if(letrasEscritas < 25){
             cuadro[letrasEscritas].setText(String.valueOf(evt.getKeyChar()));
             ++letrasEscritas;
-            if(letrasEscritas % 5 == 0){
-                cambiarColor(Colores.GRIS,0);
-                //TODO HACER INTENTO
-                partida.cambiarTurno();
+            if(letrasEscritas % 5 == 0 && letrasEscritas > 0){
+                //TODO llamar al método jugar
             }
 
         }
@@ -259,23 +254,13 @@ public class InterfazPartida5 extends javax.swing.JPanel{
 
     public void cambiarColor(Colores color, int posicion){
         int palabra = letrasEscritas - 5;
-        switch(color){
-            case VERDE:
-                cuadro[palabra + posicion].setBackground(Color.GREEN);
-                break;
-            case AMARILLO:
-                cuadro[palabra + posicion].setBackground(Color.ORANGE);
-                break;
-            case GRIS:
-                cuadro[palabra + posicion].setBackground(Color.GRAY);
-                break;
+        switch (color) {
+            case VERDE -> cuadro[palabra + posicion].setBackground(Color.GREEN);
+            case AMARILLO -> cuadro[palabra + posicion].setBackground(Color.ORANGE);
+            case GRIS -> cuadro[palabra + posicion].setBackground(Color.GRAY);
         }
     }
     public Jugador getJugador(){
         return jugador;
-    }
-
-    public void setPartida(Partida partida){
-        this.partida = partida;
     }
 }
