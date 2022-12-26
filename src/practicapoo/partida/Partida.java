@@ -28,8 +28,7 @@ public class Partida {
     }
 
     public void cambiarTurno(){
-        if(interfaz.getJugador().equals(jugador1))interfaz = new InterfazPalabra5(jugador2,this);
-        else interfaz = new InterfazPalabra5(jugador1,this);
+        //TODO hacer método cambiarTurno
     };
 
     public void actualizarMarcador(){};
