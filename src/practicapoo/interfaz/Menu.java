@@ -1,6 +1,8 @@
 package practicapoo.interfaz;
 
 import practicapoo.jugador.Jugador;
+import practicapoo.palabra.Entrenamiento;
+
 import javax.swing.*;
 
 /**
@@ -84,6 +86,7 @@ public class Menu extends JPanel {
 
     private void practicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_practicarActionPerformed
         // TODO Empezar partida de práctica
+        Entrenamiento e = new Entrenamiento();
     }//GEN-LAST:event_practicarActionPerformed
 
     private void iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionActionPerformed
@@ -127,7 +130,7 @@ public class Menu extends JPanel {
         if (!frame.getJugadores().autenticar(j)) {
             return;
         }
-        if(j.equals(new Jugador("admin","admin")))frame.pintar(new Config(frame));
-        else frame.pintar(new Sesion(frame,j));
+        if(j.equals(new Jugador("admin","admin")))frame.cambiarContenido(new Config(frame));
+        else frame.cambiarContenido(new Sesion(frame,j));
     }
 }

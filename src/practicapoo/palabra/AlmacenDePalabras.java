@@ -27,10 +27,13 @@ public class AlmacenDePalabras {
 
             for (int i = 0; i < numPalabras; i++) {
                 palabrasDeCinco[i] = new Palabra();
+                palabrasDeCinco[i].setPalabra(entrada.readLine().toCharArray());
+
             }
             entrada.readLine();
             for (int i = 0; i < numPalabras; i++) {
                 palabrasDeSeis[i] = new Palabra();
+                palabrasDeSeis[i].setPalabra(entrada.readLine().toCharArray());
             }
             entrada.close();
         } catch (FileNotFoundException fnfex) {

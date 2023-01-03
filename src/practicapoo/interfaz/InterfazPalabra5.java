@@ -2,6 +2,7 @@ package practicapoo.interfaz;
 
 import practicapoo.enums.Colores;
 import practicapoo.jugador.Jugador;
+import practicapoo.palabra.Palabra;
 import practicapoo.partida.Partida;
 
 import javax.swing.*;
@@ -10,16 +11,21 @@ import java.awt.*;
 public class InterfazPalabra5 extends javax.swing.JPanel{
 
     private int letrasEscritas;
-    private  char[] palabra;
+    private  char[] intento;
+    private int intentos;
     private Jugador jugador;
+    private Palabra palabra;
+    private Main frame;
 
     /**
      * Creates new form Partida5
      */
-    public InterfazPalabra5(Jugador jugador) {
+    public InterfazPalabra5(Jugador jugador, Palabra palabra, Main frame) {
         initComponents();
         this.jugador = jugador;
-        palabra = new char[5];
+        intento = new char[5];
+        this.palabra = palabra;
+        this.frame = frame;
         turno.setText("Turno de " + jugador.getNombre());
     }
 
@@ -231,9 +237,10 @@ public class InterfazPalabra5 extends javax.swing.JPanel{
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
         if(letrasEscritas < 25){
             cuadro[letrasEscritas].setText(String.valueOf(evt.getKeyChar()));
+            intento[letrasEscritas % 5] = evt.getKeyChar();
             ++letrasEscritas;
             if(letrasEscritas % 5 == 0 && letrasEscritas > 0){
-                //TODO llamar al método jugar
+                palabra.jugar(intento,intentos++);
             }
 
         }
@@ -262,5 +269,9 @@ public class InterfazPalabra5 extends javax.swing.JPanel{
     }
     public Jugador getJugador(){
         return jugador;
+    }
+
+    public int getIntentos() {
+        return intentos;
     }
 }

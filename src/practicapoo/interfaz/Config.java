@@ -175,7 +175,7 @@ public class Config extends javax.swing.JPanel {
     }//GEN-LAST:event_bajaActionPerformed
 
     private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
-        frame.pintar(new Menu(frame));
+        frame.cambiarContenido(new Menu(frame));
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
 

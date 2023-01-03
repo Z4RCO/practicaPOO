@@ -1,17 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package practicapoo.interfaz;
 
+import practicapoo.Configuracion;
 import practicapoo.jugador.AlmacenDeJugadores;
 import practicapoo.palabra.AlmacenDePalabras;
 import practicapoo.partida.AlmacenDePartidas;
-
-import javax.imageio.ImageReader;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.ImageProducer;
 
 /**
  * Clase que genera el JFrame Base sobre el que se asientan el resto de paneles
@@ -21,19 +14,15 @@ import java.awt.image.ImageProducer;
 public class Main extends JFrame {
 
     private AlmacenDeJugadores jugadores;
-    private AlmacenDePalabras palabras;
+    public static AlmacenDePalabras palabras;
     private AlmacenDePartidas partidas;
     public Main() {
-
+        Configuracion.setter("resources/configuracion.txt");
         jugadores = new AlmacenDeJugadores();
         palabras = new AlmacenDePalabras();
         partidas = new AlmacenDePartidas();
-
         initComponents();
-        //TODO Pasar icono a initComponents
-        setIconImage(new ImageIcon("resources/Logo.png").getImage());
-
-        pintar(new Menu(this));
+        cambiarContenido(new Menu(this));
     }
 
     /**
@@ -101,8 +90,7 @@ public class Main extends JFrame {
      * Método para Cambiar el contenido del panel lienzo
      * @param panel Panel para poner sobre el lienzo
      */
-    //TODO Cambiar nombre a cambiarContenido
-    public void pintar(JPanel panel){
+    public void cambiarContenido(JPanel panel){
           panel.setSize(800,500);
           panel.setLocation(0,0);
           lienzo.removeAll();

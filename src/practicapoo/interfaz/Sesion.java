@@ -95,7 +95,12 @@ public class Sesion extends javax.swing.JPanel {
 
     private void estadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasActionPerformed
         //TODO Cambiar ver stats y Partidas contra otro por Ver Perfil
-        JOptionPane.showMessageDialog(frame,jugador.getEstadisticas().toString(),"Estadísticas",0,new ImageIcon("src/practicapoo/imagenes/Stats.png"));
+        JOptionPane.showMessageDialog(
+                frame,
+                jugador.getEstadisticas().toString(),
+                "Estadísticas",
+                0,
+                new ImageIcon("src/practicapoo/imagenes/Stats.png"));
     }//GEN-LAST:event_estadisticasActionPerformed
 
     private void partidasOtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partidasOtroActionPerformed
@@ -104,13 +109,14 @@ public class Sesion extends javax.swing.JPanel {
     }//GEN-LAST:event_partidasOtroActionPerformed
 
     private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
-        frame.pintar(new Menu(frame));
+        frame.cambiarContenido(new Menu(frame));
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
         //TODO arreglar llamada al constructor de partida
         //TODO poner atributo frame en InterfazPartida
         Partida p = new Partida(this.jugador,null);
+        frame.cambiarContenido(p.getPalabra(0).getInterfaz());
 
     }//GEN-LAST:event_jugarActionPerformed
 

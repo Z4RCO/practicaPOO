@@ -1,5 +1,6 @@
 package practicapoo.jugador;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -26,10 +27,14 @@ public class AlmacenDeJugadores implements Serializable {
     public void rankingOrdenadoPorVictorias() {
         jugadores.sort(Jugador::compareTo);
         Iterator<Jugador> i = jugadores.iterator();
+        StringBuilder sb = new StringBuilder();
         while (i.hasNext()) {
             String element = i.next().getNombre();
+            sb.append(element);
             //TODO Devolver jugadores
+
         }
+        JOptionPane.showMessageDialog(null,sb);
     }
 
     public void rankingOrdenadoPorNombre() {
