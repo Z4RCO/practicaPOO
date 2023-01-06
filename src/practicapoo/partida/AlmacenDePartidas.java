@@ -6,6 +6,10 @@ import java.util.ArrayList;
 public class AlmacenDePartidas implements Serializable {
     private ArrayList<Partida> partidas;
 
+    public ArrayList<Partida> getPartidas() {
+        return partidas;
+    }
+
     public AlmacenDePartidas(){
         this.partidas = new ArrayList<Partida>();
         cargarArchivo();

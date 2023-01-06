@@ -40,6 +40,14 @@ public class Partida {
         return palabras[palabra];
     }
 
+    public Jugador getJugador1() {
+        return jugador1;
+    }
+
+    public Jugador getJugador2() {
+        return jugador2;
+    }
+
     public void cambiarTurno() {
         //TODO hacer método cambiarTurno
         actualizarMarcador();
