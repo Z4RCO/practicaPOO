@@ -35,10 +35,11 @@ public class Palabra {
         pistaDeLetra = new PistaDeLetra();
         palabra = new char[numLetras.getSize()];
         this.regaloDeLetra = true;
-        almacen = Main.palabras;
+        almacen = Main.getPalabras();
     }
 
     public void jugar(char[] intento, int numIntento) {
+        //TODO COmprobar el número de intentos y si se ha acertado
         intentos[numIntento] = new Intento(intento);
         comprobarColocadas(intento);
         comprobarDistintaPosicion(intento);
@@ -79,7 +80,7 @@ public class Palabra {
     }
 
     public int puntosObtenidos() {
-        return (6 - interfaz.getIntentos());
+        return (6);
     }
 
     public void sacarPalabraAleatoria() {

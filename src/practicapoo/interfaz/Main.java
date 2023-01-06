@@ -4,6 +4,7 @@ import practicapoo.Configuracion;
 import practicapoo.jugador.AlmacenDeJugadores;
 import practicapoo.palabra.AlmacenDePalabras;
 import practicapoo.partida.AlmacenDePartidas;
+
 import javax.swing.*;
 
 /**
@@ -13,16 +14,14 @@ import javax.swing.*;
  */
 public class Main extends JFrame {
 
-    private AlmacenDeJugadores jugadores;
-    public static AlmacenDePalabras palabras;
-    private AlmacenDePartidas partidas;
+
     public Main() {
         Configuracion.setter("resources/configuracion.txt");
         jugadores = new AlmacenDeJugadores();
         palabras = new AlmacenDePalabras();
         partidas = new AlmacenDePartidas();
         initComponents();
-        cambiarContenido(new Menu(this));
+        cambiarContenido(new Menu());
     }
 
     /**
@@ -39,28 +38,28 @@ public class Main extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lingo");
         //setIconImage(new ImageIcon(getClass().getResource("src/practicapoo/archivos/w.png")).getImage());
-        setResizable(false);
+        setResizable(true);
 
         javax.swing.GroupLayout lienzoLayout = new javax.swing.GroupLayout(lienzo);
         lienzo.setLayout(lienzoLayout);
         lienzoLayout.setHorizontalGroup(
-            lienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+                lienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 900, Short.MAX_VALUE)
         );
         lienzoLayout.setVerticalGroup(
-            lienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+                lienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 500, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lienzo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lienzo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lienzo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lienzo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -69,6 +68,7 @@ public class Main extends JFrame {
     /**
      * Main de la Clase
      * Inicio de funcionamiento del programa
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -81,49 +81,59 @@ public class Main extends JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel lienzo;
-    // End of variables declaration//GEN-END:variables
+
+    // Variables declaration - do not modify
+    private static AlmacenDeJugadores jugadores;
+    private static AlmacenDePalabras palabras;
+    private static AlmacenDePartidas partidas;
+    private static javax.swing.JPanel lienzo;
+    // End of variables declaration
 
 
     /**
      * Método para Cambiar el contenido del panel lienzo
+     *
      * @param panel Panel para poner sobre el lienzo
      */
-    public void cambiarContenido(JPanel panel){
-          panel.setSize(800,500);
-          panel.setLocation(0,0);
-          lienzo.removeAll();
-          lienzo.add(panel);
-          lienzo.revalidate();
-          lienzo.repaint();
-          panel.setFocusable(true);
-          panel.grabFocus();
-      }
+    public static void cambiarContenido(JPanel panel) {
+        panel.setSize(900, 500);
+        panel.setLocation(0, 0);
+        lienzo.removeAll();
+        lienzo.add(panel);
+        lienzo.revalidate();
+        lienzo.repaint();
+        panel.setFocusable(true);
+        panel.grabFocus();
+    }
 
     /**
      * Devuelve la lista de jugadores
+     *
      * @return Atributo jugadores
      */
-    public AlmacenDeJugadores getJugadores() {
+    public static AlmacenDeJugadores getJugadores() {
         return jugadores;
     }
 
     /**
      * Devuelve la lista de Palabras
+     *
      * @return Atributo palabras
      */
-    public AlmacenDePalabras getPalabras() {
+    public static AlmacenDePalabras getPalabras() {
         return palabras;
     }
 
     /**
      * Devuelve la lista de Partidas
+     *
      * @return Atributo partidas
      */
-    public AlmacenDePartidas getPartidas() {
+    public static AlmacenDePartidas getPartidas() {
         return partidas;
     }
 
-
+    public static JPanel getLienzo() {
+        return lienzo;
+    }
 }

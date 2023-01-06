@@ -1,5 +1,6 @@
 package practicapoo.interfaz;
 
+import practicapoo.enums.Letras;
 import practicapoo.jugador.Jugador;
 import practicapoo.palabra.Entrenamiento;
 
@@ -10,15 +11,11 @@ import javax.swing.*;
  * @author z3rc0
  */
 public class Menu extends JPanel {
-
-    private Main frame;
     /**
      * Crea un nuevo menú
-     * @param frame Frame sobre el que dibujar el menú
      */
-    public Menu(Main frame) {
+    public Menu() {
         initComponents();
-        this.frame = frame;
     }
 
     /**
@@ -34,6 +31,7 @@ public class Menu extends JPanel {
         practicar = new javax.swing.JButton();
         salir = new javax.swing.JButton();
 
+        iniciarSesion.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         iniciarSesion.setText("Iniciar Sesión");
         iniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -41,6 +39,7 @@ public class Menu extends JPanel {
             }
         });
 
+        practicar.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         practicar.setText("Practicar");
         practicar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -48,6 +47,7 @@ public class Menu extends JPanel {
             }
         });
 
+        salir.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         salir.setText("Salir");
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,23 +60,23 @@ public class Menu extends JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(268, 268, 268)
+                .addGap(325, 325, 325)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(iniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                    .addComponent(practicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(317, Short.MAX_VALUE))
+                    .addComponent(practicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(iniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                .addContainerGap(325, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(practicar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addGap(112, 112, 112)
+                .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(practicar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -85,8 +85,21 @@ public class Menu extends JPanel {
     }//GEN-LAST:event_salirActionPerformed
 
     private void practicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_practicarActionPerformed
-        // TODO Empezar partida de práctica
-        Entrenamiento e = new Entrenamiento();
+        Entrenamiento ent;
+        Object[] opciones = {"Cinco", "Seis"};
+        int n = JOptionPane.showOptionDialog(Main.getLienzo(),
+                "Selecciona las letras de las palabras:",
+                "Entrenamiento",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                new ImageIcon("resources/LogIn.png"),
+                opciones,
+                opciones[0]);
+        switch(n){
+            case JOptionPane.YES_OPTION -> ent = new Entrenamiento(Letras.CINCO);
+            case JOptionPane.NO_OPTION -> ent = new Entrenamiento(Letras.SEIS);
+        }
+
     }//GEN-LAST:event_practicarActionPerformed
 
     private void iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesionActionPerformed
@@ -113,7 +126,7 @@ public class Menu extends JPanel {
         popup.add(pass);
 
         int i = JOptionPane.showConfirmDialog(
-                frame,
+                Main.getLienzo(),
                 popup,
                 "Iniciar sesión",
                 JOptionPane.OK_CANCEL_OPTION,
@@ -127,10 +140,10 @@ public class Menu extends JPanel {
         }
 
         Jugador j = new Jugador(user.getText(),new String( pass.getPassword()));
-        if (!frame.getJugadores().autenticar(j)) {
+        if (!Main.getJugadores().autenticar(j)) {
             return;
         }
-        if(j.equals(new Jugador("admin","admin")))frame.cambiarContenido(new Config(frame));
-        else frame.cambiarContenido(new Sesion(frame,j));
+        if(j.equals(new Jugador("admin","admin")))Main.cambiarContenido(new Config());
+        else Main.cambiarContenido(new Sesion(j));
     }
 }

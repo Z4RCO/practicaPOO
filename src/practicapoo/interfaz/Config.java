@@ -13,14 +13,11 @@ import javax.swing.*;
  * @author Sergio
  */
 public class Config extends javax.swing.JPanel {
-    
-    private Main frame;
     /**
      * Creates new form Config
      */
-    public Config(Main frame) {
+    public Config() {
         initComponents();
-        this.frame = frame;
     }
 
     /**
@@ -111,15 +108,15 @@ public class Config extends javax.swing.JPanel {
     }//GEN-LAST:event_editarConfigActionPerformed
 
     private void verInfoPartidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInfoPartidasActionPerformed
-        AlmacenDePartidas partidas = frame.getPartidas();
+        AlmacenDePartidas partidas = Main.getPartidas();
         JPanel p = new JPanel();
         p.add(new JTextArea(partidas.infoPartidas()));
 
-        JOptionPane.showMessageDialog(frame,p,"Información de todas las partidas.",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(Main.getLienzo(),p,"Información de todas las partidas.",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_verInfoPartidasActionPerformed
 
     private void altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaActionPerformed
-        AlmacenDeJugadores j = frame.getJugadores();
+        AlmacenDeJugadores j = Main.getJugadores();
 
         JPanel popup = new JPanel();
         JTextField user = new JTextField(20);
@@ -131,7 +128,7 @@ public class Config extends javax.swing.JPanel {
         popup.add(new JLabel("Contraseña"));
         popup.add(pass);
         int i = JOptionPane.showConfirmDialog(
-                frame, popup, "Iniciar sesión",
+                Main.getLienzo(), popup, "Iniciar sesión",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
                 new ImageIcon("resources/Usuario.png")
@@ -147,7 +144,7 @@ public class Config extends javax.swing.JPanel {
     }//GEN-LAST:event_altaActionPerformed
 
     private void bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bajaActionPerformed
-        AlmacenDeJugadores j = frame.getJugadores();
+        AlmacenDeJugadores j = Main.getJugadores();
 
         JPanel popup = new JPanel();
         JTextField user = new JTextField(20);
@@ -157,7 +154,7 @@ public class Config extends javax.swing.JPanel {
         popup.add(new JLabel("Usuario"));
         popup.add(user);
         int i = JOptionPane.showConfirmDialog(
-                frame,
+                Main.getLienzo(),
                 popup,
                 "Iniciar sesión",
                 JOptionPane.OK_CANCEL_OPTION,
@@ -175,7 +172,7 @@ public class Config extends javax.swing.JPanel {
     }//GEN-LAST:event_bajaActionPerformed
 
     private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
-        frame.cambiarContenido(new Menu(frame));
+        Main.cambiarContenido(new Menu());
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
 

@@ -32,7 +32,7 @@ public class Partida {
 
         palabras[0] = new Palabra();
         palabras[0].sacarPalabraAleatoria();
-        //palabras[0].setInterfaz(new InterfazPalabra5(jugador1,palabras[0],));
+        //palabras[0].setInterfaz(new InterfazPalabra5(jugador1,palabras[0],null));
 
     }
 

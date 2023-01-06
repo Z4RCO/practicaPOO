@@ -14,12 +14,10 @@ public class Sesion extends javax.swing.JPanel {
     private Main frame;
     /**
      * Crea un nuevo form de una sesión iniciada
-     * @param frame Frame sobre el que asentar el JPanel
      * @param jugador Jugador que ha iniciado sesión
      */
-    public Sesion(Main frame, Jugador jugador) {
+    public Sesion(Jugador jugador) {
         initComponents();
-        this.frame = frame;
         this.jugador = jugador;
     }
 
@@ -109,14 +107,16 @@ public class Sesion extends javax.swing.JPanel {
     }//GEN-LAST:event_partidasOtroActionPerformed
 
     private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
-        frame.cambiarContenido(new Menu(frame));
+        Main.cambiarContenido(new Menu());
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
         //TODO arreglar llamada al constructor de partida
         //TODO poner atributo frame en InterfazPartida
-        Partida p = new Partida(this.jugador,null);
-        frame.cambiarContenido(p.getPalabra(0).getInterfaz());
+        //Partida p = new Partida(this.jugador,null);
+        //frame.cambiarContenido(p.getPalabra(0).getInterfaz());
+
+        //frame.cambiarContenido(new InterfazPalabra5(this.jugador));
 
     }//GEN-LAST:event_jugarActionPerformed
 
