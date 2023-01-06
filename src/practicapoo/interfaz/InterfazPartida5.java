@@ -385,40 +385,43 @@ public class InterfazPartida5 extends javax.swing.JPanel{
                 jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 13:
-                jLabel16.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 14:
-                jLabel17.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 15:
-                jLabel18.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 16:
-                jLabel19.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 17:
-                jLabel20.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 18:
-                jLabel21.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 19:
-                jLabel22.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 20:
-                jLabel23.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 21:
-                jLabel24.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 22:
-                jLabel25.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 23:
-                jLabel26.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
             case 24:
-                jLabel27.setText(evt.getKeyChar() + "");
+                jLabel15.setText(evt.getKeyChar() + "");
+                break;
+            case 25:
+                jLabel15.setText(evt.getKeyChar() + "");
                 break;
         }
         if(letrasEscritas == 5){

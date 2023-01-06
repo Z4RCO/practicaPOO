@@ -1,15 +1,17 @@
 package practicapoo;
 
+import practicapoo.enums.Letras;
+
 import java.io.*;
 
 public class Configuracion {
-    private static enum letras{
-        Cinco,
-        Seis,
-    };
+    private static Letras letras;
     private static int numPalabras;
     private static boolean primeraLetra;
 
+    public static Letras getNumLetras(){
+        return letras;
+    }
     public static int getNumPalabras() {
         return numPalabras;
     }
@@ -17,16 +19,15 @@ public class Configuracion {
         return primeraLetra;
     }
 
-    public static void setter(){
+    public static void setter(String archivo){
         try{
-            FileReader fr = new FileReader("src/practicapoo/archivos/configuracion.txt");
+            FileReader fr = new FileReader(archivo);
             BufferedReader entrada = new BufferedReader(fr);
 
             String s = entrada.readLine();
 
-            //TODO Hacer enum
-            if(s.charAt(0) == '5') System.out.println();
-            else System.out.println();
+            if(s.charAt(0) == '5') letras = Letras.CINCO;
+            else letras = Letras.SEIS;
 
 
             numPalabras = Integer.parseInt(s.substring(2,3));
@@ -34,7 +35,7 @@ public class Configuracion {
 
 
         }catch(FileNotFoundException fnf){
-            System.err.println("Error. Archivo No encontrado: " + fnf);
+            System.err.println("Se ha producido una excepción. Archivo No encontrado: " + fnf);
         }catch(IOException io){
             System.err.println("Excepción de Entrada/Salida: " + io);
         }

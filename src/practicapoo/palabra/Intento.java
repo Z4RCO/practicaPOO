@@ -1,13 +1,13 @@
 package practicapoo.palabra;
 
 public class Intento {
-    private char[] intento;
+    private final char[] intento;
 
 
-    public Intento() {
-        this.intento = new char[/*La longitud que el ususario seleccione en configuración*/];
+    public Intento(char[] intento) {
+       this.intento = intento;
     }
     public char[] recogerIntento(){
-
+        return this.intento;
     }
 }

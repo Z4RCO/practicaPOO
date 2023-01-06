@@ -1,5 +1,6 @@
 package practicapoo.jugador;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -26,10 +27,14 @@ public class AlmacenDeJugadores implements Serializable {
     public void rankingOrdenadoPorVictorias() {
         jugadores.sort(Jugador::compareTo);
         Iterator<Jugador> i = jugadores.iterator();
+        StringBuilder sb = new StringBuilder();
         while (i.hasNext()) {
             String element = i.next().getNombre();
+            sb.append(element);
             //TODO Devolver jugadores
+
         }
+        JOptionPane.showMessageDialog(null,sb);
     }
 
     public void rankingOrdenadoPorNombre() {
@@ -61,34 +66,35 @@ public class AlmacenDeJugadores implements Serializable {
 
     private void cargarArchivo() {
         try {
-            FileInputStream file = new FileInputStream("src/practicapoo/archivos/jugadores.lingo");
+            FileInputStream file = new FileInputStream("resources/jugadores.lingo");
             ObjectInputStream input = new ObjectInputStream(file);
             Jugador j = (Jugador) input.readObject();
+            System.out.println(j.getNombre());
             if(input != null) {
                 while (j != null) {
                     jugadores.add(j);
                     j = (Jugador) input.readObject();
+                    System.out.println(j.getNombre());
                 }
                 input.close();
             }
-        } catch(EOFException eof){
-        }catch (IOException | ClassNotFoundException eof) {
-            System.err.println("Error. Se ha producido un error: " + eof);
+        } catch(EOFException ignored){
+        }catch (IOException | ClassNotFoundException exception) {
+            System.err.println("Error. Se ha producido una excepción intentando cargar el archivo de jugadores: " + exception);
         }
 
     }
 
     private void guardarArchivo(){
         try {
-            System.out.println("guardando...");
-            FileOutputStream file = new FileOutputStream("src/practicapoo/archivos/jugadores.lingo");
+            FileOutputStream file = new FileOutputStream("resources/jugadores.lingo");
             ObjectOutputStream input = new ObjectOutputStream(file);
 
             for(Jugador j:jugadores){
                 input.writeObject(j);
             }
         } catch (IOException io) {
-            System.err.println("Error. Se ha producido un error al guardar la información: " + io);
+            System.err.println("Error. Se ha producido una excepción al serializar el almacen de jugadores: " + io);
         }
     }
 }
