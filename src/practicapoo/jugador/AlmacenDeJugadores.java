@@ -2,6 +2,7 @@ package practicapoo.jugador;
 
 import practicapoo.interfaz.Main;
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.*;
 
@@ -42,26 +43,45 @@ public class AlmacenDeJugadores implements Serializable {
                     .append(j.getEstadisticas().getPuntos())
                     .append("\n");
         }
+        JScrollPane sp = new JScrollPane();
+        JTextArea t = new JTextArea(sb.toString());
+        t.setColumns(30);
+        t.setRows(10);
+        sp.setViewportView(t);
         JOptionPane.showMessageDialog(
                 Main.getLienzo(),
-                sb,
+                sp,
                 "Ranking ordenado por victorias",
                 JOptionPane.INFORMATION_MESSAGE,
                 null);
     }
 
     public void rankingOrdenadoPorNombre() {
-        SortedMap<String,Integer> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        SortedMap<String,Estadisticas> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         for (Jugador j : jugadores) {
-            map.put(j.getNombre(),j.getEstadisticas().getGanadas());
+            map.put(j.getNombre(),j.getEstadisticas());
         }
         StringBuilder sb = new StringBuilder("Jugador   Victorias\n");
-        for(Map.Entry<String,Integer> entry: map.entrySet()){
-            sb.append(entry.getKey()).append("     ").append(entry.getValue()).append("\n");
+        for(Map.Entry<String,Estadisticas> entry: map.entrySet()){
+            sb.append(entry.getKey())
+                    .append("\n    Victorias: ")
+                    .append(entry.getValue().getGanadas())
+                    .append("\n    Derrotas: ")
+                    .append(entry.getValue().getPerdidas())
+                    .append("\n    Empates: ")
+                    .append(entry.getValue().getEmpatadas())
+                    .append("\n    Puntos totales: ")
+                    .append(entry.getValue().getPuntos())
+                    .append("\n");
         }
+        JScrollPane sp = new JScrollPane();
+        JTextArea t = new JTextArea(sb.toString());
+        t.setColumns(30);
+        t.setRows(10);
+        sp.setViewportView(t);
         JOptionPane.showMessageDialog(
                 Main.getLienzo(),
-                sb,
+                sp,
                 "Ranking ordenado alfabéticamente",
                 JOptionPane.INFORMATION_MESSAGE,
                 null);
