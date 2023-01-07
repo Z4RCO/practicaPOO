@@ -1,5 +1,6 @@
 package practicapoo.jugador;
 
+import practicapoo.interfaz.Main;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
@@ -27,26 +28,35 @@ public class AlmacenDeJugadores implements Serializable {
     public void rankingOrdenadoPorVictorias() {
         jugadores.sort(Jugador::compareTo);
         Iterator<Jugador> i = jugadores.iterator();
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("Jugador   Victorias\n");
         while (i.hasNext()) {
-            String element = i.next().getNombre();
-            sb.append(element);
-            //TODO Devolver jugadores
+            Jugador j = i.next();
+            sb.append(j.getNombre()).append("     ").append(j.getEstadisticas().getGanadas()).append("\n");
 
         }
-        JOptionPane.showMessageDialog(null,sb);
+        JOptionPane.showMessageDialog(
+                Main.getLienzo(),
+                sb,
+                "Ranking ordenado por victorias",
+                JOptionPane.INFORMATION_MESSAGE,
+                null);
     }
 
     public void rankingOrdenadoPorNombre() {
-        TreeSet<String> set = new TreeSet<String>();
+        SortedMap<String,Integer> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         for (Jugador j : jugadores) {
-            set.add(j.getNombre());
+            map.put(j.getNombre(),j.getEstadisticas().getGanadas());
         }
-        Iterator<String> i = set.iterator();
-        while (i.hasNext()) {
-            String element = i.next();
-            //TODO Devolver jugadores
+        StringBuilder sb = new StringBuilder("Jugador   Victorias\n");
+        for(Map.Entry<String,Integer> entry: map.entrySet()){
+            sb.append(entry.getKey()).append("     ").append(entry.getValue()).append("\n");
         }
+        JOptionPane.showMessageDialog(
+                Main.getLienzo(),
+                sb,
+                "Ranking ordenado alfabéticamente",
+                JOptionPane.INFORMATION_MESSAGE,
+                null);
     }
 
     public void alta(Jugador j) {
@@ -74,6 +84,8 @@ public class AlmacenDeJugadores implements Serializable {
                 while (j != null) {
                     jugadores.add(j);
                     j = (Jugador) input.readObject();
+                    int rnd = (int)(Math.random() * 10);
+                    j.getEstadisticas().addGanadas(rnd);
                     System.out.println(j.getNombre());
                 }
                 input.close();

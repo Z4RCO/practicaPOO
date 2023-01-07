@@ -50,8 +50,8 @@ public class Jugador implements Comparable, Serializable {
     @Override
     public int compareTo(Object o) {
         Jugador j= (Jugador) o;
-        if(estadisticas.getGanadas() > j.estadisticas.getGanadas())return 1;
-        if(estadisticas.getGanadas() < j.estadisticas.getGanadas())return -1;
+        if(estadisticas.getGanadas() > j.estadisticas.getGanadas())return -1;
+        if(estadisticas.getGanadas() < j.estadisticas.getGanadas())return 1;
         return 0;
     }
 
