@@ -28,11 +28,19 @@ public class AlmacenDeJugadores implements Serializable {
     public void rankingOrdenadoPorVictorias() {
         jugadores.sort(Jugador::compareTo);
         Iterator<Jugador> i = jugadores.iterator();
-        StringBuilder sb = new StringBuilder("Jugador   Victorias\n");
+        StringBuilder sb = new StringBuilder("Jugadores:\n");
         while (i.hasNext()) {
             Jugador j = i.next();
-            sb.append(j.getNombre()).append("     ").append(j.getEstadisticas().getGanadas()).append("\n");
-
+            sb.append(j.getNombre())
+                    .append("\n    Victorias: ")
+                    .append(j.getEstadisticas().getGanadas())
+                    .append("\n    Derrotas: ")
+                    .append(j.getEstadisticas().getPerdidas())
+                    .append("\n    Empates: ")
+                    .append(j.getEstadisticas().getEmpatadas())
+                    .append("\n    Puntos totales: ")
+                    .append(j.getEstadisticas().getPuntos())
+                    .append("\n");
         }
         JOptionPane.showMessageDialog(
                 Main.getLienzo(),
@@ -85,7 +93,7 @@ public class AlmacenDeJugadores implements Serializable {
                     jugadores.add(j);
                     j = (Jugador) input.readObject();
                     int rnd = (int)(Math.random() * 10);
-                    j.getEstadisticas().addGanadas(rnd);
+                    j.getEstadisticas().addVictorias(rnd);
                     System.out.println(j.getNombre());
                 }
                 input.close();

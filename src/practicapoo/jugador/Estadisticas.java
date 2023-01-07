@@ -12,11 +12,23 @@ public class Estadisticas implements Serializable {
         return ganadas;
     }
 
+    public int getEmpatadas() {
+        return empatadas;
+    }
+
+    public int getPerdidas() {
+        return perdidas;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
     /**
      * Suma el valor del parámetro al atributo ganadas
      * @param ganadas valor a sumar al atributo
      */
-    public void addGanadas(int ganadas) {
+    public void addVictorias(int ganadas) {
         if(ganadas < 0)throw new IllegalArgumentException("Parametro negativo no aceptado");
         this.ganadas = ganadas;
     }
@@ -25,7 +37,7 @@ public class Estadisticas implements Serializable {
      * Suma el valor del parámetro al atributo empatadas
      * @param empatadas valor a sumar al atributo
      */
-    public void addEmpatadas(int empatadas) {
+    public void addEmpates(int empatadas) {
         if(empatadas < 0)throw new IllegalArgumentException("Parametro negativo no aceptado");
         this.empatadas = empatadas;
     }
@@ -34,7 +46,7 @@ public class Estadisticas implements Serializable {
      * Suma el valor del parámetro al atributo perdidas
      * @param perdidas valor a sumar al atributo
      */
-    public void addPerdidas(int perdidas) {
+    public void addDerrotas(int perdidas) {
         if(perdidas < 0)throw new IllegalArgumentException("Parametro negativo no aceptado");
         this.perdidas = perdidas;
     }
