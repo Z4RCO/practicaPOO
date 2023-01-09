@@ -1,5 +1,6 @@
 package practicapoo.interfaz;
 
+import practicapoo.Configuracion;
 import practicapoo.enums.Letras;
 import practicapoo.jugador.Jugador;
 import practicapoo.palabra.Entrenamiento;
@@ -96,9 +97,13 @@ public class Menu extends JPanel {
                 opciones,
                 opciones[0]);
         switch(n){
-            case JOptionPane.YES_OPTION -> ent = new Entrenamiento(Letras.CINCO);
-            case JOptionPane.NO_OPTION -> ent = new Entrenamiento(Letras.SEIS);
+            case JOptionPane.YES_OPTION -> Configuracion.setLetras(Letras.CINCO);
+            case JOptionPane.NO_OPTION -> Configuracion.setLetras(Letras.SEIS);
         }
+        ent = new Entrenamiento();
+
+
+
 
     }//GEN-LAST:event_practicarActionPerformed
 
@@ -131,7 +136,7 @@ public class Menu extends JPanel {
                 "Iniciar sesión",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
-                new ImageIcon("src/practicapoo/archivos/Usuario.png")
+                new ImageIcon("resources/LogIn.png")
         );
 
         //si le has dado a OK y has puesto texto en los TextFields
@@ -144,6 +149,9 @@ public class Menu extends JPanel {
             return;
         }
         if(j.equals(new Jugador("admin","admin")))Main.cambiarContenido(new Config());
-        else Main.cambiarContenido(new Sesion(j));
+        else{
+            j = Main.getJugadores().getJugador(j);
+            Main.cambiarContenido(new Sesion(j));
+        }
     }
 }

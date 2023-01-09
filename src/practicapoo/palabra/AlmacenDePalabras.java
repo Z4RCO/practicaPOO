@@ -1,9 +1,13 @@
 package practicapoo.palabra;
 
+import practicapoo.interfaz.Palabra;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AlmacenDePalabras {
 
@@ -25,16 +29,24 @@ public class AlmacenDePalabras {
             palabrasDeCinco = new Palabra[numPalabras];
             palabrasDeSeis = new Palabra[numPalabras];
 
-            for (int i = 0; i < numPalabras; i++) {
-                palabrasDeCinco[i] = new Palabra();
-                palabrasDeCinco[i].setPalabra(entrada.readLine().toCharArray());
-
+            int lineas = 0;
+            ArrayList<String> pal = new ArrayList<>();
+            String lineaSiguiente = entrada.readLine();
+            while(!lineaSiguiente.equals("6")){
+                pal.add(lineaSiguiente);
+                lineaSiguiente = entrada.readLine();
+                ++lineas;
             }
-            entrada.readLine();
-            for (int i = 0; i < numPalabras; i++) {
+
+            palabrasDeCinco = new Palabra[lineas];
+            palabrasDeSeis = new Palabra[lineas];
+            for (int i = 0; i < lineas; i++) {
+                palabrasDeCinco[i] = new Palabra();
                 palabrasDeSeis[i] = new Palabra();
+                palabrasDeCinco[i].setPalabra(pal.get(i).toCharArray());
                 palabrasDeSeis[i].setPalabra(entrada.readLine().toCharArray());
             }
+
             entrada.close();
         } catch (FileNotFoundException fnfex) {
             System.out.println("Fichero no encontrado: " + fnfex);

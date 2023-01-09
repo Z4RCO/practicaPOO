@@ -1,8 +1,13 @@
 package practicapoo.interfaz;
 
 import javax.swing.*;
+
+import practicapoo.Configuracion;
+import practicapoo.enums.Letras;
+import practicapoo.jugador.AlmacenDeJugadores;
 import practicapoo.jugador.Jugador;
 import practicapoo.partida.Partida;
+
 
 /**
  *
@@ -11,7 +16,6 @@ import practicapoo.partida.Partida;
 public class Sesion extends javax.swing.JPanel {
     
     private Jugador jugador;
-    private Main frame;
     /**
      * Crea un nuevo form de una sesión iniciada
      * @param jugador Jugador que ha iniciado sesión
@@ -31,10 +35,11 @@ public class Sesion extends javax.swing.JPanel {
     private void initComponents() {
 
         jugar = new javax.swing.JButton();
-        estadisticas = new javax.swing.JButton();
-        partidasOtro = new javax.swing.JButton();
         cerrarSesion = new javax.swing.JButton();
+        perfil = new javax.swing.JButton();
+        rankings = new javax.swing.JButton();
 
+        jugar.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jugar.setText("Jugar!");
         jugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,24 +47,27 @@ public class Sesion extends javax.swing.JPanel {
             }
         });
 
-        estadisticas.setText("Ver estadísticas");
-        estadisticas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadisticasActionPerformed(evt);
-            }
-        });
-
-        partidasOtro.setText("Ver partidas contra otro");
-        partidasOtro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                partidasOtroActionPerformed(evt);
-            }
-        });
-
+        cerrarSesion.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         cerrarSesion.setText("Cerrar sesion");
         cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cerrarSesionActionPerformed(evt);
+            }
+        });
+
+        perfil.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        perfil.setText("Ver perfil");
+        perfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perfilActionPerformed(evt);
+            }
+        });
+
+        rankings.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        rankings.setText("Ver rankings");
+        rankings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rankingsActionPerformed(evt);
             }
         });
 
@@ -68,63 +76,94 @@ public class Sesion extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(jugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(estadisticas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(partidasOtro, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addGap(325, 325, 325)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(rankings, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                        .addComponent(perfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(325, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103)
+                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(estadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(partidasOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rankings, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void estadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasActionPerformed
-        //TODO Cambiar ver stats y Partidas contra otro por Ver Perfil
-        JOptionPane.showMessageDialog(
-                frame,
-                jugador.getEstadisticas().toString(),
-                "Estadísticas",
-                0,
-                new ImageIcon("src/practicapoo/imagenes/Stats.png"));
-    }//GEN-LAST:event_estadisticasActionPerformed
-
-    private void partidasOtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partidasOtroActionPerformed
-        // TODO hacer popup partidas contra otro
-        jugador.partidasContraOtro(new Jugador(null,null));
-    }//GEN-LAST:event_partidasOtroActionPerformed
 
     private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
         Main.cambiarContenido(new Menu());
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
-        //TODO arreglar llamada al constructor de partida
-        //TODO poner atributo frame en InterfazPartida
-        //Partida p = new Partida(this.jugador,null);
-        //frame.cambiarContenido(p.getPalabra(0).getInterfaz());
+        JTextField user = new JTextField();
+        JPasswordField pass = new JPasswordField();
+        Object[] mensaje = {
+                "Ususario:", user,
+                "Contraseña:", pass
+        };
 
-        //frame.cambiarContenido(new InterfazPalabra5(this.jugador));
+        int option = JOptionPane.showConfirmDialog(this, mensaje, "Empezar partida", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,new ImageIcon("resources/LogIn.png"));
+        if (option == JOptionPane.OK_OPTION) {
+            Jugador j = new Jugador(user.getText(),new String(pass.getPassword()));
+            if (!Main.getJugadores().autenticar(j)) {
+                return;
+            }
+            j = Main.getJugadores().getJugador(j);
+            Object[] tipo = {"Cinco","Seis"};
+            int n = JOptionPane.showOptionDialog(this,
+                    "Elije ls letras de las palabras",
+                    "Configuración de parttida",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    new ImageIcon("resources/Icono.png"),
+                    tipo,
+                    tipo[0]);
+            switch(n){
+                case JOptionPane.YES_OPTION -> Configuracion.setLetras(Letras.CINCO);
+                case JOptionPane.NO_OPTION -> Configuracion.setLetras(Letras.SEIS);
+            }
+
+            Partida p = new Partida(this.jugador,j);
+        }
 
     }//GEN-LAST:event_jugarActionPerformed
+
+    private void perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilActionPerformed
+        // TODO Hacer JPanel para ver el perfil
+    }//GEN-LAST:event_perfilActionPerformed
+
+    private void rankingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingsActionPerformed
+        Object[] opciones = {"Victorias", "Alfabético"};
+        int n = JOptionPane.showOptionDialog(Main.getLienzo(),
+                "¿Cómo quieres ver el ranking?",
+                "Rankings",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                new ImageIcon("resources/Usuario.png"),
+                opciones,
+                opciones[0]);
+        switch(n){
+            case JOptionPane.YES_OPTION -> Main.getJugadores().rankingOrdenadoPorVictorias();
+            case JOptionPane.NO_OPTION -> Main.getJugadores().rankingOrdenadoPorNombre();
+        }
+
+    }//GEN-LAST:event_rankingsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cerrarSesion;
-    private javax.swing.JButton estadisticas;
     private javax.swing.JButton jugar;
-    private javax.swing.JButton partidasOtro;
+    private javax.swing.JButton perfil;
+    private javax.swing.JButton rankings;
     // End of variables declaration//GEN-END:variables
 }

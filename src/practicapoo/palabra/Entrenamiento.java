@@ -1,9 +1,8 @@
 package practicapoo.palabra;
 
 import practicapoo.enums.Letras;
-import practicapoo.interfaz.InterfazPalabra5;
-import practicapoo.interfaz.InterfazPalabra6;
 import practicapoo.interfaz.Main;
+import practicapoo.interfaz.Palabra;
 import practicapoo.jugador.Jugador;
 
 public class Entrenamiento {
@@ -12,15 +11,12 @@ public class Entrenamiento {
     private boolean regaloDePalabra;
     private Palabra palabra;
 
-    public Entrenamiento(Letras letras){
+    public Entrenamiento(){
         Jugador invitado = new Jugador("Invitado","");
         regaloDePalabra = true;
         this.palabra = new Palabra();
-        switch (letras){
-            case CINCO -> palabra.setInterfaz(new InterfazPalabra5(invitado,palabra));
-            case SEIS ->  palabra.setInterfaz(new InterfazPalabra6(invitado,palabra));
-        }
-        Main.cambiarContenido(palabra.getInterfaz());
+        palabra.sacarPalabraAleatoria();
+        palabra.setTurno("Entrenamiento");
     }
     public int mostrarPuntos(){
 
@@ -30,6 +26,8 @@ public class Entrenamiento {
     public boolean usarPistaDePalabra(){
         if(!regaloDePalabra)return false;
         regaloDePalabra = false;
+
+
         return true;
     }
 
