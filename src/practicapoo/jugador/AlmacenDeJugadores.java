@@ -16,7 +16,6 @@ public class AlmacenDeJugadores implements Serializable {
         cargarArchivo();
         jugadores.add(new Jugador("admin","admin"));
         jugadores.add(new Jugador("Sergio","12345"));
-        jugadores.add(new Jugador("Eva","Me gustas"));
         guardarArchivo();
 
     }
