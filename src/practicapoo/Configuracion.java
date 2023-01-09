@@ -40,4 +40,8 @@ public class Configuracion {
             System.err.println("Excepción de Entrada/Salida: " + io);
         }
     }
+
+    public static void setLetras(Letras letras) {
+        Configuracion.letras = letras;
+    }
 }

@@ -30,7 +30,7 @@ public class Estadisticas implements Serializable {
      */
     public void addVictorias(int ganadas) {
         if(ganadas < 0)throw new IllegalArgumentException("Parametro negativo no aceptado");
-        this.ganadas = ganadas;
+        this.ganadas += ganadas;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Estadisticas implements Serializable {
      */
     public void addEmpates(int empatadas) {
         if(empatadas < 0)throw new IllegalArgumentException("Parametro negativo no aceptado");
-        this.empatadas = empatadas;
+        this.empatadas += empatadas;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Estadisticas implements Serializable {
      */
     public void addDerrotas(int perdidas) {
         if(perdidas < 0)throw new IllegalArgumentException("Parametro negativo no aceptado");
-        this.perdidas = perdidas;
+        this.perdidas += perdidas;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Estadisticas implements Serializable {
      */
     public void addPuntos(int puntos) {
         if(puntos < 0)throw new IllegalArgumentException("Parametro negativo no aceptado");
-        this.puntos = puntos;
+        this.puntos += puntos;
     }
 
     /**

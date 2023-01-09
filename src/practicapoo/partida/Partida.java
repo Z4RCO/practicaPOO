@@ -1,43 +1,55 @@
 package practicapoo.partida;
 
 import practicapoo.Configuracion;
-import practicapoo.interfaz.InterfazPalabra5;
+import practicapoo.interfaz.Main;
+import practicapoo.interfaz.Palabra;
+import practicapoo.interfaz.Sesion;
 import practicapoo.jugador.Jugador;
-import practicapoo.palabra.Palabra;
 
-public class Partida {
+import javax.swing.*;
+import java.io.*;
+
+public class Partida implements Externalizable {
+
+    private static int numPartidas;
 
     private int identificador;
-    private static int numPartidas;
-    private boolean regalo_de_palabra;
-    private boolean primeraLetra;
     private int numPalabras;
     private Jugador jugador1;
     private Jugador jugador2;
     private Marcador marcador;
+
+    private boolean regaloDePalabra;
+    //TODO regalo de palabra
+
+    private  boolean primeraLetra;
+    //TODO primera letra
+    private int palabraActual;
+
     private Palabra[] palabras;
 
-    public Partida(Jugador jugador1, Jugador jugador2) {
-        identificador = numPartidas++;
-        this.numPalabras = Configuracion.getNumPalabras();
 
+    public Partida(Jugador jugador1, Jugador jugador2) {
+        this();
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
-
-        primeraLetra = Configuracion.isPrimeraLetra();
-        regalo_de_palabra = true;
-
-        marcador = new Marcador();
-        palabras = new Palabra[numPalabras];
-
-        palabras[0] = new Palabra();
+        palabras[0] = new Palabra(this);
         palabras[0].sacarPalabraAleatoria();
-        //palabras[0].setInterfaz(new InterfazPalabra5(jugador1,palabras[0],null));
-
+        palabras[0].setTurno("Turno de: " + jugador1.getNombre());
+        Main.cambiarContenido(palabras[0]);
     }
 
-    public Palabra getPalabra(int palabra){
-        return palabras[palabra];
+    public Partida(){
+        jugador1 = new Jugador(null,null);
+        jugador2 = new Jugador(null,null);
+        identificador = numPartidas++;
+        this.numPalabras = Configuracion.getNumPalabras();
+        primeraLetra = Configuracion.isPrimeraLetra();
+        regaloDePalabra = true;
+
+        marcador = new Marcador();
+        palabras = new Palabra[numPalabras * 2];
+
     }
 
     public Jugador getJugador1() {
@@ -49,24 +61,67 @@ public class Partida {
     }
 
     public void cambiarTurno() {
-        //TODO hacer método cambiarTurno
-        actualizarMarcador();
+        ++palabraActual;
+        if (palabraActual < numPalabras * 2) {
+            palabras[palabraActual] = new Palabra(this);
+            palabras[palabraActual].sacarPalabraAleatoria();
+            Main.cambiarContenido(palabras[palabraActual]);
+            if (palabras[palabraActual - 1].getTurno().equals("Turno de: " + jugador1.getNombre())) {
+                palabras[palabraActual].setTurno("Turno de: " + jugador2.getNombre());
+                palabras[palabraActual].setPuntos(marcador.getPuntos_j2());
+            } else {
+                palabras[palabraActual].setTurno("Turno de: " + jugador1.getNombre());
+                palabras[palabraActual].setPuntos(marcador.getPuntos_j1());
+            }
+
+        } else {
+            String ganador;
+            if (marcador.getPuntos_j1() > marcador.getPuntos_j2()) {
+                ganador = jugador1.getNombre();
+                jugador1.SumarVictoria();
+                jugador1.sumarPuntos(marcador.getPuntos_j1());
+                jugador2.sumarDerrota();
+                jugador2.sumarPuntos(marcador.getPuntos_j2());
+
+            } else if (marcador.getPuntos_j1() < marcador.getPuntos_j2()) {
+                ganador = jugador2.getNombre();
+                jugador2.SumarVictoria();
+                jugador2.sumarPuntos(marcador.getPuntos_j2());
+                jugador1.sumarDerrota();
+                jugador1.sumarPuntos(marcador.getPuntos_j1());
+
+            } else {
+                ganador = "Empate!";
+                jugador1.sumarEmpate();
+                jugador2.sumarEmpate();
+                jugador1.sumarPuntos(marcador.getPuntos_j1());
+                jugador2.sumarPuntos(marcador.getPuntos_j2());
+            }
+            JOptionPane.showMessageDialog(Main.getLienzo(), "Ganador de la partida: " + ganador);
+            Main.getJugadores().guardarArchivo();
+            Main.getPartidas().insertarPartida(this);
+            Main.cambiarContenido(new Sesion(jugador1));
+
+
+        }
+
 
     }
 
-    public void actualizarMarcador() {
-        //TODO hacer método ActualizarMarcador
-        //if()marcador.addPuntos_j1(palabras[0].puntosObtenidos());
-        //else marcador.addPuntos_j2(palabras[0].puntosObtenidos());
+    public void actualizarMarcador(String jugador, int puntos) {
+        if (("Turno de: " + jugador1.getNombre()).equals(jugador)) {
+            marcador.addPuntos_j1(puntos);
+        } else {
+            marcador.addPuntos_j2(puntos);
+        }
     }
 
-    public boolean usar_Pista_de_Letra() {
+    public boolean usarPistaDeLetra() {
         //TODO hacer método usarPistaDeLetra
         return true;
     }
 
     public boolean usar_Pista_de_Palabra() {
-        //TODO hacer método usarPistaDePalabra
         return true;
     }
 
@@ -81,5 +136,35 @@ public class Partida {
                 "Jugador 1: " + jugador1 + ". Consiguió " + marcador.getPuntos_j1() + "\n" +
                 "Jugador 2: " + jugador2 + ". Consiguió " + marcador.getPuntos_j2() + "\n" +
                 "Palabras de la partida: " + p + "\n";
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.write(identificador);
+        out.write(numPalabras);
+        out.writeBoolean(primeraLetra);
+        out.writeBoolean(regaloDePalabra);
+        out.writeObject(jugador1);
+        out.writeObject(jugador2);
+        out.writeObject(marcador);
+        for (Palabra p : palabras) {
+            out.writeObject(p);
+        }
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        identificador = in.read();
+        numPalabras = in.read();
+        primeraLetra = in.readBoolean();
+        regaloDePalabra = in.readBoolean();
+        jugador1 = (Jugador) in.readObject();
+        jugador2 = (Jugador) in.readObject();
+        marcador = (Marcador) in.readObject();
+        palabras = new Palabra[numPalabras * 2];
+        for (int i = 0; i < numPalabras * 2; i++) {
+            palabras[i] =(Palabra) in.readObject();
+        }
+
     }
 }

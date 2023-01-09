@@ -61,4 +61,20 @@ public class Jugador implements Comparable, Serializable {
     public Estadisticas getEstadisticas(){
         return estadisticas;
     }
+
+    public void SumarVictoria(){
+        estadisticas.addVictorias(1);
+    }
+
+    public void sumarDerrota(){
+        estadisticas.addDerrotas(1);
+    }
+
+    public void sumarEmpate(){
+        estadisticas.addEmpates(1);
+    }
+
+    public void sumarPuntos(int puntos){
+        estadisticas.addPuntos(puntos);
+    }
 }

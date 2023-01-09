@@ -2,8 +2,11 @@ package practicapoo.interfaz;
 
 import javax.swing.*;
 
+import practicapoo.Configuracion;
+import practicapoo.enums.Letras;
 import practicapoo.jugador.AlmacenDeJugadores;
 import practicapoo.jugador.Jugador;
+import practicapoo.partida.Partida;
 
 
 /**
@@ -13,7 +16,6 @@ import practicapoo.jugador.Jugador;
 public class Sesion extends javax.swing.JPanel {
     
     private Jugador jugador;
-    private Main frame;
     /**
      * Crea un nuevo form de una sesión iniciada
      * @param jugador Jugador que ha iniciado sesión
@@ -103,17 +105,41 @@ public class Sesion extends javax.swing.JPanel {
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
-        //TODO arreglar llamada al constructor de partida
-        //TODO poner atributo frame en InterfazPartida
-        //Partida p = new Partida(this.jugador,null);
-        //frame.cambiarContenido(p.getPalabra(0).getInterfaz());
+        JTextField user = new JTextField();
+        JPasswordField pass = new JPasswordField();
+        Object[] mensaje = {
+                "Ususario:", user,
+                "Contraseña:", pass
+        };
 
-        //frame.cambiarContenido(new InterfazPalabra5(this.jugador));
+        int option = JOptionPane.showConfirmDialog(this, mensaje, "Empezar partida", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,new ImageIcon("resources/LogIn.png"));
+        if (option == JOptionPane.OK_OPTION) {
+            Jugador j = new Jugador(user.getText(),new String(pass.getPassword()));
+            if (!Main.getJugadores().autenticar(j)) {
+                return;
+            }
+            j = Main.getJugadores().getJugador(j);
+            Object[] tipo = {"Cinco","Seis"};
+            int n = JOptionPane.showOptionDialog(this,
+                    "Elije ls letras de las palabras",
+                    "Configuración de parttida",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    new ImageIcon("resources/Icono.png"),
+                    tipo,
+                    tipo[0]);
+            switch(n){
+                case JOptionPane.YES_OPTION -> Configuracion.setLetras(Letras.CINCO);
+                case JOptionPane.NO_OPTION -> Configuracion.setLetras(Letras.SEIS);
+            }
+
+            Partida p = new Partida(this.jugador,j);
+        }
 
     }//GEN-LAST:event_jugarActionPerformed
 
     private void perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilActionPerformed
-        // TODO add your handling code here:
+        // TODO Hacer JPanel para ver el perfil
     }//GEN-LAST:event_perfilActionPerformed
 
     private void rankingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingsActionPerformed

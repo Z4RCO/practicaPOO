@@ -1,9 +1,18 @@
 package practicapoo.partida;
 
-public class Marcador {
+import java.io.Serializable;
+
+/**
+ * Clase que gestiona el marcador de una partida
+ */
+public class Marcador implements Serializable {
     private int puntos_j1;
     private int puntos_j2;
 
+    public Marcador() {
+        this.puntos_j1 = 0;
+        this.puntos_j2 = 0;
+    }
 
     public int getPuntos_j1() {
         return puntos_j1;

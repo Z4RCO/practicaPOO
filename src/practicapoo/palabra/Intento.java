@@ -1,6 +1,8 @@
 package practicapoo.palabra;
 
-public class Intento {
+import java.io.Serializable;
+
+public class Intento implements Serializable {
     private final char[] intento;
 
 

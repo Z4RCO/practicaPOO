@@ -10,7 +10,6 @@ import javax.swing.*;
 /**
  * Interfaz para permitir al administrador tratar toda la información del programa
  * Contiene varios botones para cada una de las acciones necesarias
- * @author Sergio
  */
 public class Config extends javax.swing.JPanel {
     /**
@@ -35,6 +34,7 @@ public class Config extends javax.swing.JPanel {
         baja = new javax.swing.JButton();
         cerrarSesion = new javax.swing.JButton();
 
+        verInfoPartidas.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         verInfoPartidas.setText("Ver información de las partidas");
         verInfoPartidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,6 +42,7 @@ public class Config extends javax.swing.JPanel {
             }
         });
 
+        editarConfig.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         editarConfig.setText("Cambiar Configuración");
         editarConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,6 +50,7 @@ public class Config extends javax.swing.JPanel {
             }
         });
 
+        alta.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         alta.setText("Dar de alta un jugador");
         alta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,6 +58,7 @@ public class Config extends javax.swing.JPanel {
             }
         });
 
+        baja.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         baja.setText("Dar de baja un jugador");
         baja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +66,7 @@ public class Config extends javax.swing.JPanel {
             }
         });
 
+        cerrarSesion.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         cerrarSesion.setText("Cerrar sesión");
         cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,8 +78,8 @@ public class Config extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(225, 225, 225)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(151, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(verInfoPartidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -84,12 +88,12 @@ public class Config extends javax.swing.JPanel {
                         .addComponent(alta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                         .addComponent(baja)))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addGap(152, 152, 152))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addGap(74, 74, 74)
                 .addComponent(editarConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(verInfoPartidas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -99,7 +103,7 @@ public class Config extends javax.swing.JPanel {
                     .addComponent(baja, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -109,10 +113,13 @@ public class Config extends javax.swing.JPanel {
 
     private void verInfoPartidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInfoPartidasActionPerformed
         AlmacenDePartidas partidas = Main.getPartidas();
-        JPanel p = new JPanel();
-        p.add(new JTextArea(partidas.infoPartidas()));
+        JScrollPane sp = new JScrollPane();
+        JTextArea t = new JTextArea(partidas.infoPartidas());
+        t.setColumns(30);
+        t.setRows(10);
+        sp.setViewportView(t);
 
-        JOptionPane.showMessageDialog(Main.getLienzo(),p,"Información de todas las partidas.",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(Main.getLienzo(), sp, "Información de todas las partidas.", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_verInfoPartidasActionPerformed
 
     private void altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaActionPerformed
@@ -135,8 +142,8 @@ public class Config extends javax.swing.JPanel {
         );
 
         //si le has dado a OK y has puesto texto en los TextFields
-        if(i == JOptionPane.OK_OPTION && !user.getText().equals("") &&  !(new String(pass.getPassword())).equals("")){
-            Jugador jugador = new Jugador(user.getText(),new String( pass.getPassword()));
+        if (i == JOptionPane.OK_OPTION && !user.getText().equals("") && !(new String(pass.getPassword())).equals("")) {
+            Jugador jugador = new Jugador(user.getText(), new String(pass.getPassword()));
             j.alta(jugador);
         }
 
@@ -166,7 +173,7 @@ public class Config extends javax.swing.JPanel {
         if (i != JOptionPane.OK_OPTION || user.getText().equals("") || (new String(pass.getPassword())).equals("")) {
             return;
         }
-        Jugador jugador = new Jugador(user.getText(),new String( pass.getPassword()));
+        Jugador jugador = new Jugador(user.getText(), new String(pass.getPassword()));
         j.baja(jugador);
 
     }//GEN-LAST:event_bajaActionPerformed
