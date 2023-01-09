@@ -148,9 +148,9 @@ public class Partida implements Externalizable {
             p.append(palabras[i]).append(" ");
         }
         return "Identificador: " + identificador + "\n" +
-                "Se muestra la primera letra: " + primeraLetra +
-                "Jugador 1: " + jugador1 + ". Consiguió " + marcador.getPuntos_j1() + "\n" +
-                "Jugador 2: " + jugador2 + ". Consiguió " + marcador.getPuntos_j2() + "\n" +
+                "Se muestra la primera letra: " + primeraLetra + "\n" +
+                "Jugador 1: " + jugador1.getNombre() + ". Consiguio " + marcador.getPuntos_j1() + " puntos\n" +
+                "Jugador 2: " + jugador2.getNombre() + ". Consiguio " + marcador.getPuntos_j2() + " puntos\n" +
                 "Palabras de la partida: " + p + "\n";
     }
 
@@ -164,7 +164,7 @@ public class Partida implements Externalizable {
         out.writeObject(jugador2);
         out.writeObject(marcador);
         for (Palabra p : palabras) {
-            out.writeObject(p);
+            p.writeExternal(out);
         }
     }
 
@@ -179,7 +179,8 @@ public class Partida implements Externalizable {
         marcador = (Marcador) in.readObject();
         palabras = new Palabra[numPalabras * 2];
         for (int i = 0; i < numPalabras * 2; i++) {
-            palabras[i] =(Palabra) in.readObject();
+            palabras[i] = new Palabra();
+            palabras[i].readExternal(in);
         }
 
     }

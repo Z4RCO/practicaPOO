@@ -390,8 +390,11 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
-        out.write(palabra.length);
-        out.writeChars(String.valueOf(palabra));
+        int size = palabra.length;
+        out.write(size);
+        for (int i = 0; i < size; i++) {
+            out.writeChar(palabra[i]);
+        }
         for (Intento i : intentos){
             out.writeObject(i);
         }
@@ -405,10 +408,13 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        int size = in.readInt();
+        int size = in.read();
         palabra = new char[size];
         for (int i = 0; i < size; i++) {
             palabra[i] = in.readChar();
+        }
+        for (int i = 0; i < 5; i++) {
+            intentos[i] = (Intento) in.readObject();
         }
         intentosRealizados = in.read();
         numLetras = (Letras) in.readObject();

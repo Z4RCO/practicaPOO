@@ -65,7 +65,6 @@ public class AlmacenDePartidas implements Externalizable {
         }catch (FileNotFoundException fnf){
             System.err.println("Se ha producido una excepción cargando el almacen de partidas: No se ha enontrado el archivo deseado.\n" + fnf);
         }catch(EOFException ignored){
-            System.out.println("Final de archivo" + ignored);
         }catch (IOException | ClassNotFoundException ioex){
             System.err.println("Se ha producido una excepción de E/S cargando el almacen de partidas: " + ioex);
             ioex.printStackTrace();
@@ -104,7 +103,9 @@ public class AlmacenDePartidas implements Externalizable {
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         int cantidad = in.read();
         for (int i = 0; i < cantidad; i++) {
+            System.out.println(this.i++);
             Partida p = (Partida) in.readObject();
+            System.out.println(i++);
             System.out.println(p.toString());
             partidas.add(p);
         }
