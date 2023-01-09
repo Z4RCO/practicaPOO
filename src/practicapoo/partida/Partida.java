@@ -5,6 +5,7 @@ import practicapoo.interfaz.Main;
 import practicapoo.interfaz.Palabra;
 import practicapoo.interfaz.Sesion;
 import practicapoo.jugador.Jugador;
+import practicapoo.palabra.PistaDeLetra;
 
 import javax.swing.*;
 import java.io.*;
@@ -118,6 +119,21 @@ public class Partida implements Externalizable {
 
     public boolean usarPistaDeLetra() {
         //TODO hacer método usarPistaDeLetra
+        String j1 = jugador1.getNombre();
+        String j2 = jugador2.getNombre();
+        Palabra p = palabras[palabraActual];
+        PistaDeLetra pl = new PistaDeLetra(p);
+        if (p.getTurno().equals(j1) &&
+                pl.regalarLetra() &&
+                jugador1.getEstadisticas().getPuntos() > 0) {
+            jugador1.sumarPuntos(-1);
+            pl.mostrarPalabraActualizada();
+        } else if (p.getTurno().equals(j2) &&
+                pl.regalarLetra() &&
+                jugador2.getEstadisticas().getPuntos() > 0){
+            jugador2.sumarPuntos(-1);
+            pl.mostrarPalabraActualizada();
+        }
         return true;
     }
 
