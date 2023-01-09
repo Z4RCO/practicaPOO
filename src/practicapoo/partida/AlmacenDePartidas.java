@@ -14,14 +14,18 @@ public class AlmacenDePartidas implements Externalizable {
     public ArrayList<Partida> getPartidas() {
         return partidas;
     }
+    private int i;
 
     /**
      * Constructor de la clase
      * Crea el Arraylist y lo llena a partir del archivo
       */
     public AlmacenDePartidas(){
+        System.out.println(i++);
         this.partidas = new ArrayList<Partida>();
+        System.out.println(i++);
         cargarArchivo();
+        System.out.println(i++);
     }
 
     /**
@@ -50,18 +54,18 @@ public class AlmacenDePartidas implements Externalizable {
      */
     private void cargarArchivo(){
         try{
-
+            System.out.println(i++);
             FileInputStream file = new FileInputStream("resources/partidas.lingo");
-
+            System.out.println(i++);
             ObjectInputStream input = new ObjectInputStream(file);
-
+            System.out.println(i++);
             readExternal(input);
 
 
         }catch (FileNotFoundException fnf){
             System.err.println("Se ha producido una excepción cargando el almacen de partidas: No se ha enontrado el archivo deseado.\n" + fnf);
         }catch(EOFException ignored){
-
+            System.out.println("Final de archivo" + ignored);
         }catch (IOException | ClassNotFoundException ioex){
             System.err.println("Se ha producido una excepción de E/S cargando el almacen de partidas: " + ioex);
             ioex.printStackTrace();
@@ -99,9 +103,10 @@ public class AlmacenDePartidas implements Externalizable {
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         int cantidad = in.read();
-        partidas = new ArrayList<>();
         for (int i = 0; i < cantidad; i++) {
-            partidas.add((Partida) in.readObject());
+            Partida p = (Partida) in.readObject();
+            System.out.println(p.toString());
+            partidas.add(p);
         }
     }
 }
