@@ -147,14 +147,14 @@ public class Partida implements Externalizable {
     @Override
     public String toString() {
         StringBuilder p = new StringBuilder();
-        for (int i = 0; i < numPalabras; i++) {
+        for (int i = 0; i < numPalabras * 2; i++) {
             p.append(palabras[i].toString());
         }
         return "Identificador: " + identificador + "\n" +
                 "Se muestra la primera letra: " + primeraLetra + "\n" +
                 "Jugador 1: " + jugador1.getNombre() + ". Consiguio " + marcador.getPuntos_j1() + " puntos\n" +
                 "Jugador 2: " + jugador2.getNombre() + ". Consiguio " + marcador.getPuntos_j2() + " puntos\n" +
-                "Palabras de la partida: \n" + p + "\n";
+                "Palabras de la partida:\n" + p + "\n";
     }
 
     @Override

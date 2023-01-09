@@ -37,7 +37,7 @@ public class Main extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lingo");
-        //setIconImage(new ImageIcon(getClass().getResource("src/practicapoo/archivos/w.png")).getImage());
+        setIconImage(new ImageIcon("resources/Logo.png").getImage());
         setResizable(true);
 
         javax.swing.GroupLayout lienzoLayout = new javax.swing.GroupLayout(lienzo);

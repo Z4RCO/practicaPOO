@@ -51,7 +51,7 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
 
     }
 
-    public Palabra(Partida partida){
+    public Palabra(Partida partida) {
         initComponents();
         numLetras = Configuracion.getNumLetras();
         regaloDeLetra = true;
@@ -200,16 +200,15 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
-        if(ventana.getText().length() == numLetras.getSize()){
+        if (ventana.getText().length() == numLetras.getSize()) {
             jugar();
         }
     }//GEN-LAST:event_confirmarActionPerformed
 
     private void pistaLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaLetraActionPerformed
-        if(!pistaDeLetra.regalarLetra()){
-            appendToPane("Error. No puedes usar una pista de letra en este momento\n",Color.RED);
-        }
-        else{
+        if (!pistaDeLetra.regalarLetra()) {
+            appendToPane("Error. No puedes usar una pista de letra en este momento\n", Color.RED);
+        } else {
             regaloDeLetra = false;
         }
     }//GEN-LAST:event_pistaLetraActionPerformed
@@ -225,17 +224,17 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
     public void jugar() {
         String intento = ventana.getText();
         ventana.setText(null);
-        appendToPane("Intento " + (intentosRealizados + 1) +": " + intento +"\n",Color.BLACK);
+        appendToPane("Intento " + (intentosRealizados + 1) + ": " + intento + "\n", Color.BLACK);
         intentos[intentosRealizados] = new Intento(intento.toCharArray());
         boolean victoria = comprobarColocadas();
         comprobarDistintaPosicion();
         ++intentosRealizados;
-        if(victoria){
-            if(esPartida){
-                partida.actualizarMarcador(turno.getText(),puntosObtenidos());
+        if (victoria) {
+            if (esPartida) {
+                partida.actualizarMarcador(turno.getText(), puntosObtenidos());
                 partida.cambiarTurno();
 
-            }else{
+            } else {
                 int puntos = Integer.parseInt(numPuntos.getText());
                 puntos += puntosObtenidos();
                 this.removeAll();
@@ -243,15 +242,14 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
                 turno.setText("Entrenamiento");
                 numPuntos.setText(String.valueOf(puntos));
                 sacarPalabraAleatoria();
-                appendToPane("Muy bien! Has adivinado la palabra en " + intentosRealizados + " intentos!\n",Color.BLACK);
+                appendToPane("Muy bien! Has adivinado la palabra en " + intentosRealizados + " intentos!\n", Color.BLACK);
                 intentosRealizados = 0;
             }
         }
-        if(intentosRealizados == 5){
-            if (esPartida){
+        if (intentosRealizados == 5) {
+            if (esPartida) {
                 partida.cambiarTurno();
-            }
-            else{
+            } else {
                 int puntos = Integer.parseInt(numPuntos.getText());
                 puntos += puntosObtenidos();
                 this.removeAll();
@@ -260,7 +258,7 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
                 numPuntos.setText(String.valueOf(puntos));
                 String pal = new String(palabra);
                 sacarPalabraAleatoria();
-                appendToPane("La palabra era: " + pal.toUpperCase() +". Más suerte la próxima vez!\n",Color.BLACK);
+                appendToPane("La palabra era: " + pal.toUpperCase() + ". Más suerte la próxima vez!\n", Color.BLACK);
                 intentosRealizados = 0;
             }
         }
@@ -274,10 +272,10 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         for (int i = 0; i < numLetras.getSize(); i++) {
             if (palabra[i] == intentos[intentosRealizados].recogerIntento()[i]) {
                 ++correctas;
-                appendToPane("La letra " + palabra[i] + " está en la posición correcta!\n",Color.GREEN);
+                appendToPane("La letra " + palabra[i] + " está en la posición correcta!\n", Color.GREEN);
             }
         }
-        if(correctas == Configuracion.getNumLetras().getSize())return true;
+        if (correctas == Configuracion.getNumLetras().getSize()) return true;
         return false;
     }
 
@@ -296,9 +294,9 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         for (int i = 0; i < numLetras.getSize(); i++) {
             char c = intentos[intentosRealizados].recogerIntento()[i];
             if (numApariciones(c) > 0 && palabra[i] != c) {
-                appendToPane("La letra " + c + " está en otra posición\n",Color.ORANGE);
+                appendToPane("La letra " + c + " está en otra posición\n", Color.ORANGE);
             } else if (numApariciones(c) == 0) {
-                appendToPane("La letra " + c + " no está en la palabra\n",Color.GRAY);
+                appendToPane("La letra " + c + " no está en la palabra\n", Color.GRAY);
             }
         }
     }
@@ -347,7 +345,7 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         return intentos;
     }
 
-    public void setTurno(String jugador){
+    public void setTurno(String jugador) {
         this.turno.setText(jugador);
     }
 
@@ -355,11 +353,11 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
     /**
      * Método para cambiar el contenido del panel, permitiendo usar colores
      * Modificado de https://stackoverflow.com/questions/9650992/how-to-change-text-color-in-the-jtextarea
-     * @param msg  String para escribir en el Pane
-     * @param c  Color para pintar el texto
+     *
+     * @param msg String para escribir en el Pane
+     * @param c   Color para pintar el texto
      */
-    public void appendToPane(String msg, Color c)
-    {
+    public void appendToPane(String msg, Color c) {
         StyleContext sc = StyleContext.getDefaultStyleContext();
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
 
@@ -372,37 +370,24 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         textPane.replaceSelection(msg);
     }
 
-    public String getTurno(){
+    public String getTurno() {
         return this.turno.getText();
     }
 
-    public void setPuntos(int puntos){
+    public void setPuntos(int puntos) {
         numPuntos.setText(String.valueOf(puntos));
     }
 
-
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton confirmar;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton menuPrincipal;
-    private javax.swing.JLabel numPuntos;
-    private javax.swing.JButton pistaLetra;
-    private javax.swing.JButton pistaPalabra;
-    private javax.swing.JTextPane textPane;
-    private javax.swing.JLabel textPuntos;
-    private javax.swing.JLabel turno;
-    private javax.swing.JTextField ventana;
-
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sbIntentos = new StringBuilder();
         for (int i = 0; i < 5; i++) {
-            sbIntentos.append("Intento ").append(i + 1).append(intentos[i].recogerIntento()).append("\n");
+            sbIntentos.append("\tIntento ").append(i + 1);
+            if (intentos[i] == null) sbIntentos.append(": No se ha jugado.\n");
+            else sbIntentos.append(" ").append(intentos[i].recogerIntento()).append("\n");
         }
         return "Palabra: " +
-                Arrays.toString(palabra) + sbIntentos;
+                new String(palabra) + "\n" + sbIntentos;
 
     }
 
@@ -413,7 +398,7 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         for (int i = 0; i < size; i++) {
             out.writeChar(palabra[i]);
         }
-        for (Intento i : intentos){
+        for (Intento i : intentos) {
             out.writeObject(i);
         }
         out.write(this.intentosRealizados);
@@ -433,7 +418,6 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         }
         for (int i = 0; i < 5; i++) {
             intentos[i] = (Intento) in.readObject();
-            if(intentos[i] == null)intentos[i] = new Intento("No se ha jugado".toCharArray());
         }
         intentosRealizados = in.read();
         numLetras = (Letras) in.readObject();
@@ -442,5 +426,17 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         esPartida = in.readBoolean();
         partida = (Partida) in.readObject();
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton confirmar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton menuPrincipal;
+    private javax.swing.JLabel numPuntos;
+    private javax.swing.JButton pistaLetra;
+    private javax.swing.JButton pistaPalabra;
+    private javax.swing.JTextPane textPane;
+    private javax.swing.JLabel textPuntos;
+    private javax.swing.JLabel turno;
+    private javax.swing.JTextField ventana;
     // End of variables declaration//GEN-END:variables
 }
