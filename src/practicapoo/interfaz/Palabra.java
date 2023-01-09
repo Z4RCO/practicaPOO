@@ -433,6 +433,7 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         }
         for (int i = 0; i < 5; i++) {
             intentos[i] = (Intento) in.readObject();
+            if(intentos[i] == null)intentos[i] = new Intento("No se ha jugado".toCharArray());
         }
         intentosRealizados = in.read();
         numLetras = (Letras) in.readObject();
