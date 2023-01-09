@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Arrays;
 
 /**
  * @author Sergio
@@ -387,6 +388,11 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
     private javax.swing.JLabel textPuntos;
     private javax.swing.JLabel turno;
     private javax.swing.JTextField ventana;
+
+    @Override
+    public String toString() {
+        return "Palabra:" + Arrays.toString(palabra) + "\n";
+    }
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {

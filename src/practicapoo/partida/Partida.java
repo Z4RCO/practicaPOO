@@ -146,6 +146,7 @@ public class Partida implements Externalizable {
         StringBuilder p = new StringBuilder();
         for (int i = 0; i < numPalabras; i++) {
             p.append(palabras[i]).append(" ");
+            palabras[i].toString();
         }
         return "Identificador: " + identificador + "\n" +
                 "Se muestra la primera letra: " + primeraLetra + "\n" +
