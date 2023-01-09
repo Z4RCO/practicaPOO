@@ -2,7 +2,10 @@ package practicapoo;
 
 import practicapoo.enums.Letras;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Configuracion {
     private static Letras letras;

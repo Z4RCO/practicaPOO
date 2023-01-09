@@ -4,8 +4,10 @@ import practicapoo.interfaz.Main;
 import practicapoo.partida.AlmacenDePartidas;
 import practicapoo.partida.Partida;
 
-import java.io.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 public class Jugador implements Comparable, Serializable {
     private String nombre;

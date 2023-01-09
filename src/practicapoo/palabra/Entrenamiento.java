@@ -1,6 +1,5 @@
 package practicapoo.palabra;
 
-import practicapoo.enums.Letras;
 import practicapoo.interfaz.Main;
 import practicapoo.interfaz.Palabra;
 import practicapoo.jugador.Jugador;
@@ -17,6 +16,7 @@ public class Entrenamiento {
         this.palabra = new Palabra();
         palabra.sacarPalabraAleatoria();
         palabra.setTurno("Entrenamiento");
+        Main.cambiarContenido(palabra);
     }
     public int mostrarPuntos(){
 

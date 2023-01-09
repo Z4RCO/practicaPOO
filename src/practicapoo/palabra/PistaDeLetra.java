@@ -36,7 +36,6 @@ public class PistaDeLetra implements Serializable {
         }
 
         if(s.length() < Configuracion.getNumLetras().getSize() - 1){
-            System.out.println(s.length());
             palabra.appendToPane( "La letra " + c + " está en la solución\n",Color.PINK);
         }
 

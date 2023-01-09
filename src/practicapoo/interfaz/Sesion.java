@@ -1,12 +1,11 @@
 package practicapoo.interfaz;
 
-import javax.swing.*;
-
 import practicapoo.Configuracion;
 import practicapoo.enums.Letras;
-import practicapoo.jugador.AlmacenDeJugadores;
 import practicapoo.jugador.Jugador;
 import practicapoo.partida.Partida;
+
+import javax.swing.*;
 
 
 /**

@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AlmacenDePalabras {
 
@@ -49,9 +48,9 @@ public class AlmacenDePalabras {
 
             entrada.close();
         } catch (FileNotFoundException fnfex) {
-            System.out.println("Fichero no encontrado: " + fnfex);
+            System.err.println("Fichero no encontrado: " + fnfex);
         } catch (IOException ioex) {
-            System.out.println("Excepción de E/S: " + ioex);
+            System.err.println("Excepción de E/S: " + ioex);
         }
     }
 

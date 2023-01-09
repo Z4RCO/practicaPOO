@@ -3,7 +3,6 @@ package practicapoo.jugador;
 import practicapoo.interfaz.Main;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 import java.util.*;
 
@@ -15,6 +14,10 @@ public class AlmacenDeJugadores implements Serializable {
     public AlmacenDeJugadores() {
         jugadores = new ArrayList<Jugador>();
         cargarArchivo();
+        jugadores.add(new Jugador("admin","admin"));
+        jugadores.add(new Jugador("Sergio","12345"));
+        jugadores.add(new Jugador("Eva","Me gustas"));
+        guardarArchivo();
 
     }
 
@@ -109,13 +112,10 @@ public class AlmacenDeJugadores implements Serializable {
             FileInputStream file = new FileInputStream("resources/jugadores.lingo");
             ObjectInputStream input = new ObjectInputStream(file);
             Jugador j = (Jugador) input.readObject();
-            System.out.println(j.getNombre());
             if (input != null) {
                 while (j != null) {
                     jugadores.add(j);
                     j = (Jugador) input.readObject();
-
-                    System.out.println(j.getNombre());
                 }
                 input.close();
             }

@@ -11,9 +11,15 @@ import practicapoo.palabra.PistaDeLetra;
 import practicapoo.partida.Partida;
 
 import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
 import java.awt.*;
-import java.io.*;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Arrays;
 
 /**
@@ -390,8 +396,14 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
     private javax.swing.JTextField ventana;
 
     @Override
-    public String toString() {
-        return "Palabra:" + Arrays.toString(palabra) + "\n";
+    public String toString(){
+        StringBuilder sbIntentos = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            sbIntentos.append("Intento ").append(i + 1).append(intentos[i].recogerIntento()).append("\n");
+        }
+        return "Palabra: " +
+                Arrays.toString(palabra) + sbIntentos;
+
     }
 
     @Override

@@ -14,37 +14,39 @@ public class AlmacenDePartidas implements Externalizable {
     public ArrayList<Partida> getPartidas() {
         return partidas;
     }
-    private int i;
 
     /**
      * Constructor de la clase
      * Crea el Arraylist y lo llena a partir del archivo
-      */
-    public AlmacenDePartidas(){
-        System.out.println(i++);
-        this.partidas = new ArrayList<Partida>();
-        System.out.println(i++);
+     */
+    public AlmacenDePartidas() {
+        this.partidas = new ArrayList<>();
         cargarArchivo();
-        System.out.println(i++);
     }
 
     /**
      * Método que saca la información de todas las partidas
+     *
      * @return String con la información de todas las partidas
      */
-    public String infoPartidas(){
+    public String infoPartidas() {
         StringBuilder sb = new StringBuilder();
-        for (Partida p: partidas){
-            sb.append(p.toString()).append("\n");
+        if (partidas.size() == 0) {
+            sb.append("Todavía no se han jugado partidas.\nJuega mas para que aparezcan aqui!");
+        } else {
+            for (Partida p : partidas) {
+                sb.append(p.toString()).append("\n");
+            }
         }
         return sb.toString();
     }
 
     /**
      * Inserta una partida en el Almacén y la añade al archivo
+     *
      * @param p Partida que se quiere insertar
      */
-    public void insertarPartida(Partida p){
+    public void insertarPartida(Partida p) {
         partidas.add(p);
         guardarArchivo();
     }
@@ -52,20 +54,17 @@ public class AlmacenDePartidas implements Externalizable {
     /**
      * Método que llena el ArrayList a partir de un fichero
      */
-    private void cargarArchivo(){
-        try{
-            System.out.println(i++);
+    private void cargarArchivo() {
+        try {
             FileInputStream file = new FileInputStream("resources/partidas.lingo");
-            System.out.println(i++);
             ObjectInputStream input = new ObjectInputStream(file);
-            System.out.println(i++);
             readExternal(input);
 
 
-        }catch (FileNotFoundException fnf){
+        } catch (FileNotFoundException fnf) {
             System.err.println("Se ha producido una excepción cargando el almacen de partidas: No se ha enontrado el archivo deseado.\n" + fnf);
-        }catch(EOFException ignored){
-        }catch (IOException | ClassNotFoundException ioex){
+        } catch (EOFException ignored) {
+        } catch (IOException | ClassNotFoundException ioex) {
             System.err.println("Se ha producido una excepción de E/S cargando el almacen de partidas: " + ioex);
             ioex.printStackTrace();
         }
@@ -74,17 +73,17 @@ public class AlmacenDePartidas implements Externalizable {
     /**
      * Método que guarda el ArrayList en un fichero
      */
-    private void guardarArchivo(){
-        try{
+    private void guardarArchivo() {
+        try {
 
             FileOutputStream file = new FileOutputStream("resources/partidas.lingo");
 
             ObjectOutputStream output = new ObjectOutputStream(file);
             writeExternal(output);
 
-        }catch (FileNotFoundException fnf){
+        } catch (FileNotFoundException fnf) {
             System.err.println("Se ha producido una excepción: No se ha enontrado el archivo deseado.\n" + fnf);
-        }catch (IOException ioex){
+        } catch (IOException ioex) {
             System.err.println("Se ha producido una excepción de E/S: " + ioex);
             ioex.printStackTrace();
         }
@@ -94,7 +93,7 @@ public class AlmacenDePartidas implements Externalizable {
     public void writeExternal(ObjectOutput out) throws IOException {
         int cantidad = partidas.size();
         out.write(cantidad);
-        for(Partida p: partidas){
+        for (Partida p : partidas) {
             out.writeObject(p);
         }
     }
@@ -103,10 +102,7 @@ public class AlmacenDePartidas implements Externalizable {
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         int cantidad = in.read();
         for (int i = 0; i < cantidad; i++) {
-            System.out.println(this.i++);
             Partida p = (Partida) in.readObject();
-            System.out.println(i++);
-            System.out.println(p.toString());
             partidas.add(p);
         }
     }
