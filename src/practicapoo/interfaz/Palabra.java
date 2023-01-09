@@ -391,9 +391,8 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
 
     @Override
     public String toString() {
-        return Arrays.toString(palabra);
+        return "Palabra:" + Arrays.toString(palabra) + "\n";
     }
-
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
