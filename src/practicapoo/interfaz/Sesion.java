@@ -1,11 +1,14 @@
 package practicapoo.interfaz;
 
+import javax.swing.*;
+
 import practicapoo.Configuracion;
 import practicapoo.enums.Letras;
+import practicapoo.jugador.AlmacenDeJugadores;
 import practicapoo.jugador.Jugador;
 import practicapoo.partida.Partida;
 
-import javax.swing.*;
+import java.util.Iterator;
 
 
 /**
@@ -13,7 +16,7 @@ import javax.swing.*;
  * @author z3rc0
  */
 public class Sesion extends javax.swing.JPanel {
-    
+
     private Jugador jugador;
     /**
      * Crea un nuevo form de una sesión iniciada
@@ -38,7 +41,7 @@ public class Sesion extends javax.swing.JPanel {
         perfil = new javax.swing.JButton();
         rankings = new javax.swing.JButton();
 
-        jugar.setFont(new java.awt.Font("Comic Sans MS", 0, 20)); // NOI18N
+        jugar.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jugar.setText("Jugar!");
         jugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,7 +49,7 @@ public class Sesion extends javax.swing.JPanel {
             }
         });
 
-        cerrarSesion.setFont(new java.awt.Font("Comic Sans MS", 0, 20)); // NOI18N
+        cerrarSesion.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         cerrarSesion.setText("Cerrar sesion");
         cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,7 +57,7 @@ public class Sesion extends javax.swing.JPanel {
             }
         });
 
-        perfil.setFont(new java.awt.Font("Comic Sans MS", 0, 20)); // NOI18N
+        perfil.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         perfil.setText("Ver perfil");
         perfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +65,7 @@ public class Sesion extends javax.swing.JPanel {
             }
         });
 
-        rankings.setFont(new java.awt.Font("Comic Sans MS", 0, 20)); // NOI18N
+        rankings.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         rankings.setText("Ver rankings");
         rankings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,28 +76,29 @@ public class Sesion extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(275, 275, 275)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(rankings, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(perfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(275, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(325, 325, 325)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(rankings, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                                .addComponent(perfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addContainerGap(325, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(rankings, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rankings, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(103, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -119,8 +123,8 @@ public class Sesion extends javax.swing.JPanel {
             j = Main.getJugadores().getJugador(j);
             Object[] tipo = {"Cinco","Seis"};
             int n = JOptionPane.showOptionDialog(this,
-                    "Elije ls letras de las palabras",
-                    "Configuración de parttida",
+                    "Elije las letras de las palabras",
+                    "Configuración de partida",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
                     new ImageIcon("resources/Icono.png"),
@@ -137,8 +141,98 @@ public class Sesion extends javax.swing.JPanel {
     }//GEN-LAST:event_jugarActionPerformed
 
     private void perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilActionPerformed
+        Object[] opciones = {"mis partidas", "partidas contra otros"};
+        int n = JOptionPane.showOptionDialog(Main.getLienzo(), "¿Que quieres ver ?", "Estadisticas",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,new ImageIcon("resources/Icono.png"), opciones,opciones[0]);
+        switch (n){
+            case JOptionPane.YES_OPTION -> getEstadisticas();
+            case JOptionPane.NO_OPTION -> getEstadisticasConOtro();
+        }
         // TODO Hacer JPanel para ver el perfil
     }//GEN-LAST:event_perfilActionPerformed
+
+    public void getEstadisticas(){
+
+        StringBuilder sb = new StringBuilder(jugador.getNombre());
+        sb.append("\n")
+                .append("\n    Victorias: ")
+                .append(jugador.getEstadisticas().getGanadas())
+                .append("\n    Derrotas: ")
+                .append(jugador.getEstadisticas().getPerdidas())
+                .append("\n    Empates: ")
+                .append(jugador.getEstadisticas().getEmpatadas())
+                .append("\n    Puntos totales: ")
+                .append(jugador.getEstadisticas().getPuntos())
+                .append("\n");
+
+        JScrollPane sp = new JScrollPane();
+        JTextArea t = new JTextArea(sb.toString());
+        t.setColumns(30);
+        t.setRows(10);
+        sp.setViewportView(t);
+        JOptionPane.showMessageDialog(
+                Main.getLienzo(),
+                sp,
+                "Estadisticas",
+                JOptionPane.INFORMATION_MESSAGE,
+                null);
+    }
+
+    public void getEstadisticasConOtro(){
+
+
+        JTextField user = new JTextField();
+        JPasswordField pass = new JPasswordField();
+        Object[] mensaje = {
+                "Ususario:", user,
+                "Contraseña:", pass
+        };
+
+        int option = JOptionPane.showConfirmDialog(this, mensaje, " Otro jugador", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,new ImageIcon("resources/LogIn.png"));
+        if (option == JOptionPane.OK_OPTION) {
+            Jugador j = new Jugador(user.getText(),new String(pass.getPassword()));
+            if (!Main.getJugadores().autenticar(j)) {
+                return;
+            }
+
+        }
+        StringBuilder sb = new StringBuilder(jugador.getNombre());
+        sb.append("\n")
+                .append("\n    Victorias: ")
+                .append(jugador.getEstadisticas().getGanadas())
+                .append("\n    Derrotas: ")
+                .append(jugador.getEstadisticas().getPerdidas())
+                .append("\n    Empates: ")
+                .append(jugador.getEstadisticas().getEmpatadas())
+                .append("\n    Puntos totales: ")
+                .append(jugador.getEstadisticas().getPuntos())
+                .append("\n");
+
+        //StringBuilder sb = new StringBuilder(jugador.getNombre());
+        sb.append("\n")
+                .append("\n    Victorias: ")
+                .append(jugador.getEstadisticas().getGanadas())
+                .append("\n    Derrotas: ")
+                .append(jugador.getEstadisticas().getPerdidas())
+                .append("\n    Empates: ")
+                .append(jugador.getEstadisticas().getEmpatadas())
+                .append("\n    Puntos totales: ")
+                .append(jugador.getEstadisticas().getPuntos())
+                .append("\n");
+
+        JScrollPane sp = new JScrollPane();
+        JTextArea t = new JTextArea(sb.toString());
+        t.setColumns(30);
+        t.setRows(10);
+        sp.setViewportView(t);
+        JOptionPane.showMessageDialog(
+                Main.getLienzo(),
+                sp,
+                "Estadisticas",
+                JOptionPane.INFORMATION_MESSAGE,
+                null);
+    }
+
 
     private void rankingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingsActionPerformed
         Object[] opciones = {"Victorias", "Alfabético"};
