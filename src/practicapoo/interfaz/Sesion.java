@@ -8,6 +8,8 @@ import practicapoo.jugador.AlmacenDeJugadores;
 import practicapoo.jugador.Jugador;
 import practicapoo.partida.Partida;
 
+import java.util.Iterator;
+
 
 /**
  *
@@ -121,8 +123,8 @@ public class Sesion extends javax.swing.JPanel {
             j = Main.getJugadores().getJugador(j);
             Object[] tipo = {"Cinco","Seis"};
             int n = JOptionPane.showOptionDialog(this,
-                    "Elije ls letras de las palabras",
-                    "Configuración de parttida",
+                    "Elije las letras de las palabras",
+                    "Configuración de partida",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
                     new ImageIcon("resources/Icono.png"),
@@ -139,8 +141,98 @@ public class Sesion extends javax.swing.JPanel {
     }//GEN-LAST:event_jugarActionPerformed
 
     private void perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilActionPerformed
+        Object[] opciones = {"mis partidas", "partidas contra otros"};
+        int n = JOptionPane.showOptionDialog(Main.getLienzo(), "¿Que quieres ver ?", "Estadisticas",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,new ImageIcon("resources/Icono.png"), opciones,opciones[0]);
+        switch (n){
+            case JOptionPane.YES_OPTION -> getEstadisticas();
+            case JOptionPane.NO_OPTION -> getEstadisticasConOtro();
+        }
         // TODO Hacer JPanel para ver el perfil
     }//GEN-LAST:event_perfilActionPerformed
+
+    public void getEstadisticas(){
+
+        StringBuilder sb = new StringBuilder(jugador.getNombre());
+            sb.append("\n")
+                    .append("\n    Victorias: ")
+                    .append(jugador.getEstadisticas().getGanadas())
+                    .append("\n    Derrotas: ")
+                    .append(jugador.getEstadisticas().getPerdidas())
+                    .append("\n    Empates: ")
+                    .append(jugador.getEstadisticas().getEmpatadas())
+                    .append("\n    Puntos totales: ")
+                    .append(jugador.getEstadisticas().getPuntos())
+                    .append("\n");
+
+        JScrollPane sp = new JScrollPane();
+        JTextArea t = new JTextArea(sb.toString());
+        t.setColumns(30);
+        t.setRows(10);
+        sp.setViewportView(t);
+        JOptionPane.showMessageDialog(
+                Main.getLienzo(),
+                sp,
+                "Estadisticas",
+                JOptionPane.INFORMATION_MESSAGE,
+                null);
+    }
+
+    public void getEstadisticasConOtro(){
+
+
+        JTextField user = new JTextField();
+        JPasswordField pass = new JPasswordField();
+        Object[] mensaje = {
+                "Ususario:", user,
+                "Contraseña:", pass
+        };
+
+        int option = JOptionPane.showConfirmDialog(this, mensaje, " Otro jugador", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,new ImageIcon("resources/LogIn.png"));
+        if (option == JOptionPane.OK_OPTION) {
+            Jugador j = new Jugador(user.getText(),new String(pass.getPassword()));
+            if (!Main.getJugadores().autenticar(j)) {
+                return;
+            }
+
+        }
+        StringBuilder sb = new StringBuilder(jugador.getNombre());
+        sb.append("\n")
+                .append("\n    Victorias: ")
+                .append(jugador.getEstadisticas().getGanadas())
+                .append("\n    Derrotas: ")
+                .append(jugador.getEstadisticas().getPerdidas())
+                .append("\n    Empates: ")
+                .append(jugador.getEstadisticas().getEmpatadas())
+                .append("\n    Puntos totales: ")
+                .append(jugador.getEstadisticas().getPuntos())
+                .append("\n");
+
+        //StringBuilder sb = new StringBuilder(jugador.getNombre());
+        sb.append("\n")
+                .append("\n    Victorias: ")
+                .append(jugador.getEstadisticas().getGanadas())
+                .append("\n    Derrotas: ")
+                .append(jugador.getEstadisticas().getPerdidas())
+                .append("\n    Empates: ")
+                .append(jugador.getEstadisticas().getEmpatadas())
+                .append("\n    Puntos totales: ")
+                .append(jugador.getEstadisticas().getPuntos())
+                .append("\n");
+
+        JScrollPane sp = new JScrollPane();
+        JTextArea t = new JTextArea(sb.toString());
+        t.setColumns(30);
+        t.setRows(10);
+        sp.setViewportView(t);
+        JOptionPane.showMessageDialog(
+                Main.getLienzo(),
+                sp,
+                "Estadisticas",
+                JOptionPane.INFORMATION_MESSAGE,
+                null);
+    }
+
 
     private void rankingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingsActionPerformed
         Object[] opciones = {"Victorias", "Alfabético"};

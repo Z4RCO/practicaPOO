@@ -15,6 +15,10 @@ public class AlmacenDeJugadores implements Serializable {
     public AlmacenDeJugadores() {
         jugadores = new ArrayList<Jugador>();
         cargarArchivo();
+        jugadores.add(new Jugador("admin","admin"));
+        jugadores.add(new Jugador("Cristian","1234"));
+        jugadores.add(new Jugador("Sergio","12345"));
+        guardarArchivo();
 
     }
 
@@ -88,6 +92,7 @@ public class AlmacenDeJugadores implements Serializable {
                 JOptionPane.INFORMATION_MESSAGE,
                 null);
     }
+
 
     public void alta(Jugador j) {
         if (!autenticar(j)) {
