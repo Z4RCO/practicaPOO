@@ -12,14 +12,15 @@ import java.util.Iterator;
 
 
 /**
- *
  * @author z3rc0
  */
 public class Sesion extends javax.swing.JPanel {
 
     private Jugador jugador;
+
     /**
      * Crea un nuevo form de una sesión iniciada
+     *
      * @param jugador Jugador que ha iniciado sesión
      */
     public Sesion(Jugador jugador) {
@@ -41,7 +42,7 @@ public class Sesion extends javax.swing.JPanel {
         perfil = new javax.swing.JButton();
         rankings = new javax.swing.JButton();
 
-        jugar.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jugar.setFont(new java.awt.Font("Comic Sans MS", 0, 20)); // NOI18N
         jugar.setText("Jugar!");
         jugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,7 +50,7 @@ public class Sesion extends javax.swing.JPanel {
             }
         });
 
-        cerrarSesion.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        cerrarSesion.setFont(new java.awt.Font("Comic Sans MS", 0, 20)); // NOI18N
         cerrarSesion.setText("Cerrar sesion");
         cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,7 +58,7 @@ public class Sesion extends javax.swing.JPanel {
             }
         });
 
-        perfil.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        perfil.setFont(new java.awt.Font("Comic Sans MS", 0, 20)); // NOI18N
         perfil.setText("Ver perfil");
         perfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +66,7 @@ public class Sesion extends javax.swing.JPanel {
             }
         });
 
-        rankings.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        rankings.setFont(new java.awt.Font("Comic Sans MS", 0, 20)); // NOI18N
         rankings.setText("Ver rankings");
         rankings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,27 +79,26 @@ public class Sesion extends javax.swing.JPanel {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(325, 325, 325)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(rankings, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                                .addComponent(perfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addContainerGap(325, Short.MAX_VALUE))
+                                .addGap(275, 275, 275)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(rankings, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(perfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                        .addComponent(jugar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(275, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(103, 103, 103)
-                                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(73, 73, 73)
+                                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(rankings, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rankings, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(103, Short.MAX_VALUE))
+                                .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(73, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -114,14 +114,14 @@ public class Sesion extends javax.swing.JPanel {
                 "Contraseña:", pass
         };
 
-        int option = JOptionPane.showConfirmDialog(this, mensaje, "Empezar partida", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,new ImageIcon("resources/LogIn.png"));
+        int option = JOptionPane.showConfirmDialog(this, mensaje, "Empezar partida", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("resources/LogIn.png"));
         if (option == JOptionPane.OK_OPTION) {
-            Jugador j = new Jugador(user.getText(),new String(pass.getPassword()));
+            Jugador j = new Jugador(user.getText(), new String(pass.getPassword()));
             if (!Main.getJugadores().autenticar(j)) {
                 return;
             }
             j = Main.getJugadores().getJugador(j);
-            Object[] tipo = {"Cinco","Seis"};
+            Object[] tipo = {"Cinco", "Seis"};
             int n = JOptionPane.showOptionDialog(this,
                     "Elije las letras de las palabras",
                     "Configuración de partida",
@@ -130,31 +130,30 @@ public class Sesion extends javax.swing.JPanel {
                     new ImageIcon("resources/Icono.png"),
                     tipo,
                     tipo[0]);
-            switch(n){
+            switch (n) {
                 case JOptionPane.YES_OPTION -> Configuracion.setLetras(Letras.CINCO);
                 case JOptionPane.NO_OPTION -> Configuracion.setLetras(Letras.SEIS);
             }
 
-            Partida p = new Partida(this.jugador,j);
+            Partida p = new Partida(this.jugador, j);
         }
 
     }//GEN-LAST:event_jugarActionPerformed
 
     private void perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilActionPerformed
-        Object[] opciones = {"mis partidas", "partidas contra otros"};
+        Object[] opciones = {"Mis estadísticas", "Partidas contra otro"};
         int n = JOptionPane.showOptionDialog(Main.getLienzo(), "¿Que quieres ver ?", "Estadisticas",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,new ImageIcon("resources/Icono.png"), opciones,opciones[0]);
-        switch (n){
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("resources/Icono.png"), opciones, opciones[0]);
+        switch (n) {
             case JOptionPane.YES_OPTION -> getEstadisticas();
             case JOptionPane.NO_OPTION -> getEstadisticasConOtro();
         }
-        // TODO Hacer JPanel para ver el perfil
     }//GEN-LAST:event_perfilActionPerformed
 
-    public void getEstadisticas(){
+    public void getEstadisticas() {
 
-        StringBuilder sb = new StringBuilder(jugador.getNombre());
-        sb.append("\n")
+        StringBuilder sb = new StringBuilder("Nombre de usuario: ");
+        sb.append(jugador.getNombre()).append("\n")
                 .append("\n    Victorias: ")
                 .append(jugador.getEstadisticas().getGanadas())
                 .append("\n    Derrotas: ")
@@ -178,9 +177,7 @@ public class Sesion extends javax.swing.JPanel {
                 null);
     }
 
-    public void getEstadisticasConOtro(){
-
-
+    private void getEstadisticasConOtro() {
         JTextField user = new JTextField();
         JPasswordField pass = new JPasswordField();
         Object[] mensaje = {
@@ -188,37 +185,28 @@ public class Sesion extends javax.swing.JPanel {
                 "Contraseña:", pass
         };
 
-        int option = JOptionPane.showConfirmDialog(this, mensaje, " Otro jugador", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,new ImageIcon("resources/LogIn.png"));
+        int option = JOptionPane.showConfirmDialog(this, mensaje, " Otro jugador", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("resources/LogIn.png"));
+        Jugador j;
+        StringBuilder sb = new StringBuilder();
         if (option == JOptionPane.OK_OPTION) {
-            Jugador j = new Jugador(user.getText(),new String(pass.getPassword()));
+            j = new Jugador(user.getText(), new String(pass.getPassword()));
             if (!Main.getJugadores().autenticar(j)) {
                 return;
             }
 
-        }
-        StringBuilder sb = new StringBuilder(jugador.getNombre());
-        sb.append("\n")
-                .append("\n    Victorias: ")
-                .append(jugador.getEstadisticas().getGanadas())
-                .append("\n    Derrotas: ")
-                .append(jugador.getEstadisticas().getPerdidas())
-                .append("\n    Empates: ")
-                .append(jugador.getEstadisticas().getEmpatadas())
-                .append("\n    Puntos totales: ")
-                .append(jugador.getEstadisticas().getPuntos())
-                .append("\n");
+            sb = new StringBuilder(jugador.getNombre());
+            for (Partida p : Main.getPartidas().getPartidas()){
+                if(p.getJugador1().equals(jugador) && p.getJugador2().equals(j)){
+                    sb.append(p);
+                }
+                if(p.getJugador1().equals(j) && p.getJugador2().equals(jugador)){
+                    sb.append(p);
+                }
+            }
 
-        //StringBuilder sb = new StringBuilder(jugador.getNombre());
-        sb.append("\n")
-                .append("\n    Victorias: ")
-                .append(jugador.getEstadisticas().getGanadas())
-                .append("\n    Derrotas: ")
-                .append(jugador.getEstadisticas().getPerdidas())
-                .append("\n    Empates: ")
-                .append(jugador.getEstadisticas().getEmpatadas())
-                .append("\n    Puntos totales: ")
-                .append(jugador.getEstadisticas().getPuntos())
-                .append("\n");
+            System.out.println(sb);
+
+        }
 
         JScrollPane sp = new JScrollPane();
         JTextArea t = new JTextArea(sb.toString());
@@ -228,7 +216,7 @@ public class Sesion extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(
                 Main.getLienzo(),
                 sp,
-                "Estadisticas",
+                "Partidas contra otro",
                 JOptionPane.INFORMATION_MESSAGE,
                 null);
     }
@@ -244,7 +232,7 @@ public class Sesion extends javax.swing.JPanel {
                 new ImageIcon("resources/Usuario.png"),
                 opciones,
                 opciones[0]);
-        switch(n){
+        switch (n) {
             case JOptionPane.YES_OPTION -> Main.getJugadores().rankingOrdenadoPorVictorias();
             case JOptionPane.NO_OPTION -> Main.getJugadores().rankingOrdenadoPorNombre();
         }

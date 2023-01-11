@@ -8,6 +8,7 @@ import practicapoo.jugador.Jugador;
 import practicapoo.palabra.PistaDeLetra;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -26,7 +27,7 @@ public class Partida implements Externalizable {
     private boolean regaloDePalabra;
     //TODO regalo de palabra
 
-    private  boolean primeraLetra;
+    private boolean primeraLetra;
     //TODO primera letra
     private int palabraActual;
 
@@ -40,12 +41,14 @@ public class Partida implements Externalizable {
         palabras[0] = new Palabra(this);
         palabras[0].sacarPalabraAleatoria();
         palabras[0].setTurno("Turno de: " + jugador1.getNombre());
+        if(primeraLetra)palabras[0].appendToPane("La primera letra de la palabra es : " + palabras[palabraActual].getPalabra()[0] +"\n", Color.PINK);
+
         Main.cambiarContenido(palabras[0]);
     }
 
-    public Partida(){
-        jugador1 = new Jugador(null,null);
-        jugador2 = new Jugador(null,null);
+    public Partida() {
+        jugador1 = new Jugador(null, null);
+        jugador2 = new Jugador(null, null);
         identificador = numPartidas++;
         this.numPalabras = Configuracion.getNumPalabras();
         primeraLetra = Configuracion.isPrimeraLetra();
@@ -64,11 +67,16 @@ public class Partida implements Externalizable {
         return jugador2;
     }
 
+    public boolean isRegaloDePalabra() {
+        return this.regaloDePalabra;
+    }
+
     public void cambiarTurno() {
         ++palabraActual;
         if (palabraActual < numPalabras * 2) {
             palabras[palabraActual] = new Palabra(this);
             palabras[palabraActual].sacarPalabraAleatoria();
+            if(primeraLetra)palabras[palabraActual].appendToPane("La primera letra de la palabra es" + palabras[palabraActual].getPalabra()[0], Color.PINK);
             Main.cambiarContenido(palabras[palabraActual]);
             if (palabras[palabraActual - 1].getTurno().equals("Turno de: " + jugador1.getNombre())) {
                 palabras[palabraActual].setTurno("Turno de: " + jugador2.getNombre());
@@ -121,27 +129,36 @@ public class Partida implements Externalizable {
     }
 
     public boolean usarPistaDeLetra() {
-        //TODO hacer método usarPistaDeLetra
-        String j1 = jugador1.getNombre();
-        String j2 = jugador2.getNombre();
-        Palabra p = palabras[palabraActual];
-        PistaDeLetra pl = new PistaDeLetra(p);
-        if (p.getTurno().equals(j1) &&
-                pl.regalarLetra() &&
-                jugador1.getEstadisticas().getPuntos() > 0) {
-            jugador1.sumarPuntos(-1);
-            pl.mostrarPalabraActualizada();
-        } else if (p.getTurno().equals(j2) &&
-                pl.regalarLetra() &&
-                jugador2.getEstadisticas().getPuntos() > 0){
-            jugador2.sumarPuntos(-1);
-            pl.mostrarPalabraActualizada();
+        if(palabras[palabraActual].getTurno().equals(jugador1.getNombre())){
+            if(marcador.getPuntos_j1()  < 1 || !palabras[palabraActual].isRegaloDeLetra())return false;
+            marcador.addPuntos_j1(-1);
+            return true;
         }
-        return true;
+        else{
+            if(marcador.getPuntos_j1() < 1 || !palabras[palabraActual].isRegaloDeLetra())return false;
+            marcador.addPuntos_j2(-1);
+            return true;
+        }
     }
 
-    public boolean usar_Pista_de_Palabra() {
-        return true;
+    public boolean usarPistaDePalabra() {
+        if (!regaloDePalabra) return false;
+        regaloDePalabra = false;
+        if (palabras[palabraActual].getTurno().equals(jugador1.getNombre())) {
+            if (marcador.getPuntos_j1() >= 3) {
+                marcador.addPuntos_j1(-3);
+                cambiarTurno();
+                return true;
+            }
+            return false;
+        } else {
+            if (marcador.getPuntos_j2() >= 3) {
+                marcador.addPuntos_j2(-3);
+                cambiarTurno();
+                return true;
+            }
+            return false;
+        }
     }
 
     @Override
@@ -150,11 +167,7 @@ public class Partida implements Externalizable {
         for (int i = 0; i < numPalabras * 2; i++) {
             p.append(palabras[i].toString());
         }
-        return "Identificador: " + identificador + "\n" +
-                "Se muestra la primera letra: " + primeraLetra + "\n" +
-                "Jugador 1: " + jugador1.getNombre() + ". Consiguio " + marcador.getPuntos_j1() + " puntos\n" +
-                "Jugador 2: " + jugador2.getNombre() + ". Consiguio " + marcador.getPuntos_j2() + " puntos\n" +
-                "Palabras de la partida:\n" + p + "\n";
+        return "Identificador: " + identificador + "\n" + "Se muestra la primera letra: " + primeraLetra + "\n" + "Jugador 1: " + jugador1.getNombre() + ". Consiguio " + marcador.getPuntos_j1() + " puntos\n" + "Jugador 2: " + jugador2.getNombre() + ". Consiguio " + marcador.getPuntos_j2() + " puntos\n" + "Palabras de la partida:\n" + p + "\n";
     }
 
     @Override

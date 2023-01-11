@@ -8,8 +8,10 @@ import practicapoo.Configuracion;
 import practicapoo.enums.Letras;
 import practicapoo.palabra.Intento;
 import practicapoo.palabra.PistaDeLetra;
+import practicapoo.partida.Entrenamiento;
 import practicapoo.partida.Partida;
 
+import javax.imageio.stream.ImageOutputStream;
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
@@ -20,7 +22,6 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.util.Arrays;
 
 /**
  * @author Sergio
@@ -35,7 +36,8 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
 
     private PistaDeLetra pistaDeLetra;
     boolean esPartida;
-    Partida partida;
+    private Partida partida;
+    private Entrenamiento entrenamiento;
 
 
     /**
@@ -47,20 +49,19 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         regaloDeLetra = true;
         pistaDeLetra = new PistaDeLetra(this);
         intentos = new Intento[5];
-
-
     }
 
     public Palabra(Partida partida) {
-        initComponents();
-        numLetras = Configuracion.getNumLetras();
-        regaloDeLetra = true;
-        pistaDeLetra = new PistaDeLetra(this);
-        intentos = new Intento[5];
+        this();
         this.partida = partida;
         this.esPartida = true;
         menuPrincipal.setEnabled(false);
+    }
 
+    public Palabra(Entrenamiento entrenamiento){
+        this();
+        this.esPartida = false;
+        this.entrenamiento = entrenamiento;
     }
 
     /**
@@ -206,15 +207,37 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
     }//GEN-LAST:event_confirmarActionPerformed
 
     private void pistaLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaLetraActionPerformed
-        if (!pistaDeLetra.regalarLetra()) {
-            appendToPane("Error. No puedes usar una pista de letra en este momento\n", Color.RED);
-        } else {
+        if(regaloDeLetra){
+            if(!partida.usarPistaDeLetra() || !pistaDeLetra.regalarLetra() ){
+                appendToPane("No puedes usar una pista de letra en este momento.\n",Color.RED);
+                return;
+            }
             regaloDeLetra = false;
+        }else{
+            appendToPane("No puedes usar una pista de letra en este momento.\n",Color.RED);
         }
+
     }//GEN-LAST:event_pistaLetraActionPerformed
 
     private void pistaPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaPalabraActionPerformed
+        if(esPartida){
+            if(!partida.isRegaloDePalabra()){
+                appendToPane("Ya no puedes usar regalos de palabra esta partida.\n",Color.RED);
+                return;
+            }
+            if(!partida.usarPistaDePalabra()){
+                appendToPane("No puedes usar un regalo de palabra en este momento.\nConsigue más puntos!",Color.RED);
+                return;
+            }
+            Object[] obj = {"Has usado el regalo de palabra","La palabra era " + new String(palabra)};
+            JOptionPane.showMessageDialog(this,obj,"Regalo de palabra",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("resources/Logo.png"));
+            partida.usarPistaDePalabra();
 
+        }else{
+            entrenamiento.usarPistaDePalabra();
+            numPuntos.setText(String.valueOf(entrenamiento.mostrarPuntos()));
+            initComponents();
+        }
     }//GEN-LAST:event_pistaPalabraActionPerformed
 
     private void menuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPrincipalActionPerformed
@@ -236,13 +259,14 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
 
             } else {
                 int puntos = Integer.parseInt(numPuntos.getText());
-                puntos += puntosObtenidos();
+                entrenamiento.addPuntos(puntos);
                 this.removeAll();
                 initComponents();
                 turno.setText("Entrenamiento");
-                numPuntos.setText(String.valueOf(puntos));
+                numPuntos.setText(String.valueOf(entrenamiento.mostrarPuntos()));
                 sacarPalabraAleatoria();
                 appendToPane("Muy bien! Has adivinado la palabra en " + intentosRealizados + " intentos!\n", Color.BLACK);
+                if(Configuracion.isPrimeraLetra())appendToPane("La primera letra de la palabra es: " + palabra[0] + "\n",Color.PINK);
                 intentosRealizados = 0;
             }
         }
@@ -251,14 +275,14 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
                 partida.cambiarTurno();
             } else {
                 int puntos = Integer.parseInt(numPuntos.getText());
-                puntos += puntosObtenidos();
+                entrenamiento.addPuntos(puntosObtenidos());
                 this.removeAll();
                 initComponents();
                 turno.setText("Entrenamiento");
-                numPuntos.setText(String.valueOf(puntos));
+                numPuntos.setText(String.valueOf(entrenamiento.mostrarPuntos()));
                 String pal = new String(palabra);
-                sacarPalabraAleatoria();
                 appendToPane("La palabra era: " + pal.toUpperCase() + ". Más suerte la próxima vez!\n", Color.BLACK);
+                sacarPalabraAleatoria();
                 intentosRealizados = 0;
             }
         }
@@ -275,8 +299,7 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
                 appendToPane("La letra " + palabra[i] + " está en la posición correcta!\n", Color.GREEN);
             }
         }
-        if (correctas == Configuracion.getNumLetras().getSize()) return true;
-        return false;
+        return correctas == Configuracion.getNumLetras().getSize();
     }
 
     private int numApariciones(char c) {
@@ -318,13 +341,6 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         }
     }
 
-    public void mostrarIntentoResuelto() {
-
-    }
-
-    public void secuenciaResultados() {
-    }
-
     public char[] getPalabra() {
         return palabra;
     }
@@ -337,16 +353,19 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         return regaloDeLetra;
     }
 
-    public JTextPane getTextArea() {
-        return textPane;
-    }
-
     public Intento[] getIntentos() {
         return intentos;
     }
 
     public void setTurno(String jugador) {
         this.turno.setText(jugador);
+    }
+    public String getTurno() {
+        return this.turno.getText();
+    }
+
+    public void setPuntos(int puntos) {
+        numPuntos.setText(String.valueOf(puntos));
     }
 
 
@@ -370,13 +389,7 @@ public class Palabra extends javax.swing.JPanel implements Externalizable {
         textPane.replaceSelection(msg);
     }
 
-    public String getTurno() {
-        return this.turno.getText();
-    }
 
-    public void setPuntos(int puntos) {
-        numPuntos.setText(String.valueOf(puntos));
-    }
 
     @Override
     public String toString() {
