@@ -51,7 +51,7 @@ public class Sesion extends javax.swing.JPanel {
         });
 
         cerrarSesion.setFont(new java.awt.Font("Comic Sans MS", 0, 20)); // NOI18N
-        cerrarSesion.setText("Cerrar sesion");
+        cerrarSesion.setText("Cerrar sesión");
         cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cerrarSesionActionPerformed(evt);
@@ -77,28 +77,28 @@ public class Sesion extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(275, 275, 275)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(rankings, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(perfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                        .addComponent(jugar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(275, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(275, 275, 275)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(rankings, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(perfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(jugar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(rankings, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(73, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rankings, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,17 +152,7 @@ public class Sesion extends javax.swing.JPanel {
 
     public void getEstadisticas() {
 
-        StringBuilder sb = new StringBuilder("Nombre de usuario: ");
-        sb.append(jugador.getNombre()).append("\n")
-                .append("\n    Victorias: ")
-                .append(jugador.getEstadisticas().getGanadas())
-                .append("\n    Derrotas: ")
-                .append(jugador.getEstadisticas().getPerdidas())
-                .append("\n    Empates: ")
-                .append(jugador.getEstadisticas().getEmpatadas())
-                .append("\n    Puntos totales: ")
-                .append(jugador.getEstadisticas().getPuntos())
-                .append("\n");
+        StringBuilder sb = new StringBuilder(jugador.toString());
 
         JScrollPane sp = new JScrollPane();
         JTextArea t = new JTextArea(sb.toString());
@@ -193,34 +183,10 @@ public class Sesion extends javax.swing.JPanel {
             if (!Main.getJugadores().autenticar(j)) {
                 return;
             }
-
-            sb = new StringBuilder(jugador.getNombre());
-            for (Partida p : Main.getPartidas().getPartidas()){
-                if(p.getJugador1().equals(jugador) && p.getJugador2().equals(j)){
-                    sb.append(p);
-                }
-                if(p.getJugador1().equals(j) && p.getJugador2().equals(jugador)){
-                    sb.append(p);
-                }
-            }
-
-            System.out.println(sb);
-
+            jugador.partidasContraOtro(j);
         }
 
-        JScrollPane sp = new JScrollPane();
-        JTextArea t = new JTextArea(sb.toString());
-        t.setColumns(30);
-        t.setRows(10);
-        sp.setViewportView(t);
-        JOptionPane.showMessageDialog(
-                Main.getLienzo(),
-                sp,
-                "Partidas contra otro",
-                JOptionPane.INFORMATION_MESSAGE,
-                null);
     }
-
 
     private void rankingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingsActionPerformed
         Object[] opciones = {"Victorias", "Alfabético"};

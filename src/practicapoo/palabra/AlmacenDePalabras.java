@@ -50,7 +50,8 @@ public class AlmacenDePalabras {
         } catch (FileNotFoundException fnfex) {
             System.err.println("Fichero no encontrado: " + fnfex);
         } catch (IOException ioex) {
-            System.err.println("Excepción de E/S: " + ioex);
+            System.err.println("Excepcion de E/S intentando cargar el fichero de configuracion: " + ioex);
+            ioex.printStackTrace();
         }
     }
 

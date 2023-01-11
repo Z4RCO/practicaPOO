@@ -5,7 +5,6 @@ import practicapoo.interfaz.Main;
 import practicapoo.interfaz.Palabra;
 import practicapoo.interfaz.Sesion;
 import practicapoo.jugador.Jugador;
-import practicapoo.palabra.PistaDeLetra;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,15 +24,22 @@ public class Partida implements Externalizable {
     private Marcador marcador;
 
     private boolean regaloDePalabra;
-    //TODO regalo de palabra
 
     private boolean primeraLetra;
-    //TODO primera letra
+
+    //Atributo para llevar la cuenta de las palabras que se han jugado
     private int palabraActual;
 
     private Palabra[] palabras;
 
 
+    /**
+     * Constructor de la partida.
+     * Crea una partida a partir de 2 jugadores y la información de la Configuración
+     *
+     * @param jugador1 primer jugador de la partida
+     * @param jugador2 segundo jugador de la partida
+     */
     public Partida(Jugador jugador1, Jugador jugador2) {
         this();
         this.jugador1 = jugador1;
@@ -41,11 +47,16 @@ public class Partida implements Externalizable {
         palabras[0] = new Palabra(this);
         palabras[0].sacarPalabraAleatoria();
         palabras[0].setTurno("Turno de: " + jugador1.getNombre());
-        if(primeraLetra)palabras[0].appendToPane("La primera letra de la palabra es : " + palabras[palabraActual].getPalabra()[0] +"\n", Color.PINK);
+        if (primeraLetra)
+            palabras[0].appendToPane("La primera letra de la palabra es : " + palabras[palabraActual].getPalabra()[0] + "\n", Color.PINK);
 
         Main.cambiarContenido(palabras[0]);
     }
 
+    /**
+     * Constructor público no-args.
+     * Utilizado por Externalizable cuando carga la información del almacén de partidas
+     */
     public Partida() {
         jugador1 = new Jugador(null, null);
         jugador2 = new Jugador(null, null);
@@ -71,12 +82,20 @@ public class Partida implements Externalizable {
         return this.regaloDePalabra;
     }
 
+    /**
+     * Método para cambiar el turno de la partida.
+     * Comprueba si se han jugador todas las palabras para acabar la partida.
+     * Si se han jugado, comprueba quién tiene más puntos para anunciar el ganador y actualizar sus estadísticas.
+     * sino:
+     * Comprueba quién es el jugador actual, y crea una palabra nueva para el otro jugador
+     */
     public void cambiarTurno() {
         ++palabraActual;
         if (palabraActual < numPalabras * 2) {
             palabras[palabraActual] = new Palabra(this);
             palabras[palabraActual].sacarPalabraAleatoria();
-            if(primeraLetra)palabras[palabraActual].appendToPane("La primera letra de la palabra es" + palabras[palabraActual].getPalabra()[0], Color.PINK);
+            if (primeraLetra)
+                palabras[palabraActual].appendToPane("La primera letra de la palabra es" + palabras[palabraActual].getPalabra()[0], Color.PINK);
             Main.cambiarContenido(palabras[palabraActual]);
             if (palabras[palabraActual - 1].getTurno().equals("Turno de: " + jugador1.getNombre())) {
                 palabras[palabraActual].setTurno("Turno de: " + jugador2.getNombre());
@@ -120,6 +139,11 @@ public class Partida implements Externalizable {
 
     }
 
+    /**
+     * Actualiza el marcador para el jugador y puntos pasador por parámetro
+     * @param jugador Nombre del jugador del que se quiere actualizar el marcador
+     * @param puntos puntos que se quieren sumar a su marcador
+     */
     public void actualizarMarcador(String jugador, int puntos) {
         if (("Turno de: " + jugador1.getNombre()).equals(jugador)) {
             marcador.addPuntos_j1(puntos);
@@ -128,19 +152,26 @@ public class Partida implements Externalizable {
         }
     }
 
+    /**
+     * Usa la pista de letra de la palabra acual
+     * @return true si el jugador tiene puntos suficientes para usar la pista. False si no tiene suficientes
+     */
     public boolean usarPistaDeLetra() {
-        if(palabras[palabraActual].getTurno().equals(jugador1.getNombre())){
-            if(marcador.getPuntos_j1()  < 1 || !palabras[palabraActual].isRegaloDeLetra())return false;
+        if (palabras[palabraActual].getTurno().equals(jugador1.getNombre())) {
+            if (marcador.getPuntos_j1() < 1 || !palabras[palabraActual].isRegaloDeLetra()) return false;
             marcador.addPuntos_j1(-1);
             return true;
-        }
-        else{
-            if(marcador.getPuntos_j1() < 1 || !palabras[palabraActual].isRegaloDeLetra())return false;
+        } else {
+            if (marcador.getPuntos_j1() < 1 || !palabras[palabraActual].isRegaloDeLetra()) return false;
             marcador.addPuntos_j2(-1);
             return true;
         }
     }
 
+    /**
+     * Métoso para usar el regalo de palabra de la partida
+     * @return true si todavía no se ha usado y el jugador tiene puntos suficientes para usarla. False en caso contrario
+     */
     public boolean usarPistaDePalabra() {
         if (!regaloDePalabra) return false;
         regaloDePalabra = false;
@@ -170,6 +201,12 @@ public class Partida implements Externalizable {
         return "Identificador: " + identificador + "\n" + "Se muestra la primera letra: " + primeraLetra + "\n" + "Jugador 1: " + jugador1.getNombre() + ". Consiguio " + marcador.getPuntos_j1() + " puntos\n" + "Jugador 2: " + jugador2.getNombre() + ". Consiguio " + marcador.getPuntos_j2() + " puntos\n" + "Palabras de la partida:\n" + p + "\n";
     }
 
+
+    /**
+     * Método para cargar una partida desde un archivo
+     * @param out the stream to write the object to
+     * @throws IOException
+     */
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.write(identificador);
@@ -184,6 +221,13 @@ public class Partida implements Externalizable {
         }
     }
 
+    /**
+     * Método para guardar la partida en un archivo
+     * Guarda la información en el mismo orden en el que luego será desrializada
+     * @param in the stream to read data from in order to restore the object
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         identificador = in.read();

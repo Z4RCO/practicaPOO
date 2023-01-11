@@ -11,16 +11,22 @@ public class AlmacenDeJugadores implements Serializable {
 
     private ArrayList<Jugador> jugadores;
 
+
+    /**
+     * Constructor de la clase.
+     * Inicializa el ArrayList y lo carga del archivo
+     */
     public AlmacenDeJugadores() {
         jugadores = new ArrayList<Jugador>();
         cargarArchivo();
-        jugadores.add(new Jugador("admin","admin"));
-        jugadores.add(new Jugador("Sergio","12345"));
-        jugadores.add(new Jugador("Eva","12345"));
-        guardarArchivo();
-
     }
 
+    /**
+     * Método para comprobar si un jugador existe en el almacén
+     *
+     * @param j jugador que se quiere comprobar
+     * @return true si existe, false si no existe
+     */
     public boolean autenticar(Jugador j) {
         boolean encontrado = false;
         Iterator<Jugador> i = jugadores.iterator();
@@ -31,22 +37,17 @@ public class AlmacenDeJugadores implements Serializable {
         return encontrado;
     }
 
+    /**
+     * Método para mostrar el ranking ordenado por victorias
+     * Se ha implementado usando el método compareTo de la clase Jugador
+     */
     public void rankingOrdenadoPorVictorias() {
         jugadores.sort(Jugador::compareTo);
         Iterator<Jugador> i = jugadores.iterator();
         StringBuilder sb = new StringBuilder("Jugadores:\n");
         while (i.hasNext()) {
             Jugador j = i.next();
-            sb.append(j.getNombre())
-                    .append("\n    Victorias: ")
-                    .append(j.getEstadisticas().getGanadas())
-                    .append("\n    Derrotas: ")
-                    .append(j.getEstadisticas().getPerdidas())
-                    .append("\n    Empates: ")
-                    .append(j.getEstadisticas().getEmpatadas())
-                    .append("\n    Puntos totales: ")
-                    .append(j.getEstadisticas().getPuntos())
-                    .append("\n");
+            sb.append(j.toString());
         }
         JScrollPane sp = new JScrollPane();
         JTextArea t = new JTextArea(sb.toString());
@@ -61,23 +62,22 @@ public class AlmacenDeJugadores implements Serializable {
                 null);
     }
 
+    /**
+     * Método para mostrar el almacén ordenado por nombre
+     * Se ha implementado usando un Mapa ordenado de nombres y estadísticas
+     */
     public void rankingOrdenadoPorNombre() {
         SortedMap<String, Estadisticas> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         for (Jugador j : jugadores) {
             map.put(j.getNombre(), j.getEstadisticas());
         }
-        StringBuilder sb = new StringBuilder("Jugador   Victorias\n");
+        StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, Estadisticas> entry : map.entrySet()) {
             sb.append(entry.getKey())
-                    .append("\n    Victorias: ")
-                    .append(entry.getValue().getGanadas())
-                    .append("\n    Derrotas: ")
-                    .append(entry.getValue().getPerdidas())
-                    .append("\n    Empates: ")
-                    .append(entry.getValue().getEmpatadas())
-                    .append("\n    Puntos totales: ")
-                    .append(entry.getValue().getPuntos())
+                    .append("\n")
+                    .append(entry.getValue().toString())
                     .append("\n");
+            ;
         }
         JScrollPane sp = new JScrollPane();
         JTextArea t = new JTextArea(sb.toString());
@@ -92,6 +92,12 @@ public class AlmacenDeJugadores implements Serializable {
                 null);
     }
 
+    /**
+     * Método para añadir un nuevo Jugador al almacén
+     *
+     * @param j jugador que se quiere añadir
+     *          Sólo se añade si no existe en el almacén
+     */
     public void alta(Jugador j) {
         if (!autenticar(j)) {
             jugadores.add(j);
@@ -100,6 +106,12 @@ public class AlmacenDeJugadores implements Serializable {
 
     }
 
+    /**
+     * Método para eliminar un jugador del almacén
+     *
+     * @param j jugador que se quiere eliminar
+     *          Si existe, se elimina del ArrayList y se actualiza el archivo
+     */
     public void baja(Jugador j) {
         if (autenticar(j)) {
             jugadores.remove(j);
@@ -107,6 +119,9 @@ public class AlmacenDeJugadores implements Serializable {
         }
     }
 
+    /**
+     * Método para cargar los datos de un fichero al ArrayList
+     */
     private void cargarArchivo() {
         try {
             FileInputStream file = new FileInputStream("resources/jugadores.lingo");
@@ -122,10 +137,14 @@ public class AlmacenDeJugadores implements Serializable {
         } catch (EOFException ignored) {
         } catch (IOException | ClassNotFoundException exception) {
             System.err.println("Error. Se ha producido una excepción intentando cargar el archivo de jugadores: " + exception);
+            exception.printStackTrace();
         }
 
     }
 
+    /**
+     * Método para serializar el ArrayList a un fichero
+     */
     public void guardarArchivo() {
         try {
             FileOutputStream file = new FileOutputStream("resources/jugadores.lingo");
@@ -136,13 +155,21 @@ public class AlmacenDeJugadores implements Serializable {
             }
         } catch (IOException io) {
             System.err.println("Error. Se ha producido una excepción al serializar el almacen de jugadores: " + io);
+            io.printStackTrace();
         }
     }
 
+
+    /**
+     * Método para obtener un jugador del almacén
+     *
+     * @param jugador jugador que se quiere obtener
+     * @return Si el jugador parámetro existe, se devuelve una referencia al del almacén. Si no existe, devuelve null
+     */
     public Jugador getJugador(Jugador jugador) {
 
         if (autenticar(jugador)) {
-            Jugador t = new Jugador(null,null);
+            Jugador t = new Jugador(null, null);
             for (Jugador j : jugadores) {
                 if (j.equals(jugador)) {
                     t = j;

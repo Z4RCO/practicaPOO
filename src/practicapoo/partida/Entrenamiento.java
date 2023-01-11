@@ -31,11 +31,11 @@ public class Entrenamiento {
             palabra.appendToPane("Ya has usado el regalo de palabra\n", Color.RED);
             return false;
         }
-        regaloDePalabra = false;
         if (puntos < 3) {
             palabra.appendToPane("No tienes puntos suficientes.\nAcumula más primero!", Color.RED);
             return false;
         }
+        regaloDePalabra = false;
         puntos -= 3;
         Object[] obj = {"Has usado el regalo de palabra", "La palabra era " + new String(palabra.getPalabra())};
         JOptionPane.showMessageDialog(
